@@ -43,8 +43,8 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href=""><i class="fa fa-circle-o"></i> Nhập hàng </a></li>
-          <li><a href=""><i class="fa fa-circle-o"></i> Xuất hàng </a></li>
+          <li><a href="{{route('nhap.index')}}"><i class="fa fa-circle-o"></i> Nhập hàng </a></li>
+          <li><a href="{{route('xuat.index')}}"><i class="fa fa-circle-o"></i> Xuất hàng </a></li>
         </ul>
       </li>
       <li>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\AvatarController;
+use App\Http\Controllers\Admin\KhoController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PaymentController;
@@ -63,8 +64,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('avatar', AvatarController::class);
     Route::delete('/deleteimageavt/{id}', [AvatarController::class, 'deleteimageavt'])->name('deleteimageavt');
 
-
-
+    Route::resource('kho', KhoController::class);
+    
+    Route::get('/nhap',[KhoController::class,'nhap'])->name('nhap.index');
+    Route::get('/xuat',[KhoController::class,'xuat'])->name('xuat.index');
 
 });
 
