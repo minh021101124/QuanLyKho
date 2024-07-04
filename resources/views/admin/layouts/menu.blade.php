@@ -35,7 +35,19 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
 
     <ul class="sidebar-menu" data-widget="tree">
-
+    <li class="treeview">
+        <a href="#">
+          <i class="fa fa-dashboard"></i> <span>Quản lý kho hàng </span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href=""><i class="fa fa-circle-o"></i> Nhập hàng </a></li>
+          <li><a href=""><i class="fa fa-circle-o"></i> Xuất hàng </a></li>
+        </ul>
+      </li>
+      <li>
       <li>
         <a href="{{route('category.index')}}">
           <i class="fa fa-th"></i> <span>Quản lý danh mục </span>
@@ -43,6 +55,7 @@
          
           </span>
         </a>
+        
       </li>
 
       <li class="treeview">
@@ -57,7 +70,7 @@
           <li><a href="{{route('product.create')}}"><i class="fa fa-circle-o"></i> Thêm mới sản phẩm </a></li>
         </ul>
       </li>
-      <li>
+      <!-- <li>
         <a href="{{route('avatar.index')}}">
           <i class="fa fa-th"></i> <span>Quản lí Ảnh trang chủ</span>
          
@@ -75,7 +88,7 @@
           <i class="fa fa-th"></i> <span>Thống kê</span>
          
         </a>
-      </li>
+      </li> -->
     </ul>
   </section>
   <!-- /.sidebar -->
