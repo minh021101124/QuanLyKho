@@ -104,7 +104,7 @@
                 <img src="{{asset('assets')}}/images/danh.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Danh PC - T MOBILE
+                  
                   <small>Thành lập năm 2024</small>
                 </p>
                 

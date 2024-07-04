@@ -6,7 +6,7 @@
         <img src="{{asset('assets')}}/images/th.jfif" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>ADMIN</p>
+        <p>--</p>
         <form action="{{ route('logout') }}" method="POST" class="d-flex" role="search">
           @csrf
           @method('DELETE')
