@@ -67,6 +67,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('kho', KhoController::class);
     
     Route::get('/nhap',[KhoController::class,'nhap'])->name('nhap.index');
+    
     Route::get('/xuat',[KhoController::class,'xuat'])->name('xuat.index');
 
 });
