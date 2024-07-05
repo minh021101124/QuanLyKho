@@ -6,6 +6,11 @@
         font-size: 12px;
         color: green;
     }
+    .ganhetroi {
+        font-weight: 500;
+        font-size: 12px;
+        color: rgb(250, 175, 0);
+    }
     .maihet {
         font-weight: 500;
         font-size: 12px;
@@ -46,8 +51,8 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>
+                                {{-- {{ $item->hansudung }} --}}
                                 {{ \Carbon\Carbon::parse($item->hansudung)->setTimezone('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s') }}
-                                
                                 @php
                                     $ngayhet = \Carbon\Carbon::parse($item->hansudung);
                                     $now = \Carbon\Carbon::now();
@@ -58,7 +63,7 @@
                                     <span class="ganhet"><div class="chua">{{ abs($demnguoc) }} ngày nữa hết hạn</div></span>
                                 @elseif($demnguoc === 0)
                                     @if($demnguoc_gio < 24)
-                                        <span class="ganhet"><div class="chua">{{ abs($demnguoc_gio) }} giờ nữa hết hạn</div></span>
+                                        <span class="ganhetroi"><div class="chua">{{ abs($demnguoc_gio) }} giờ nữa hết hạn</div></span>
                                     @else
                                         <span class="maihet"><div class="chua">Sắp hết hạn</div></span>
                                     @endif
