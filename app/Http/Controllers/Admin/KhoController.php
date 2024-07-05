@@ -32,6 +32,7 @@ class KhoController extends Controller
     public function create()
     {
        $nhap = Kho::orderBy('name','ASC')->get();
+       
         return view('admin.nhap.add',compact('nhap'));
     }
     public function store(Request $request) {

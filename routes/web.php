@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\AvatarController;
 use App\Http\Controllers\Admin\KhoController;
+use App\Http\Controllers\Admin\NhapController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PaymentController;
@@ -66,10 +67,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::resource('kho', KhoController::class);
     
-    Route::get('/nhap',[KhoController::class,'nhap'])->name('nhap.index');
+    // Route::get('/nhap',[KhoController::class,'nhap'])->name('nhap.index');
     
-    Route::get('/xuat',[KhoController::class,'xuat'])->name('xuat.index');
-
+    // Route::get('/xuat',[KhoController::class,'xuat'])->name('xuat.index');
+    Route::resource('nhaphanghoa', NhapController::class);
+    Route::get('/nhaphang',[NhapController::class,'nhaphang'])->name('nhap.index');
+    Route::get('/danh-sach-nhap',[NhapController::class,'dsnhap'])->name('nhap.list');
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');

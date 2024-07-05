@@ -29,30 +29,48 @@
 </style>
 <section class="content">
     <h3>Danh sách đơn hàng nhập</h3>
-    <a href="{{ route('nhaphanghoa.create') }}" class="btn btn-success" style="margin-left:85%; margin-top:0">Tạo mới đơn nhập</a>
+    <a href="{{ route('kho.create') }}" class="btn btn-success" style="margin-left:85%; margin-top:0">Tạo mới đơn nhập</a>
    
     <div class="box-body table-responsive no-padding">
-        @if($nhap->count() > 0)
+        @if($kho->count() > 0)
             <table class="table table-hover" style="margin-left:0; margin-top:1%">
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Mã đơn</th>
-                        <th>Nội dung nhập</th>
-                        <th>Người nhập</th>
-                        <th>Ghi chú</th>
+                        <th>Tên</th>
+                        <th>SL</th>
+                        <th>Hạn sử dụng</th>
                         <th>Ngày lập</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($nhap as $item)
+                    @foreach ($kho as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->ma_don }}</td>
-                            <td>{{ $item->noi_dung }}</td>
-                            <td>{{ $item->nguoi_nhap }}</td>
-                            <td>{{ $item->ghi_chu }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td>
+                                {{-- {{ $item->hansudung }} --}}
+                                {{ \Carbon\Carbon::parse($item->hansudung)->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s') }}
+                                @php
+                                    $ngayhet = \Carbon\Carbon::parse($item->hansudung);
+                                    $now = \Carbon\Carbon::now();
+                                    $demnguoc = $ngayhet->diffInDays($now, false);
+                                    $demnguoc_gio = $ngayhet->diffInHours($now, false);
+                                @endphp
+                                @if($demnguoc < 0)
+                                    <span class="ganhet"><div class="chua">{{ abs($demnguoc) }} ngày nữa hết hạn</div></span>
+                                @elseif($demnguoc === 0)
+                                    @if($demnguoc_gio < 24)
+                                        <span class="ganhetroi"><div class="chua">{{ abs($demnguoc_gio) }} giờ nữa hết hạn</div></span>
+                                    @else
+                                        <span class="maihet"><div class="chua">Sắp hết hạn</div></span>
+                                    @endif
+                                @else
+                                    <span class="dahet"><div class="chua">Đã hết hạn</div></span>
+                                @endif
+                            </td>
                         </td>
                         <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s') }}</td>
                         <td>

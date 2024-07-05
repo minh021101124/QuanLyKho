@@ -3,11 +3,44 @@
 
 <section class="content">
     
-<h1>Thêm mới</h1>
+<h3>Tạo mới đơn nhập hàng</h3>
 
     <form action="{{ route('kho.store') }}" method="POST">
         @csrf
         <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group @error('name') has-error @enderror">
+                        <label for="name">Mã đơn hàng</label>
+                        <input type="text" name="ma_don" id="ma_don" class="form-control">
+                        @error('ma_don')
+                            <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group @error('name') has-error @enderror">
+                        <label for="name">Nội dung nhập hàng</label>
+                        <input type="text" name="noi_dung_nhap" id="noi_dung_nhap" class="form-control">
+                        @error('noi_dung_nhap')
+                            <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group @error('name') has-error @enderror">
+                        <label for="name">Ghi chú</label>
+                        <textarea name="ghi_chu" id="ghi_chu" class="form-control" rows="3"></textarea>
+                        @error('ghi_chu')
+                            <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group @error('name') has-error @enderror">
@@ -18,6 +51,15 @@
                         @enderror
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
+                <label for="product">Sản phẩm</label>
+                <select name="product" id="product" class="form-control">
+                    <option value="">Chọn sản phẩm</option>
+                    @foreach($products as $product)
+                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="row">
                 <div class="col-md-6">
@@ -60,3 +102,4 @@
    
     </section>
 @endsection
+

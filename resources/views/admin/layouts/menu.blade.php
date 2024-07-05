@@ -35,9 +35,9 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
 
     <ul class="sidebar-menu" data-widget="tree">
-    <li class="treeview">
+      <li class="treeview">
         <a href="#">
-          <i class="fa fa-dashboard"></i> <span>Quản lý kho hàng </span>
+          <i class="fa fa-dashboard"></i> <span>Quản lý Nhập hàng </span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
@@ -45,7 +45,20 @@
         <ul class="treeview-menu">
           {{-- <li><a href="{{route('kho.index')}}"><i class="fa fa-circle-o"></i> Danh sách mặt hàng </a></li> --}}
           <li><a href="{{route('nhap.index')}}"><i class="fa fa-circle-o"></i> Nhập hàng </a></li>
-          <li><a href="{{route('xuat.index')}}"><i class="fa fa-circle-o"></i> Xuất hàng </a></li>
+          <li><a href="{{route('nhap.list')}}"><i class="fa fa-circle-o"></i> Sản phẩm đã nhập </a></li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-dashboard"></i> <span>Quản lý Xuất hàng </span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          {{-- <li><a href="{{route('kho.index')}}"><i class="fa fa-circle-o"></i> Danh sách mặt hàng </a></li> --}}
+          <li><a href="{{route('nhap.index')}}"><i class="fa fa-circle-o"></i> Nhập hàng </a></li>
+          <li><a href=""><i class="fa fa-circle-o"></i> Xuất hàng </a></li>
         </ul>
       </li>
       <li>
