@@ -52,7 +52,7 @@
                             <td>{{ $item->quantity }}</td>
                             <td>
                                 {{-- {{ $item->hansudung }} --}}
-                                {{ \Carbon\Carbon::parse($item->hansudung)->setTimezone('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s') }}
+                                {{ \Carbon\Carbon::parse($item->hansudung)->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s') }}
                                 @php
                                     $ngayhet = \Carbon\Carbon::parse($item->hansudung);
                                     $now = \Carbon\Carbon::now();
@@ -72,7 +72,7 @@
                                 @endif
                             </td>
                         </td>
-                        <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s') }}</td>
+                        <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s') }}</td>
                         <td>
                                 <a href="{{ route('kho.show', $item->id) }}">Xem</a>
                                 <a href="{{ route('kho.edit', $item->id) }}">Chỉnh sửa</a>
