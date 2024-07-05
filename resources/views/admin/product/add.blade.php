@@ -170,7 +170,8 @@
 
                 <div class="form-group @error('short_description') has-error @enderror">
                     <label for="">Mô tả ngắn về sản phẩm</label>
-                    <textarea name="short_description" id="editor" rows="4" cols="108">{{ old('short_description') }}</textarea>
+                    <textarea name="short_description" class="form-control" rows="3" >{{ old('short_description') }}</textarea>
+                    {{-- <textarea name="ghi_chu" id="ghi_chu" class="form-control" rows="3"></textarea> --}}
                 </div>  
                 <div class="form-group @error('description') has-error @enderror">
                     <label for="">Mô tả chi tiết sản phẩm</label>

@@ -7,7 +7,7 @@
       </div>
       <div class="pull-left info">
         <p>--</p>
-        <form action="{{ route('logout') }}" method="POST" class="d-flex" role="search">
+        {{-- <form action="{{ route('logout') }}" method="POST" class="d-flex" role="search">
           @csrf
           @method('DELETE')
           <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
@@ -15,14 +15,14 @@
               <span style="font-size: 10px">Đăng xuất</span>
           </button>
         
-      </form>
+      </form> --}}
       
       
         {{-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> --}}
       </div>
     </div>
     <!-- search form -->
-    <form action="#" method="get" class="sidebar-form">
+    {{-- <form action="#" method="get" class="sidebar-form">
       <div class="input-group">
         <input type="text" name="q" class="form-control" placeholder="Search...">
         <span class="input-group-btn">
@@ -30,11 +30,20 @@
               </button>
             </span>
       </div>
-    </form>
+    </form> --}}
     <!-- /.search form -->
     <!-- sidebar menu: : style can be found in sidebar.less -->
 
     <ul class="sidebar-menu" data-widget="tree">
+      <li>
+        <a href="{{route('admin.index')}}">
+          <i class="fa fa-th"></i> <span>Trang chủ</span>
+          <span class="pull-right-container">
+         
+          </span>
+        </a>
+        
+      </li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-dashboard"></i> <span>Quản lý Nhập hàng </span>
@@ -56,9 +65,10 @@
           </span>
         </a>
         <ul class="treeview-menu">
+          {{-- {{route('xuat.index')}}  {{route('xuat.list')}} --}}
           {{-- <li><a href="{{route('kho.index')}}"><i class="fa fa-circle-o"></i> Danh sách mặt hàng </a></li> --}}
-          <li><a href="{{route('nhap.index')}}"><i class="fa fa-circle-o"></i> Nhập hàng </a></li>
           <li><a href=""><i class="fa fa-circle-o"></i> Xuất hàng </a></li>
+          <li><a href=""><i class="fa fa-circle-o"></i> Sản phẩm đã xuất </a></li>
         </ul>
       </li>
       <li>

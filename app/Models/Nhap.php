@@ -15,4 +15,8 @@ class Nhap extends Model
         'ghi_chu',
         'noi_dung_nhap',
     ];
+    protected $attributes = [
+        'ghi_chu' => 'Không có ghi chú',
+        'nguoi_nhap' => 'Admin',
+    ];
 }

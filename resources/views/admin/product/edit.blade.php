@@ -211,7 +211,7 @@
                             </div>
                             <div class="form-group @error('short_description') has-error @enderror">
                                 <label for="short_description">Mô tả ngắn về sản phẩm</label><br>
-                                <textarea id="short_description" name="short_description" rows="4" cols="70">{{ $product->short_description }}</textarea>
+                                <textarea id="short_description" name="short_description" class="form-control" rows="3" c>{{ $product->short_description }}</textarea>
                                 @error('short_description')
                                 <span class="help-block">{{ $message }}</span>
                                 @enderror
