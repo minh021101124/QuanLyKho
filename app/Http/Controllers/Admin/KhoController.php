@@ -14,13 +14,13 @@ class KhoController extends Controller
 {
     public function index() {
         $kho = Kho::all();
-         // Lấy các sản phẩm gần hết hạn
-         $now = Carbon::now();
-         $hethan = Kho::where('hansudung', '<=', $now->addDays(7))
-                                      ->where('hansudung', '>=', $now)
-                                      ->get();
-        return view('admin.nhap.index', compact('kho','hethan'));
+        // Lấy các sản phẩm gần hết hạn
+        $now = Carbon::now();
+        $hethan = Kho::whereBetween('hansudung', [$now, $now->copy()->addDays(7)])->get();
+        return view('admin.nhap.index', compact('kho', 'hethan'));
     }
+    
+    
     public function xuat(){
         return view('admin.xuat.index');
     }

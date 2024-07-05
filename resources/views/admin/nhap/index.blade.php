@@ -1,24 +1,23 @@
 @extends('admin.master')
 @section('main-content')
 <style>
-    .ganhet{
+    .ganhet {
         font-weight: 500;
         font-size: 12px;
-        color:green;
+        color: green;
     }
-    .maihet{
+    .maihet {
         font-weight: 500;
         font-size: 12px;
-        color:blue;
+        color: blue;
     }
-    .dahet{
+    .dahet {
         font-weight: 600;
         font-style: italic;
         font-size: 12px;
-        color:rgb(255, 0, 0);
+        color: rgb(255, 0, 0);
     }
-    .chua{
-        /* border: 1px red solid; */
+    .chua {
         width: 150px;
         margin-left: 10px;
     }
@@ -26,7 +25,7 @@
 <section class="content">
     <h1>Quản lý Nhập kho</h1>
     <a href="{{ route('kho.create') }}" class="btn btn-success" style="margin-left:2%; margin-top:2%">+ Thêm mới</a>
-
+   
     <div class="box-body table-responsive no-padding">
         @if($kho->count() > 0)
             <table class="table table-hover" style="margin-left:2%; margin-top:5%">
@@ -47,21 +46,29 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>
-                                {{ $item->hansudung }}
+                                {{ \Carbon\Carbon::parse($item->hansudung)->setTimezone('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s') }}
+                                
                                 @php
                                     $ngayhet = \Carbon\Carbon::parse($item->hansudung);
-                                    $demnguoc = $ngayhet->diffInDays(\Carbon\Carbon::now(), false);
+                                    $now = \Carbon\Carbon::now();
+                                    $demnguoc = $ngayhet->diffInDays($now, false);
+                                    $demnguoc_gio = $ngayhet->diffInHours($now, false);
                                 @endphp
                                 @if($demnguoc < 0)
                                     <span class="ganhet"><div class="chua">{{ abs($demnguoc) }} ngày nữa hết hạn</div></span>
                                 @elseif($demnguoc === 0)
-                                    <span class="maihet"><div class="chua">Hết hạn trong ngày mai</div></span>
+                                    @if($demnguoc_gio < 24)
+                                        <span class="ganhet"><div class="chua">{{ abs($demnguoc_gio) }} giờ nữa hết hạn</div></span>
+                                    @else
+                                        <span class="maihet"><div class="chua">Sắp hết hạn</div></span>
+                                    @endif
                                 @else
                                     <span class="dahet"><div class="chua">Đã hết hạn</div></span>
                                 @endif
                             </td>
-                            <td>{{ $item->created_at }}</td>
-                            <td>
+                        </td>
+                        <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s') }}</td>
+                        <td>
                                 <a href="{{ route('kho.show', $item->id) }}">Xem</a>
                                 <a href="{{ route('kho.edit', $item->id) }}">Chỉnh sửa</a>
                                 <form action="{{ route('kho.destroy', $item->id) }}" method="POST" style="display:inline;">
