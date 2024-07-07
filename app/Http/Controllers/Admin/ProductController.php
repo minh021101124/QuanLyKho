@@ -32,7 +32,16 @@ class ProductController extends Controller
         
         return view('admin.product.index',compact('posts'));
     }
+    public function getProductPrice($id)
+    {
+        $product = Product::find($id);
 
+        if ($product) {
+            return response()->json(['price' => $product->price]);
+        }
+
+        return response()->json(['price' => 0], 404);
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -50,11 +50,12 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->ma_don }}</td>
-                            <td>{{ $item->noi_dung }}</td>
+                            <td>{{ $item->noi_dung_nhap }}</td>
                             <td>{{ $item->nguoi_nhap }}</td>
                             <td>{{ $item->ghi_chu }}</td>
                         </td>
-                        <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s') }}</td>
+                        {{-- <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s') }}</td> --}}
+                        <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y') }}</td>
                         <td>
                                 <a href="{{ route('kho.show', $item->id) }}">Xem</a>
                                 <a href="{{ route('kho.edit', $item->id) }}">Chỉnh sửa</a>

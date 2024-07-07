@@ -19,4 +19,9 @@ class Nhap extends Model
         'ghi_chu' => 'Không có ghi chú',
         'nguoi_nhap' => 'Admin',
     ];
+    public function setNguoiNhapAttribute($value)
+    {
+        $this->attributes['nguoi_nhap'] = $value ?? 'admin';
+    }
+    
 }

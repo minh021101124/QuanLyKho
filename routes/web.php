@@ -91,7 +91,7 @@ Route::get('/demo', [HomeController::class, 'demo'])->name('demo');
 
 Route::post('/vnpay_payment',[PaymentController::class,'vnpay_payment']);
 
-// Route::post('/checkout', 'CheckoutController@processCheckout')->middleware('auth');
+
 
 
 
@@ -148,3 +148,5 @@ Route::get('/export-invoice', [ProductController::class, 'exportInvoice'])->name
 
 //Route::get('/admin', 'DashboardController@index')->middleware('admin.auth')->name('admin.index');
 // Route::get('/admin', [DashboardController::class, 'index'])->middleware('admin.auth')->name('admin.index');
+
+Route::get('/product-price/{id}', [ProductController::class, 'getProductPrice']);
