@@ -99,10 +99,6 @@ Route::post('/vnpay_payment',[PaymentController::class,'vnpay_payment']);
 
 
 
-
-
-
-
 // Route::get('/a',[PostController::class,'index']);
 
 // Route::get('/create',function(){
