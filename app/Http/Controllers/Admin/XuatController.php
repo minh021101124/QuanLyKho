@@ -7,31 +7,31 @@ use Illuminate\Http\Request;
 // use App\Models\Infor;
 // use App\Models\Invoice;
 // use App\Models\Category;
-use App\Models\Nhap;
+use App\Models\Xuat;
 use App\Models\Product;
 use Carbon\Carbon;
 
-class NhapController extends Controller
+class XuatController extends Controller
 {
     public function index() {
-       $nhap = Nhap::All();
+       $xuat = Xuat::All();
     //    $products = Product::orderBy('id', 'DESC')->get();
     $products = Product::all();
-        return view('admin.nhap.index', compact('nhap','products'));
+        return view('admin.xuat.index', compact('xuat','products'));
     }
-    public function nhaphang(){
-        $nhap = Nhap::all();
+    public function xuathang(){
+        $xuat = Xuat::all();
         $products = Product::all();
-        return view('admin.nhap.index', compact('nhap','products'));
+        return view('admin.xuat.index', compact('xuat','products'));
     }
     public function create()
     {
-        $nhap = Nhap::all();
+        $xuat = Xuat::all();
         $products = Product::all(); 
-        return view('admin.nhap.add', compact('nhap','products'));
+        return view('admin.xuat.add', compact('xuat','products'));
     }
-    public function dsnhap(){
-        return view('admin.nhap.list');
+    public function dsxuat(){
+        return view('admin.xuat.list');
     }
     // public function xuat(){
     //     return view('admin.xuat.index');
