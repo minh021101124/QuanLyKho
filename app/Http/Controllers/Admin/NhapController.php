@@ -12,6 +12,7 @@ use App\Models\NhapChitiet;
 use App\Models\Product;
 use Carbon\Carbon;
 
+
 class NhapController extends Controller
 {
     public function index() {
@@ -26,6 +27,7 @@ class NhapController extends Controller
     //     $nhap = new Nhap();
     //     $nhap->ma_don = $request->ma_don;
     //     $nhap->nguoi_nhap = $request->nguoi_nhap ?? 'admin';
+
     //     $nhap->ghi_chu = $request->ghi_chu;
     //     $nhap->noi_dung_nhap = $request->noi_dung_nhap;
     //     $nhap->save();
@@ -106,17 +108,77 @@ class NhapController extends Controller
         $product->save();
     }
 
-    return redirect()->route('nhap.index')->with('success', 'Thêm mới thành công');
+    return redirect()->route('admin.nhap.index')->with('success', 'Thêm mới thành công');
 }
+//  // Phương thức để hiển thị form với nhap_id
+//  public function showForm($nhap_id)
+//  {
+//      // Kiểm tra nhap_id
+//      return view('admin.taodon', compact('nhap_id'));
+//  }
 
+//  // Phương thức để lưu dữ liệu
+//  public function Luu(Request $request, $nhap_id)
+//  {
+//      // Validate dữ liệu
+//      $validatedData = $request->validate([
+//          'product_id' => 'required|integer|exists:san_pham,id',
+//          'price' => 'required|numeric',
+//          'quantity' => 'required|integer',
+//      ]);
 
+//      // Lưu chi tiết hóa đơn nhập hàng
+//      $nhapChiTiet = new NhapChitiet();
+//      $nhapChiTiet->nhap_id = $nhap_id;
+//      $nhapChiTiet->product_id = $validatedData['product_id'];
+//      $nhapChiTiet->price = $validatedData['price'];
+//      $nhapChiTiet->quantity = $validatedData['quantity'];
+//      $nhapChiTiet->save();
 
+//      return redirect()->route('nhap.index')->with('success', 'Đã lưu đơn nhập thành công.');
+//  }
+public function add($id){
+    // $nhap = Nhap::all();
+    $products = Product::all();
+   $duliu = NhapChitiet::All();
+    $mado = Nhap::All();
+    return view('admin.nhap.themsp',compact('duliu','mado','products'));
+}
+//  public function taodon($id){
+//     // $nhap = Nhap::all();
+//     // $products = Product::all();
+//    $duli = NhapChitiet::All();
+//     $madon = Nhap::All();
+//     return view('admin.nhap.donhang',compact('duli','madon'));
+// }
+public function taodon($id)
+    {
+        // Lấy thông tin nhập và danh sách sản phẩm liên quan
+        $nhap = Nhap::with('ctNhap')->find($id);
+
+        if ($nhap) {
+            // Trả về view cùng với dữ liệu nhập và sản phẩm
+            return view('admin.nhap.donhang', ['nhap' => $nhap, 'ctNhaps' => $nhap->ctNhap]);
+        } else {
+            // Trả về trang lỗi nếu không tìm thấy
+            return redirect()->back()->with('error', 'Nhập không tồn tại');
+        }
+    }
+public function fetch()
+{
+    // Fetch product information (you can modify this query based on your needs)
+    $product = Nhap::find(1); // Example: Fetch product with ID 1
+
+    // Return view with product information
+    return view('admin.nhap.index', compact('product'));
+}
     public function nhaphang(){
         // $nhap = Nhap::all();
         // $products = Product::all();
         $nhap = Nhap::orderBy('id', 'DESC')->get();
         return view('admin.nhap.index', compact('nhap'));
     }
+    
     public function create()
     {
         $nhap = Nhap::all();

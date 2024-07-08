@@ -74,10 +74,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('nhaphanghoa', NhapController::class);
     Route::get('/nhaphang',[NhapController::class,'nhaphang'])->name('nhap.index');
     Route::get('/danh-sach-nhap',[NhapController::class,'dsnhap'])->name('nhap.list');
-
-    Route::resource('xuathanghoa', XuatController::class);
-    Route::get('/xuathang',[XuatController::class,'xuathang'])->name('xuat.index');
-    Route::get('/danh-sach-xuat',[XuatController::class,'dsxuat'])->name('xuat.list');
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');

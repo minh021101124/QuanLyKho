@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Infor;
 use App\Models\Invoice;
 use App\Models\Category;
-
+use App\Models\Product;
 
 class DashboardController extends Controller
 {
     public function index() {
-
-        return view('admin.index');
+        $products = Product::all();
+    $count = $products->count();
+        return view('admin.index',compact('count', 'products'));
     }
 
     public function statistic() {
@@ -24,7 +25,6 @@ class DashboardController extends Controller
 
         return view('admin.statistic.thongke', compact('records', 'Tong'));
     }
-
    
 }
 
