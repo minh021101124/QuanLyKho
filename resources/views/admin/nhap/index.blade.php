@@ -59,10 +59,11 @@
                         <td>
                                 <a href="{{ route('nhap.donhang', $item->id) }}">Xem</a>
                                 {{-- <a href="{{ route('kho.show', $item->id) }}">Xem</a> --}}
-                                <a href="{{ route('nhap.add', $item->id) }}">Add</a>
+                                {{-- <a href="{{ route('nhap.add', $item->id) }}">Add</a> --}}
                                 <form action="{{ route('kho.destroy', $item->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
+                                    
                                     <button type="submit">Xóa</button>
                                 </form>
                             </td>

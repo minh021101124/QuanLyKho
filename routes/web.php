@@ -74,6 +74,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('nhaphanghoa', NhapController::class);
     Route::get('/nhaphang',[NhapController::class,'nhaphang'])->name('nhap.index');
     Route::get('/danh-sach-nhap',[NhapController::class,'dsnhap'])->name('nhap.list');
+    Route::get('/admin/tao-don-nhap/{id}', [NhapController::class, 'taodon'])->name('nhap.donhang');
 
     Route::resource('xuathanghoa', XuatController::class);
     Route::get('/xuathang',[XuatController::class,'xuathang'])->name('xuat.index');
