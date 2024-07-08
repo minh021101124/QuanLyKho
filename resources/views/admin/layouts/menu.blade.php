@@ -66,6 +66,7 @@
         </a>
         <ul class="treeview-menu">
           {{-- {{route('xuat.index')}}  {{route('xuat.list')}} --}}
+
           {{-- <li><a href="{{route('kho.index')}}"><i class="fa fa-circle-o"></i> Danh sách mặt hàng </a></li> --}}
           <li><a href=""><i class="fa fa-circle-o"></i> Xuất hàng </a></li>
           <li><a href=""><i class="fa fa-circle-o"></i> Sản phẩm đã xuất </a></li>

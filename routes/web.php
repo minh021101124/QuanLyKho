@@ -73,6 +73,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('nhaphanghoa', NhapController::class);
     Route::get('/nhaphang',[NhapController::class,'nhaphang'])->name('nhap.index');
     Route::get('/danh-sach-nhap',[NhapController::class,'dsnhap'])->name('nhap.list');
+    Route::get('/tao-don-nhap/{id}',[NhapController::class,'taodon'])->name('nhap.donhang');
+    Route::get('/themsp/{id}',[NhapController::class,'add'])->name('nhap.add');
+   Route::get('/admin/themsp/{nhap_id}', [NhapController::class, 'showForm'])->name('nhap.showForm');
+Route::post('/admin/themsp/{nhap_id}', [NhapController::class, 'Luu'])->name('nhap.luu');
+
+Route::get('/tao-don-nhap/{id}', [NhapController::class, 'taodon'])->name('nhap.donhang');
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');

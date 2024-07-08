@@ -23,5 +23,8 @@ class Nhap extends Model
     {
         $this->attributes['nguoi_nhap'] = $value ?? 'admin';
     }
-    
+    public function ctNhap()
+    {
+        return $this->hasMany(NhapChitiet::class);
+    }
 }

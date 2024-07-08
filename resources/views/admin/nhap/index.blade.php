@@ -57,8 +57,9 @@
                         {{-- <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s') }}</td> --}}
                         <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y') }}</td>
                         <td>
-                                <a href="{{ route('kho.show', $item->id) }}">Xem</a>
-                                <a href="{{ route('kho.edit', $item->id) }}">Chỉnh sửa</a>
+                                <a href="{{ route('nhap.donhang', $item->id) }}">Xem</a>
+                                {{-- <a href="{{ route('kho.show', $item->id) }}">Xem</a> --}}
+                                <a href="{{ route('nhap.add', $item->id) }}">Add</a>
                                 <form action="{{ route('kho.destroy', $item->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
@@ -74,4 +75,6 @@
         @endif
     </div>
 </section>
+
+
 @endsection
