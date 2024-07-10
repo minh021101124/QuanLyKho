@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('main-content')
-
+@section('title','Đơn nhập')
 <style>
     .ganhet {
         font-weight: 500;
@@ -111,7 +111,7 @@
 @if(Session::has('success'))
 <script>
     swal({
-        title: "Thông báo",
+        title: "Message",
         text: "{{ Session::get('success') }}",
         icon: "success",
         button: "OK",

@@ -59,7 +59,7 @@
               @endforeach
         </tbody>
     </table>
-     <a href="{{route('product.trash')}}"class="btn btn-primary"><i class="fa fa-trash">Thùng rác</i></a>
+     <a href="{{route('product.trash')}}"class="btn btn-primary"><i class="fa fa-trash"> Thùng rác </i></a>
     </div> 
   </div>
 

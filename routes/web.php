@@ -39,8 +39,9 @@ Route::get('/cart',[CartController::class,'index'])->name('cart.index');
 
 
 
-
-Route::prefix('admin')->middleware('auth')->group(function () {
+//đăng nhập quản trị
+// Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
     Route::get('/statistic', [DashboardController::class, 'statistic'])->name('admin.statistic');
  
@@ -79,7 +80,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('xuathanghoa', XuatController::class);
     Route::get('/xuathang',[XuatController::class,'xuathang'])->name('xuat.index');
     Route::get('/danh-sach-xuat',[XuatController::class,'dsxuat'])->name('xuat.list');
-    Route::get('/admin/tao-don-xuat/{id}', [XuatController::class, 'taodon'])->name('xuat.donhang');
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');

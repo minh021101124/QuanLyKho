@@ -3,6 +3,7 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
+        
         <img src="{{asset('assets')}}/images/th.jfif" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">

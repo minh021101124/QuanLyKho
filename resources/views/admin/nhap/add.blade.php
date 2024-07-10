@@ -1,15 +1,16 @@
 @extends('admin.master')
 @section('main-content')
-
+@section('title','Tạo mới đơn nhập')
 <section class="content">
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Thêm Sản Phẩm</title>
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+    <h2>Tạo mới đơn nhập</h2>
     <form action="{{ route('nhaphanghoa.store') }}" method="POST">
         @csrf
         <div class="box-body">
@@ -146,7 +147,7 @@
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     $(document).ready(function() {
         $('#product-dropdown').change(function() {
             var productId = $(this).val();
@@ -177,16 +178,14 @@
             var price = parseFloat($('#product-price').val()) || 0;
             var quantity = parseInt($('#quantity').val()) || 0;
             var total = price * quantity;
-            $('#tong_tien').val(total.toFixed(2));
         }
     });
-</script>
+</script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#product-dropdown').change(function() {
             var productId = $(this).val();
-
             if (productId) {
                 $.ajax({
                     url: '/product-price/' + productId,
@@ -194,7 +193,7 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.price !== undefined) {
-                            $('#product-price').val(response.price);
+                            $('#product-price').val(response.price.toFixed(0)+'đ');
                             calculateTotal();
                         }
                     }
@@ -213,12 +212,28 @@
             var price = parseFloat($('#product-price').val()) || 0;
             var quantity = parseInt($('#quantity').val()) || 0;
             var total = price * quantity;
-            $('#tong_tien').val(formatCurrency(total) + 'đ');
+            // $('#tong_tien').val(total.toFixed(0)+ 'đ');
+            $('#tong_tien').val(total.toFixed(0) + 'đ');
         }
 
-        function formatCurrency(number) {
-            return number.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        }
+        // function formatCurrency(number) {
+        //     return number.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        // }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var minNumber = 100;
+    var maxNumber = 999;
+
+    // Sinh số ngẫu nhiên từ minNumber đến maxNumber
+    var randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+
+    // Format số ngẫu nhiên thành chuỗi 'HD02110xxx'
+    var maDon = 'HD02' + randomNumber.toString().padStart(4, '0');
+    
+    // Gán giá trị vào ô text có id là 'ma_don'
+    document.getElementById('ma_don').value = maDon;
     });
 </script>
 <script>

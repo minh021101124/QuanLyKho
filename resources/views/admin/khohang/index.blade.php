@@ -1,5 +1,6 @@
 @extends('admin.master')
 @section('main-content')
+@section('title','Kho hàng')
 <style>
     .ganhet {
         font-weight: 500;
@@ -56,12 +57,12 @@
 </style>
 
 <section class="content">
-    @if ($message = Session::get('success'))
+    {{-- @if ($message = Session::get('success'))
     <div class="alert alert-success alert-block">
       <button type="button" class="close" data-dismiss="alert">×</button>  
         <strong>{{ $message }}</strong>
     </div>
-    @endif 
+    @endif  --}}
 
     <h2>Kho hàng</h2>
     <div class="container">
@@ -92,7 +93,7 @@
         </div>
         
         <div class="box box2">
-            <div style="background: red;height:100%;"><h3>Tồn kho</h3></div>
+            
             <h3>Tồn kho</h3>
             <table class="table table-hover">
                 <thead>
@@ -107,12 +108,22 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->name }}</td>
-                        <td>{{ $item->quantity }}</td>
+                        <td>
+                            @if($item->quantity == 0)
+                                Đã hết
+                            @elseif($item->quantity < 3)
+                                Sắp hết hàng ({{ $item->quantity }})
+                            @else
+                                {{ $item->quantity }}
+                            @endif
+                        </td>
+                        
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    {{ $nhapchitiet->links() }}
 </section>
 @endsection

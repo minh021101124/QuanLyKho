@@ -46,6 +46,8 @@ class NhapController extends Controller
             'ngaysx' => 'required',
             'hansd' => 'required',
         ]);
+    
+      
         $nhap = new Nhap();
         $nhap->ma_don = $request->ma_don;
         $nhap->nguoi_nhap = $request->nguoi_nhap ?? 'admin';
@@ -72,6 +74,7 @@ class NhapController extends Controller
                 'hansd' => $ngayhethan[$key],
             ];
         }
+    
         try {
             NhapChitiet::insert($data);
         } catch (\Exception $e) {
@@ -84,10 +87,15 @@ class NhapController extends Controller
                 $product->save();
             }
         }
+    
         return redirect()->route('nhap.index')->with('success', 'Nhập hàng thành công.');
         // return back()->with('message', 'Nhập hàng thành công.');
     }
     
+    
+    
+
+
 //  
 // public function add($id){
 //     // $nhap = Nhap::all();
@@ -135,4 +143,9 @@ public function taodon($id)
         $products = Product::all(); 
         return view('admin.nhap.add', compact('nhap','products'));
     }
+    
+   
 }
+
+
+ 

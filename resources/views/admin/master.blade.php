@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>@yield('title')Trang quản trị</title>
+  <title>@yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -15,28 +15,15 @@
   <link rel="stylesheet" href="css/style.css" />
   <script src="{{asset('assets')}}/js/angular.min.js"></script>
   <script src="{{asset('assets')}}/js/app.js"></script>
+  <link rel="icon" href="{{asset('assets')}}/images/page_img.png" type="image/x-icon">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-  {{-- <header class="main-header">
-    <a href="../../index2.html" class="logo">   
-      <span class="logo-mini"><b>A</b>LT</span>   
-      <span class="logo-lg">HELLO</span>
-    </a>
-    <nav class="navbar navbar-static-top">
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">HI</span>
-        <span class="icon-bar">a</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>    
-    </nav>
-    
-  </header> --}}
+
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="../../index2.html" class="logo">
+    <a href="{{route('admin.index')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->

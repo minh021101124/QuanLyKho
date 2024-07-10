@@ -1,5 +1,6 @@
 @extends('admin.master')
 @section('main-content')
+@section('title','Đơn nhập sản phẩm')
 <style>
     .ganhet {
         font-weight: 500;

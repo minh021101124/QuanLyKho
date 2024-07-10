@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('main-content')
-
+@section('title','Trang chủ')
 <section class="content">
 
     <style>
@@ -77,6 +77,69 @@
 
     <div class="container1">
         <h1>TRANG CHỦ</h1>
+    </div>
+    <div class="container1">
+      
+        <div class="summary">
+            <p class="total">Sản phẩm sắp hết hàng : {{ $count_saphet }}</p>
+        </div>
+        <div class="product-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($demtongsp as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>
+                                  
+                                        Sắp hết hàng ( còn {{ $item->quantity }} sản phẩm)
+                                    
+                                    
+                                </td>
+                                
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>              
+        </div>
+    </div>
+    <div class="container1">
+      
+        <div class="summary">
+            <p class="total">Sản phẩm hết hàng : {{$count_saphet}}</p>
+        </div>
+        <div class="product-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($demsp_het as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>
+                                   
+                                        Đã hết hàng
+                                    
+                                </td>
+                                
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>              
+        </div>
     </div>
     <div class="container1">
       
