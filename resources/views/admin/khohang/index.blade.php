@@ -116,8 +116,7 @@
                             @else
                                 {{ $item->quantity }}
                             @endif
-                        </td>
-                        
+                        </td>                       
                     </tr>
                     @endforeach
                 </tbody>
