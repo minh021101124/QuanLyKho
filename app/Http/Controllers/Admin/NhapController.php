@@ -21,13 +21,18 @@ class NhapController extends Controller
         return view('admin.nhap.index', compact('nhap','products'));
     }
     public function dsnhap() {
-        $nhap = Nhap::All();
+        $nhap = Nhap::all();
         
-        $nhapchitiet = NhapChitiet::paginate(7);
-      // $products = Product::orderBy('id', 'DESC')->get();
-         $products = Product::all();
-         return view('admin.nhap.list', compact('nhap','products','nhapchitiet'));
-     }
+        // Corrected pagination and ordering
+        $nhapchitiet = NhapChitiet::orderBy('id', 'DESC')->paginate(7);
+        
+        // Fetching all products
+        $products = Product::all();
+        
+        // Returning the view with compacted data
+        return view('admin.nhap.list', compact('nhap', 'products', 'nhapchitiet'));
+    }
+    
     public function store(Request $request)
     {
         $request->validate([

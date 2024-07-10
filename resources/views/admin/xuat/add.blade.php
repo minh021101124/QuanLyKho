@@ -1,5 +1,6 @@
 @extends('admin.master')
 @section('main-content')
+@section('title','Tạo mới đơn xuất')
 
 <section class="content">
 <!DOCTYPE html>

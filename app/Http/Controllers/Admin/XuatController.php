@@ -31,7 +31,7 @@ class XuatController extends Controller
     public function dsxuat() {
         $nhap = Xuat::All();
         
-        $xuatchitiet = XuatChitiet::All();
+        $xuatchitiet = XuatChitiet::orderBy('id', 'DESC')->get();
       // $products = Product::orderBy('id', 'DESC')->get();
          $products = Product::all();
          return view('admin.xuat.list', compact('nhap','products','xuatchitiet'));
