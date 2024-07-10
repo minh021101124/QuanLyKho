@@ -1,5 +1,6 @@
 @extends('admin.master')
 @section('main-content')
+@section('title','Tạo mới đơn xuất')
 
 <section class="content">
 <!DOCTYPE html>
@@ -250,4 +251,22 @@
     });
 </script>
 @endif
+@if(Session::has('error'))
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Swal.fire({
+            title: "Thông báo",
+            text: "{{ Session::get('error') }}",
+            icon: "error",
+            confirmButtonText: "OK",
+            timer: 8000, // Automatically close after 8 seconds
+            timerProgressBar: true, // Show progress bar
+            toast: true, // Toast style (displays at the top)
+            position: 'top-end', // Position of the toast
+            showConfirmButton: false // Hide the confirmation button
+        });
+    });
+</script>
+@endif
+
 @endsection

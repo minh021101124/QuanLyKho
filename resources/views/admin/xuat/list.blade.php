@@ -1,5 +1,6 @@
 @extends('admin.master')
 @section('main-content')
+@section('title','Danh sách xuất')
 <style>
     .ganhet {
         font-weight: 500;
@@ -59,7 +60,7 @@
                             <td>{{ $item->quantity }}</td>
                             <td>{{ number_format($item->price) }}đ</td>
                             <td>{{ number_format($item->total_price) }}đ</td>
-                            <td>{{ $item->created_at ? $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y') : '' }}</td>
+                            <td>{{ $item->xuat->created_at ? $item->xuat->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y') : '' }}</td>
 
                             <td></td>
                         </td>
