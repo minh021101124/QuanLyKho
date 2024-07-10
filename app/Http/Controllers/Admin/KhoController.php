@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 // use App\Models\Invoice;
 // use App\Models\Category;
 use App\Models\Kho;
+use App\Models\NhapChitiet;
+use App\Models\Product;
 use Carbon\Carbon;
 
 class KhoController extends Controller
@@ -16,10 +18,12 @@ class KhoController extends Controller
         $kho = Kho::all();
         // Lấy các sản phẩm gần hết hạn
         $now = Carbon::now();
+        $nhapchitiet = NhapChitiet::paginate(5);
+        $demtongsp = Product::All();
         $hethan = Kho::whereBetween('hansudung', [$now, $now->copy()->addDays(7)])->get();
-        return view('admin.nhap.index', compact('kho', 'hethan'));
+        return view('admin.khohang.index', compact('kho', 'hethan','nhapchitiet','demtongsp'));
     }
-    
+   
     
     public function xuat(){
         return view('admin.xuat.index');

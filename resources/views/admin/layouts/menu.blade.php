@@ -3,6 +3,7 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
+        
         <img src="{{asset('assets')}}/images/th.jfif" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
@@ -74,6 +75,16 @@
         </ul>
       </li>
       <li>
+        <a href="{{route('khohang.index')}}">
+          <i class="fa fa-th"></i> <span>Kho hàng</span>
+          <span class="pull-right-container">
+         
+          </span>
+        </a>
+        
+      </li>
+      <li>
+
       <li>
         <a href="{{route('category.index')}}">
           <i class="fa fa-th"></i> <span>Quản lý danh mục </span>

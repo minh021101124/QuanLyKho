@@ -39,8 +39,9 @@ Route::get('/cart',[CartController::class,'index'])->name('cart.index');
 
 
 
-
-Route::prefix('admin')->middleware('auth')->group(function () {
+//đăng nhập quản trị
+// Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
     Route::get('/statistic', [DashboardController::class, 'statistic'])->name('admin.statistic');
  
@@ -67,7 +68,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/deleteimageavt/{id}', [AvatarController::class, 'deleteimageavt'])->name('deleteimageavt');
 
     Route::resource('kho', KhoController::class);
-    
+    Route::get('/khohang',[KhoController::class,'index'])->name('khohang.index');
     // Route::get('/nhap',[KhoController::class,'nhap'])->name('nhap.index');
     
     // Route::get('/xuat',[KhoController::class,'xuat'])->name('xuat.index');
@@ -79,6 +80,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('xuathanghoa', XuatController::class);
     Route::get('/xuathang',[XuatController::class,'xuathang'])->name('xuat.index');
     Route::get('/danh-sach-xuat',[XuatController::class,'dsxuat'])->name('xuat.list');
+
+    // Route::get('/',[KhoController::class,'trangchu'])->name('admin.index');
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');

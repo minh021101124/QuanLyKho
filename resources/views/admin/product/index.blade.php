@@ -13,10 +13,6 @@
             <button type="button" class="close" data-dismiss="alert">×</button>	
               <strong>{{ $message }}</strong>
           </div>
-
-
-         
-
         @endif        
         <a href="{{route('product.create')}}"  style="margin-left:2%; margin-top:2%"><button class="btnthem">+ Thêm mới   </button> </a>
            

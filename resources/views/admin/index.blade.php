@@ -1,17 +1,55 @@
 @extends('admin.master')
 @section('main-content')
-
+@section('title','Trang chủ')
 <section class="content">
 
     <style>
+        .product-image {
+   width: 140px;height: 130px;
+    
+    display: block; 
+    margin: 10px 10px 10px 10px; 
+    box-sizing: border-box; 
+}
+
+.product-details {
+    margin-top: 20px;
+    padding: 10px; 
+    max-height: 250px; 
+    width: 140px;
+}
+.product-detailss{
+    margin-top: 10px;
+}
+.titlen{
+    height: 30px;
+    
+}
+.titlen a{
+    text-decoration: none;
+    color: #000000;
+}
+.titlen a:hover{
+    text-decoration: none;
+    color: #c62929;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* background: #fcf3e8; */
+    justify-content: flex-start; 
+    padding: 20px;
+    align-items: center;
+}
         /* body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             padding: 20px;
         } */
         .container1 {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 1000px;
+            margin: 15px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -39,19 +77,99 @@
 
     <div class="container1">
         <h1>TRANG CHỦ</h1>
-
-        <div class="summary">
-            <p class="total">Sản phẩm:  {{ $count }}</p>
-        </div>
-
-        
-        {{-- <ul>
-            @foreach ($products as $product)
-                <li>{{ $product->name }} - {{ $product->price }}</li>
-            @endforeach
-        </ul> --}}
     </div>
-
+    <div class="container1">
+      
+        <div class="summary">
+            <p class="total">Sản phẩm sắp hết hàng : {{ $count_saphet }}</p>
+        </div>
+        <div class="product-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($demtongsp as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>
+                                  
+                                        Sắp hết hàng ( còn {{ $item->quantity }} sản phẩm)
+                                    
+                                    
+                                </td>
+                                
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>              
+        </div>
+    </div>
+    <div class="container1">
+      
+        <div class="summary">
+            <p class="total">Sản phẩm hết hàng : {{$count_saphet}}</p>
+        </div>
+        <div class="product-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($demsp_het as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>
+                                   
+                                        Đã hết hàng
+                                    
+                                </td>
+                                
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>              
+        </div>
+    </div>
+    <div class="container1">
+      
+        <div class="summary">
+            <p class="total">Tổng số mặt hàng :  {{ $count }}</p>
+        </div>
+        <div class="product-container">
+            @foreach ($products as $item)
+                <div class="product-item">
+                    <div class="img-product">
+                        <a href=""> 
+                            <img src="{{ asset('images/' . $item->image) }}" alt="{{ $item->name }}" class="product-image" height="200px">
+        
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <div class="titlen"> 
+                            <a href="">
+                                <h4 class="product-title">{{ $item->name }}</h4>
+                            </a>
+                        </div>
+                       
+                      
+                       
+                       
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 
 </section>
 @endsection

@@ -9,7 +9,8 @@ class NhapChitiet extends Model
 {
     use HasFactory;
     protected $table = 'nhapchitiet';
-    protected $fillable = ['product_id', 'nhap_id', 'price', 'quantity', 'ngaysx', 'hansd'];
+    protected $fillable = ['product_id', 'nhap_id', 'price', 'total_price','quantity', 'ngaysx', 'hansd'];
+    
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
@@ -18,4 +19,6 @@ class NhapChitiet extends Model
     {
         return $this->belongsTo(Nhap::class);
     }
+    
+    
 }

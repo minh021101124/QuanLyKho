@@ -47,6 +47,9 @@ class Product extends Model
     public function categorySlug() {
         return $this->category->slug;
     }
-    
+    public function chitietnhap()
+    {
+        return $this->hasMany(NhapChitiet::class, 'product_id');
+    }
    
 }
