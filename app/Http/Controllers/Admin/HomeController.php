@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -26,6 +25,7 @@ class HomeController extends Controller
     //     $related =Product::where('category_id',$product->category_id)->where('id','!=',$product->id)->get();
     //     return view ('fe.detail',compact('product','related','cart'));
     // }
+
     public function detail($slug, Cart $cart) {
         $product = Product::where('slug', $slug)->first();
         if ($product) {    
@@ -51,15 +51,12 @@ class HomeController extends Controller
     //     return view('fe.catdetail', compact('cat', 'products', 'cart'));
     // }
 
-
-
     public function category(Category $cat, Cart $cart)
     {
         $categoryIds = $this->getAllCategoryIds($cat);
         $products = Product::whereIn('category_id', $categoryIds)->paginate(9);
         return view('fe.catdetail', compact('cat', 'products', 'cart'));
     }
-
     private function getAllCategoryIds(Category $category)
     {
         $ids = collect([$category->id]);
@@ -71,7 +68,6 @@ class HomeController extends Controller
 
         return $ids;
     }
-    
     public function empty(Cart $cart){
         return view ('fe.empty',compact('cart'));
     }
@@ -84,23 +80,18 @@ class HomeController extends Controller
     public function tuvan(){
         return view ('fe.tuvan');
     }
-
     public function percent() {
         // Lấy tất cả các sản phẩm từ bảng Product
         $products = Product::all();
-    
         // Tạo một mảng để lưu trữ phần trăm giảm giá của từng sản phẩm
         $discountPercentages = [];
-    
         // Lặp qua từng sản phẩm để tính phần trăm giảm giá
         foreach ($products as $product) {
             // Tính phần trăm giảm giá cho từng sản phẩm
             $discountPercentage = ($product->price - $product->sale_price) / $product->price * 100;
-    
             // Thêm phần trăm giảm giá vào mảng
             $discountPercentages[] = $discountPercentage;
         }
-    
         // Trả về view và truyền biến $discountPercentages
         return view('fe.home', compact('discountPercentages'));
     }

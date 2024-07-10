@@ -11,7 +11,7 @@ class Xuat extends Model
 
     protected $table = 'xuat';
     protected $fillable = [
-        'ma_don',
+        'ma_xuat',
         'nguoi_xuat',
         'ghi_chu',
         'noi_dung_xuat',
@@ -25,4 +25,9 @@ class Xuat extends Model
         $this->attributes['nguoi_xuat'] = $value ?? 'admin';
     }
     
+
+    public function ctNhap()
+    {
+        return $this->hasMany(XuatChitiet::class);
+    }
 }

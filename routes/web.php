@@ -80,8 +80,6 @@ Route::prefix('admin')->group(function () {
     Route::resource('xuathanghoa', XuatController::class);
     Route::get('/xuathang',[XuatController::class,'xuathang'])->name('xuat.index');
     Route::get('/danh-sach-xuat',[XuatController::class,'dsxuat'])->name('xuat.list');
-
-    // Route::get('/',[KhoController::class,'trangchu'])->name('admin.index');
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');

@@ -31,8 +31,8 @@
             <tr>
                   <th scope="row">{{ $post->id }}</th>
                   <td>{{ $post->name }}</td>
-                  <td>{{ $post->price }}</td>
-                  <td>{{ $post->sale_price }}</td>
+                  <td>{{ number_format($post->price) }}đ</td>
+                  <td>{{ number_format($post->sale_price) }}đ</td>
                   {{-- <td>{{ $post->category_id }}</td> --}}
                   <td>@if($post->category)
                     {{$post->category->name}}
@@ -59,7 +59,7 @@
               @endforeach
         </tbody>
     </table>
-     <a href="{{route('product.trash')}}"class="btn btn-primary"><i class="fa fa-trash">Thùng rác</i></a>
+     <a href="{{route('product.trash')}}"class="btn btn-primary"><i class="fa fa-trash"> Thùng rác </i></a>
     </div> 
   </div>
 
