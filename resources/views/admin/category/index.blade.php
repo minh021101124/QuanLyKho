@@ -24,7 +24,7 @@
                 <th>Tên danh mục</th>
                 <th>Danh mục cha</th>
                 <th>Ngày tạo</th>
-                <th>Trạng tháiiii</th>
+                <th>Trạng thái</th>
                 <th></th>
             </tr>
 
@@ -61,7 +61,7 @@
           @endforelse
         </tbody>
     </table>
-    <a href="{{route('category.trash')}}"style="margin-left:2%" class="btn btn-primary"><i class="fa fa-trash">Thùng rác</i></a>
+    <a href="{{route('category.trash')}}"style="margin-left:2%" class="btn btn-primary"><i class="fa fa-trash"> Thùng rác</i></a>
       </div>
   </div>
 
