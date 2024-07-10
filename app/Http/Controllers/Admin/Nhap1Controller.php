@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -23,7 +24,7 @@ class NhapController extends Controller
     public function dsnhap() {
         $nhap = Nhap::All();
         
-        $nhapchitiet = NhapChitiet::paginate(7);
+        $nhapchitiet = NhapChitiet::All();
       // $products = Product::orderBy('id', 'DESC')->get();
          $products = Product::all();
          return view('admin.nhap.list', compact('nhap','products','nhapchitiet'));
@@ -46,6 +47,8 @@ class NhapController extends Controller
             'ngaysx' => 'required',
             'hansd' => 'required',
         ]);
+    
+      
         $nhap = new Nhap();
         $nhap->ma_don = $request->ma_don;
         $nhap->nguoi_nhap = $request->nguoi_nhap ?? 'admin';
@@ -72,6 +75,7 @@ class NhapController extends Controller
                 'hansd' => $ngayhethan[$key],
             ];
         }
+    
         try {
             NhapChitiet::insert($data);
         } catch (\Exception $e) {
@@ -84,18 +88,22 @@ class NhapController extends Controller
                 $product->save();
             }
         }
+    
         return redirect()->route('nhap.index')->with('success', 'Nhập hàng thành công.');
-        // return back()->with('message', 'Nhập hàng thành công.');
     }
     
+    
+    
+
+
 //  
-// public function add($id){
-//     // $nhap = Nhap::all();
-//     $products = Product::all();
-//    $duliu = NhapChitiet::All();
-//     $mado = Nhap::All();
-//     return view('admin.nhap.themsp',compact('duliu','mado','products'));
-// }
+public function add($id){
+    // $nhap = Nhap::all();
+    $products = Product::all();
+   $duliu = NhapChitiet::All();
+    $mado = Nhap::All();
+    return view('admin.nhap.themsp',compact('duliu','mado','products'));
+}
 
 public function taodon($id)
     {
@@ -126,13 +134,19 @@ public function taodon($id)
     public function nhaphang(){
         // $nhap = Nhap::all();
         // $products = Product::all();
-        $nhap = Nhap::orderBy('id', 'DESC')->paginate(5); 
+        $nhap = Nhap::orderBy('id', 'DESC')->get();
         return view('admin.nhap.index', compact('nhap'));
     }
+    
     public function create()
     {
         $nhap = Nhap::all();
         $products = Product::all(); 
         return view('admin.nhap.add', compact('nhap','products'));
     }
+    
+   
 }
+
+
+ 

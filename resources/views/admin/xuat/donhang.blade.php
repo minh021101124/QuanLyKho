@@ -32,16 +32,16 @@
     {{-- @foreach ($madon as $item)
     Đơn hàng số : {{$item -> ma_don}}
     @endforeach --}}
-    <h1 style="margin-bottom:5%">Chi tiết Đơn Nhập Hàng</h1>
+    <h1 style="margin-bottom:5%">Chi tiết Đơn Xuất Hàng</h1>
     {{-- <p>ID: {{ $nhap->id }}</p> --}}
     <table style="border:none; width: 35%;font-size:18px;">
         <tr>
             <td style="font-weight: 600; color: red; padding-left: 10%;">Mã đơn hàng:</td>
-            <td style="padding-left: 10%;">{{ $nhap->ma_don }}</td>
+            <td style="padding-left: 10%;">{{ $nhap->ma_xuat }}</td>
             
         </tr>
         <tr>
-            <td style="font-weight: 600; color: red; padding-left: 10%;">Ngày Nhập:</td>
+            <td style="font-weight: 600; color: red; padding-left: 10%;">Ngày Xuất:</td>
             <td style="padding-left: 10%;">{{ $nhap->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('H:i - d/m/Y') }}</td>
         </tr>
     </table>
@@ -73,7 +73,7 @@
                             @endphp
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $ctNhap->product->name }}</td>
+                                <td>{{ $ctNhap->prouctid->name }}</td>
                                 <td>{{ number_format($ctNhap->price) }}đ</td>
                                 <td>{{ $ctNhap->quantity }}</td>
                                 <td>{{ number_format($ctNhap->total_price) }}đ</td>

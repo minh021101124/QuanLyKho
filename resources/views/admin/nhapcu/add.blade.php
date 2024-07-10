@@ -139,7 +139,7 @@
                 var price = parseFloat($row.find('#product-price').val()) || 0;
                 var quantity = parseInt($row.find('#quantity').val()) || 0;
                 var total = price * quantity;
-                $row.find('#tong_tien').val(total);
+                $row.find('#tong_tien').val(total.toFixed(2));
             }
         });
     </script>

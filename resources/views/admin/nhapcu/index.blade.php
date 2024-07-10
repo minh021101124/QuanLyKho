@@ -34,37 +34,37 @@
         <strong>{{ $message }}</strong>
     </div>
   @endif 
-    <h2>Danh sách đơn xuất</h2>
-    <a href="{{ route('xuathanghoa.create') }}" class="btn btn-success" style="margin-left:80%; margin-top:0">Tạo mới đơn xuất </a>
+    <h2>Danh sách đơn đã nhập</h2>
+    <a href="{{ route('nhaphanghoa.create') }}" class="btn btn-success" style="margin-left:80%; margin-top:0">Tạo mới đơn nhập</a>
    
     <div class="box-body table-responsive no-padding">
-        @if($xuat->count() > 0)
+        @if($nhap->count() > 0)
             <table class="table table-hover" style="margin-left:0; margin-top:1%">
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Mã xuất</th>
-                        <th>Nội dung xuất</th>
-                        <th>Người xuất</th>
+                        <th>Mã đơn</th>
+                        <th>Nội dung nhập</th>
+                        <th>Người nhập</th>
                         <th>Ghi chú</th>
                         <th>Ngày lập</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($xuat as $item)
+                    @foreach ($nhap as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                           
-                            <td>  <a href="{{ route('xuat.donhang', $item->id) }}">{{ $item->ma_xuat }}</a></td>
-                            <td>{{ $item->noi_dung_xuat }}</td>
-                            <td>{{ $item->nguoi_xuat }}</td>
+                            <td>  <a href="{{ route('nhap.donhang', $item->id) }}">{{ $item->ma_don }}</a></td>
+                            <td>{{ $item->noi_dung_nhap }}</td>
+                            <td>{{ $item->nguoi_nhap }}</td>
                             <td>{{ $item->ghi_chu }}</td>
                         </td>
                         {{-- <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s') }}</td> --}}
                         <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y') }}</td>
                         <td>
-                                <a href="{{ route('xuat.donhang', $item->id) }}"><button class="btn btn-primary">Xem chi tiết</button></a>
+                                <a href="{{ route('nhap.donhang', $item->id) }}"><button class="btn btn-primary">Xem chi tiết</button></a>
                                 {{-- <a href="{{ route('kho.show', $item->id) }}">Xem</a> --}}
                                 {{-- <a href="{{ route('nhap.add', $item->id) }}">Add</a> --}}
                                 <form action="{{ route('kho.destroy', $item->id) }}" method="POST" style="display:inline;">
@@ -83,5 +83,6 @@
         @endif
     </div>
 </section>
+
 
 @endsection

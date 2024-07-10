@@ -74,6 +74,16 @@
         </ul>
       </li>
       <li>
+        <a href="{{route('khohang.index')}}">
+          <i class="fa fa-th"></i> <span>Kho hàng</span>
+          <span class="pull-right-container">
+         
+          </span>
+        </a>
+        
+      </li>
+      <li>
+
       <li>
         <a href="{{route('category.index')}}">
           <i class="fa fa-th"></i> <span>Quản lý danh mục </span>

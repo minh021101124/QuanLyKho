@@ -13,7 +13,7 @@ class DashboardController extends Controller
 {
     public function index() {
         $products = Product::all();
-    $count = $products->count();
+        $count = $products->count();
         return view('admin.index',compact('count', 'products'));
     }
 

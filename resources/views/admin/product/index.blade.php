@@ -13,10 +13,6 @@
             <button type="button" class="close" data-dismiss="alert">×</button>	
               <strong>{{ $message }}</strong>
           </div>
-
-
-         
-
         @endif        
         <a href="{{route('product.create')}}"  style="margin-left:2%; margin-top:2%"><button class="btnthem">+ Thêm mới   </button> </a>
            
@@ -35,8 +31,8 @@
             <tr>
                   <th scope="row">{{ $post->id }}</th>
                   <td>{{ $post->name }}</td>
-                  <td>{{ $post->price }}</td>
-                  <td>{{ $post->sale_price }}</td>
+                  <td>{{ number_format($post->price) }}đ</td>
+                  <td>{{ number_format($post->sale_price) }}đ</td>
                   {{-- <td>{{ $post->category_id }}</td> --}}
                   <td>@if($post->category)
                     {{$post->category->name}}

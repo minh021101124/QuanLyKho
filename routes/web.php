@@ -67,7 +67,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/deleteimageavt/{id}', [AvatarController::class, 'deleteimageavt'])->name('deleteimageavt');
 
     Route::resource('kho', KhoController::class);
-    
+    Route::get('/khohang',[KhoController::class,'index'])->name('khohang.index');
     // Route::get('/nhap',[KhoController::class,'nhap'])->name('nhap.index');
     
     // Route::get('/xuat',[KhoController::class,'xuat'])->name('xuat.index');
@@ -79,6 +79,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('xuathanghoa', XuatController::class);
     Route::get('/xuathang',[XuatController::class,'xuathang'])->name('xuat.index');
     Route::get('/danh-sach-xuat',[XuatController::class,'dsxuat'])->name('xuat.list');
+    Route::get('/admin/tao-don-xuat/{id}', [XuatController::class, 'taodon'])->name('xuat.donhang');
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');

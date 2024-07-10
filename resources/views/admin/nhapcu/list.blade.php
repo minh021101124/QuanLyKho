@@ -26,19 +26,16 @@
         width: 150px;
         margin-left: 10px;
     }
-    .pagination-container {
-    display: flex;
-    justify-content: center;}
 </style>
 <section class="content">
-    {{-- @if ($message = Session::get('success'))
+    @if ($message = Session::get('success'))
     <div class="alert alert-success alert-block">
       <button type="button" class="close" data-dismiss="alert">×</button>	
         <strong>{{ $message }}</strong>
     </div>
-  @endif  --}}
+  @endif 
     <h3>Danh sách sản phẩm đã nhập</h3>
-    <div class="box-body table-responsive no-padding" style="height:390px">
+    <div class="box-body table-responsive no-padding">
         @if($nhap->count() > 0)
             <table class="table table-hover" style="margin-left:0; margin-top:1%">
                 <thead>
@@ -62,7 +59,7 @@
                             <td>{{ $item->quantity }}</td>
                             <td>{{ number_format($item->price) }}đ</td>
                             <td>{{ number_format($item->total_price) }}đ</td>
-                            <td>{{ $item->nhap->created_at ? $item->nhap->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y') : '' }}</td>
+                            <td>{{ $item->created_at ? $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y') : '' }}</td>
 
                             <td></td>
                         </td>
@@ -73,13 +70,9 @@
                     @endforeach
                 </tbody>
             </table>
-            {{-- {{ $nhapchitiet->links() }} --}}
         @else
             <span>Chưa có dữ liệu</span>
         @endif
-    </div>
-    <div class="pagination-container">
-        {{ $nhapchitiet->links() }}
     </div>
 </section>
 

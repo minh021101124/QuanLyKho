@@ -10,15 +10,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <form action="{{ route('nhaphanghoa.store') }}" method="POST">
+    <form action="{{ route('xuathanghoa.store') }}" method="POST">
         @csrf
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group @error('ma_don') has-error @enderror">
-                        <label for="ma_don">Mã đơn hàng</label>
-                        <input type="text" name="ma_don" id="ma_don" class="form-control">
-                        @error('ma_don')
+                    <div class="form-group @error('ma_xuat') has-error @enderror">
+                        <label for="ma_xuat">Mã đơn hàng</label>
+                        <input type="text" name="ma_xuat" id="ma_xuat" class="form-control">
+                        @error('ma_xuat')
                             <span class="help-block">{{ $message }}</span>
                         @enderror
                     </div>
@@ -26,10 +26,10 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group @error('noi_dung_nhap') has-error @enderror">
-                        <label for="noi_dung_nhap">Nội dung nhập hàng</label>
-                        <input type="text" name="noi_dung_nhap" id="noi_dung_nhap" value="Hóa đơn nhập hàng"class="form-control">
-                        @error('noi_dung_nhap')
+                    <div class="form-group @error('noi_dung_xuat') has-error @enderror">
+                        <label for="noi_dung_xuat">Nội dung xuất hàng</label>
+                        <input type="text" name="noi_dung_xuat" id="noi_dung_xuat" value="Hóa đơn xuất hàng"class="form-control">
+                        @error('noi_dung_xuat')
                             <span class="help-block">{{ $message }}</span>
                         @enderror
                     </div>
@@ -39,7 +39,7 @@
                 <div class="col-md-12">
                     <div class="form-group @error('ghi_chu') has-error @enderror">
                         <label for="ghi_chu">Ghi chú</label>
-                        <textarea name="ghi_chu" id="ghi_chu" class="form-control" rows="2" placeholder="Nhập thông tin ghi chú cho đơn hàng cần nhập" ></textarea>
+                        <textarea name="ghi_chu" id="ghi_chu" class="form-control" rows="2" placeholder="Nhập thông tin ghi chú cho đơn hàng cần xuất" ></textarea>
                         @error('ghi_chu')
                             <span class="help-block">{{ $message }}</span>
                         @enderror
@@ -79,7 +79,7 @@
             </tbody>
         </table>
         <button type="submit" class="btn btn-success" style="width:100px;margin-left:1%">Lưu</button>
-        <a href="{{ route('nhap.index') }}" class="btn btn-danger" style="margin-left:0; margin-top:0;width:100px;">Hủy</a>
+        <a href="{{ route('xuat.index') }}" class="btn btn-danger" style="margin-left:0; margin-top:0;width:100px;">Hủy</a>
     </form>
 
     <script>
@@ -233,8 +233,21 @@
     var maDon = 'HD02' + randomNumber.toString().padStart(4, '0');
     
     // Gán giá trị vào ô text có id là 'ma_don'
-    document.getElementById('ma_don').value = maDon;
+    document.getElementById('ma_xuat').value = maDon;
     });
 </script>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@if(Session::has('success'))
+<script>
+    swal({
+        title: "Thông báo",
+        text: "{{ Session::get('success') }}",
+        icon: "success",
+        button: "OK",
+        timer: 8000,
+        dangerMode: false,
+    });
+</script>
+@endif
 @endsection
