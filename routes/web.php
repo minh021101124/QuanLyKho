@@ -83,7 +83,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/admin/tao-don-xuat/{id}', [XuatController::class, 'taodon'])->name('xuat.donhang');
 
     Route::get('/them/{id}', [NhapController::class, 'them'])->name('nhap.them');
-    Route::get('/sanpham',[ProductController::class,'sanpham'])->name('product.sanpham');
+    Route::get('/sanpham/{id}',[ProductController::class,'sanpham'])->name('product.sanpham');
+    // Route::get('detail/{slug}', [HomeController::class, 'detail'])->name('detail');
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');
