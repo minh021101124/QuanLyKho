@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\File;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Models\Infor;
-
+use App\Models\NhapChitiet;
+use App\Models\XuatChitiet;
 class ProductController extends Controller
 {
     /**
@@ -328,7 +329,14 @@ public function exportInvoice(Request $request)
 }
 public function doanhthu()
 {
-    return view('admin.thongke.doanhthu');
+    $tongnhap=  NhapChitiet::All();
+    $tong = $tongnhap->sum('total_price');
+  
+    $tongxuat=  XuatChitiet::All();
+    $tongx = $tongxuat->sum('total_price');
+   
+
+    return view('admin.thongke.doanhthu',compact('tong','tongx'));
 }
 
 
