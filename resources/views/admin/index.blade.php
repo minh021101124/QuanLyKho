@@ -89,6 +89,7 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Ảnh</th>
+                                
                                 <th>Tên sản phẩm</th>
                                 <th>Số lượng</th>
                             </tr>
@@ -98,9 +99,9 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
-                   
+                                    <a href="{{ route('product.sanpham', $item->slug) }}"> 
                                     <img src="{{asset('images')}}/{{$item->image}}" alt="" width=50px height="50px">
-                
+                                    </a>
                                 </td>
                                 <td>{{ $item->name }}</td>
                                 <td>
@@ -137,14 +138,19 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
-                   
+                                    {{-- <a href="{{route('product.sanpham','id')}}"> --}}
+
+
+                                        <a href="{{ route('product.sanpham', $item->slug) }}"> 
                                     <img src="{{asset('images')}}/{{$item->image}}" alt="" width=50px height="50px">
-                
+                                </a>
                                 </td>
-                                <td>{{ $item->name }}</td>
                                 <td>
-                                   
-                                        Đã hết hàng
+                                    {{ $item->name }}
+                                </td>
+                                <td>
+                                   <a href="">
+                                        Đã hết hàng</a>
                                     
                                 </td>
                                 <td>
@@ -177,7 +183,8 @@
             @foreach ($products as $item)
                 <div class="product-item">
                     <div class="img-product">
-                        <a href=""> 
+                       
+                            <a href="{{ route('product.sanpham', $item->slug) }}">
                             <img src="{{ asset('images/' . $item->image) }}" alt="{{ $item->name }}" class="product-image" height="200px">
         
                         </a>

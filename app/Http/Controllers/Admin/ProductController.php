@@ -32,9 +32,18 @@ class ProductController extends Controller
         
         return view('admin.product.index',compact('posts'));
     }
-    public function sanpham($id) {
-        $product = Product::where('id', $id)->first();
-        return view('admin.product.sanpham',compact('product'));
+    // public function ctsanpham($id) {
+    //     $product = Product::where('id', $id)->first();
+    //     return view('admin.product.sanpham',compact('product'));
+    // }
+    public function ctsanpham($slug) {
+        $product = Product::where('slug', $slug)->first();
+        $demtongsp = Product::All();
+
+           
+            return view('admin.product.sanpham', compact('product','demtongsp'));
+         
+       
     }
     
     public function getProductPrice($id)
@@ -316,6 +325,10 @@ public function exportInvoice(Request $request)
 
     // Xuất hóa đơn PDF
     return $dompdf->stream('Hoa_don_ban_hang.pdf')->back();
+}
+public function doanhthu()
+{
+    return view('admin.thongke.doanhthu');
 }
 
 
