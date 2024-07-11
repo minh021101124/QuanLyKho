@@ -74,7 +74,7 @@
                         <th>STT</th>
                         <th>Ảnh</th>
                         <th>Tên sản phẩm</th>
-                        <th>Ảnh</th>
+                       
                         <th>Số lượng</th>
                         <th>Ngày sản xuất</th>
                         <th>Ngày hết hạn</th>
@@ -90,8 +90,8 @@
         
                         </td>
                         <td>{{ $item->product->name }}</td>
-                        <td>
-                        <img src="{{asset('images')}}/{{$item->image}}" alt="" width=50px height="50px"></td>
+                        
+                        
                         <td>{{ $item->quantity }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->ngaysx)->format('d/m/Y') }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->hansd)->format('d/m/Y') }}</td>
