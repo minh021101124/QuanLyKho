@@ -63,27 +63,46 @@
             <tbody>
                 <tr>
                     <td>
-                        <select name="product_id[]" id="product-dropdown"class="form-control">
+                        <select name="product_id[]" id="product-dropdown" class="form-control">
                             <option value="">Chọn sản phẩm</option>
                             @foreach($products as $prod)
-                                <option value="{{ $prod->id }}">{{ $prod->name }}</option>
+                                <option value="{{ $prod->id }}"
+                                    @if ($prod->id == $id_from_url)
+                                        selected
+                                    @endif
+                                >{{ $prod->name }}</option>
                             @endforeach
                         </select>
                     </td>
+                    
                     <td><input type="number" name="quantity[]" id="quantity" min="1" max="100"class="form-control"></td>
+                    {{-- <td><input type="text" name="price[]" id="product-price" class="form-control"></td> --}}
+                    
                     <td><input type="text" name="price[]" id="product-price" class="form-control"></td>
+
                     <td><input type="text" name="total_price[]" id="tong_tien"class="form-control"></td>
                     <td><input type="date" name="ngaysx[]" class="form-control"></td>
                     <td><input type="date" name="hansd[]" class="form-control"></td>
                     <td><a href="javascript:void(0)" class="btn btn-danger removeRow">-</a></td>
                 </tr>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        // Lấy giá trị của giá sản phẩm của mặt hàng đầu tiên
+                        var firstProductPrice = $('#product-dropdown option:first').data('price');
+                        
+                        // Hiển thị giá sản phẩm trong input
+                        $('#product-price').val(firstProductPrice);
+                    });
+                </script>
+
             </tbody>
         </table>
         <button type="submit" class="btn btn-success" style="width:100px;margin-left:1%">Lưu</button>
         <a href="{{ route('nhap.index') }}" class="btn btn-danger" style="margin-left:0; margin-top:0;width:100px;">Hủy</a>
     </form>
 
-    <script>
+    {{-- <script>
         $(document).ready(function(){
             $('thead').on('click', '.addRow', function(){
                 var tr = "<tr>"+
@@ -143,7 +162,7 @@
                 $row.find('#tong_tien').val(total);
             }
         });
-    </script>
+    </script> --}}
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -182,7 +201,7 @@
     });
 </script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     $(document).ready(function() {
         $('#product-dropdown').change(function() {
             var productId = $(this).val();
@@ -250,7 +269,7 @@
     // Gán giá trị vào ô text có id là 'ma_don'
     document.getElementById('ma_don').value = maDon;
     });
-</script>
+</script> --}}
 
 </section>
 @endsection

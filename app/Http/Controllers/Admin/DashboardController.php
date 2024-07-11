@@ -16,10 +16,13 @@ class DashboardController extends Controller
         $products = Product::all();
         $count = $products->count();
         $demtongsp = Product::where('quantity', '>', 0)
-        ->where('quantity', '<', 5)
-        ->get();
+                            ->where('quantity', '<', 5)
+                            ->get();
+              
         $demsp_het = Product::where('quantity', '=', 0)->get();
+
         $count_het = Product::where('quantity', '=', 0)->count();
+        $count_het = $demsp_het->count();
         $count_saphet = $demtongsp->count();
 
        

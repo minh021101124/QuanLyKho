@@ -82,6 +82,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/danh-sach-xuat',[XuatController::class,'dsxuat'])->name('xuat.list');
     Route::get('/admin/tao-don-xuat/{id}', [XuatController::class, 'taodon'])->name('xuat.donhang');
 
+    Route::get('/them/{id}', [NhapController::class, 'them'])->name('nhap.them');
+
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');

@@ -19,9 +19,23 @@ class KhoController extends Controller
        
         $now = Carbon::now();
         $nhapchitiet = NhapChitiet::paginate(5);
+
+        $products = Product::all();
+        $count = $products->count(); 
+        
+        
+      
+        
+        $demtongton = Product::sum('quantity');
+       
+        
+        
+
+
         $demtongsp = Product::All();
+        
         $hethan = Kho::whereBetween('hansudung', [$now, $now->copy()->addDays(7)])->get();
-        return view('admin.khohang.index', compact('kho', 'hethan','nhapchitiet','demtongsp'));
+        return view('admin.khohang.index', compact('kho', 'hethan','nhapchitiet','demtongsp','demtongton'));
     }
    
     

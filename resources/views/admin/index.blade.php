@@ -88,6 +88,7 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
+                                <th>Ảnh</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Số lượng</th>
                             </tr>
@@ -96,6 +97,11 @@
                             @foreach ($demtongsp as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>
+                   
+                                    <img src="{{asset('images')}}/{{$item->image}}" alt="" width=50px height="50px">
+                
+                                </td>
                                 <td>{{ $item->name }}</td>
                                 <td>
                                   
@@ -113,27 +119,48 @@
     <div class="container1">
       
         <div class="summary">
-            <p class="total">Sản phẩm hết hàng : {{$count_saphet}}</p>
+            <p class="total">Sản phẩm hết hàng : {{$count_het}}</p>
         </div>
         <div class="product-container">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>STT</th>
+                                <th>Ảnh</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Số lượng</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($demsp_het as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>
+                   
+                                    <img src="{{asset('images')}}/{{$item->image}}" alt="" width=50px height="50px">
+                
+                                </td>
                                 <td>{{ $item->name }}</td>
                                 <td>
                                    
                                         Đã hết hàng
                                     
                                 </td>
+                                <td>
+                                    <a href="{{ route('nhap.them', ['id' => $item]) }}" class="btn btn-success">Tạo mới </a>
+
+                                </td>
+                                
+                            <script>
+                                function fillProductId() {
+                                    // Lấy mã ID sản phẩm từ trường cần điền
+                                    var productId = document.getElementById('product_id').value;
+                                
+                                    // Điền mã ID sản phẩm vào trường trong form đơn nhập hàng
+                                    document.getElementById('input_product_id').value = productId;
+                                }
+                                </script>
                                 
                             </tr>
                             @endforeach

@@ -42,6 +42,7 @@
                 <thead>
                     <tr>
                         <th>STT</th>
+                        <th>Ảnh</th>
                         <th>Tên mặt hàng</th>
                         <th>Số lượng</th>
                         <th>Đơn giá</th>
@@ -56,6 +57,11 @@
                     @foreach ($xuatchitiet as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>
+                   
+                                <img src="{{asset('images')}}/{{$item->prouctid->image}}" alt="" width=50px height="50px">
+            
+                            </td>
                             <td>{{ $item->prouctid->name }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>{{ number_format($item->price) }}đ</td>
