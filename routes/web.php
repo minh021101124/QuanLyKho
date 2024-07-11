@@ -17,13 +17,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeControllerr;
 
 
-
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
 use App\Http\Controllers\PostController;
-
 use App\Http\Controllers\ModalController;
+
 use Illuminate\Support\Facades\Route;
 
 

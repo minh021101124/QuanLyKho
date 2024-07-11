@@ -31,7 +31,6 @@ class KhoController extends Controller
         
         
 
-
         $demtongsp = Product::All();
         
         $hethan = Kho::whereBetween('hansudung', [$now, $now->copy()->addDays(7)])->get();
