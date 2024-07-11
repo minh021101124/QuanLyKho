@@ -94,7 +94,7 @@
       </li> --}}
       <li>
         <li>
-          <a href="{{route('product.sanpham')}}">
+          <a href="{{route('product.sanpham','id')}}">
             <i class="fa fa-th"></i> <span>Sản phẩm</span>
             <span class="pull-right-container">
            
