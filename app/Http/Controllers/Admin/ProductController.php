@@ -32,6 +32,10 @@ class ProductController extends Controller
         
         return view('admin.product.index',compact('posts'));
     }
+    public function sanpham() {
+        
+        return view('admin.product.sanpham');
+    }
     public function getProductPrice($id)
     {
         $product = Product::find($id);
