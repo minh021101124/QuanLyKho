@@ -81,7 +81,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/xuathang',[XuatController::class,'xuathang'])->name('xuat.index');
     Route::get('/danh-sach-xuat',[XuatController::class,'dsxuat'])->name('xuat.list');
     Route::get('/admin/tao-don-xuat/{id}', [XuatController::class, 'taodon'])->name('xuat.donhang');
-
+    Route::get('/barcode',[XuatController::class,'barcode'])->name('xuat.barcode');
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');

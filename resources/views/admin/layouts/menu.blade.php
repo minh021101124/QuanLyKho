@@ -84,6 +84,15 @@
         
       </li>
       <li>
+        <a href="{{route('xuat.barcode')}}">
+          <i class="fa fa-th"></i> <span>Quét mã vạch</span>
+          <span class="pull-right-container">
+         
+          </span>
+        </a>
+        
+      </li>
+      <li>
 
       <li>
         <a href="{{route('category.index')}}">
