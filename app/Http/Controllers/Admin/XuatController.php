@@ -22,6 +22,13 @@ class XuatController extends Controller
         $products = Product::all();
         return view('admin.xuat.index', compact('xuat','products'));
     }
+    public function barcode(){
+        $xuat = Xuat::all();
+        $products = Product::all();
+        return view('admin.xuat.barcode', compact('xuat','products'));
+    }
+
+
     public function create()
     {
         $xuat = Xuat::all();
@@ -148,6 +155,8 @@ class XuatController extends Controller
             return redirect()->back()->with('error', 'Nhập không tồn tại');
         }
     }
+
+
 }
 
 

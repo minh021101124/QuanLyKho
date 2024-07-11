@@ -71,6 +71,7 @@
                         </select>
                     </td>
                     <td><input type="number" name="quantity[]" id="quantity" min="1" max="100"class="form-control"></td>
+                    
                     <td><input type="text" name="price[]" id="product-price" class="form-control"></td>
                     <td><input type="text" name="total_price[]" id="tong_tien"class="form-control"></td>
                     <td><input type="date" name="ngaysx[]" class="form-control"></td>
@@ -81,6 +82,7 @@
         </table>
         <button type="submit" class="btn btn-success" style="width:100px;margin-left:1%">Lưu</button>
         <a href="{{ route('xuat.index') }}" class="btn btn-danger" style="margin-left:0; margin-top:0;width:100px;">Hủy</a>
+        
     </form>
 
     <script>
