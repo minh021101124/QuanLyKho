@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\File;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Models\Infor;
-
+use App\Models\NhapChitiet;
+use App\Models\XuatChitiet;
 class ProductController extends Controller
 {
     /**
@@ -32,6 +33,20 @@ class ProductController extends Controller
         
         return view('admin.product.index',compact('posts'));
     }
+    // public function ctsanpham($id) {
+    //     $product = Product::where('id', $id)->first();
+    //     return view('admin.product.sanpham',compact('product'));
+    // }
+    public function ctsanpham($slug) {
+        $product = Product::where('slug', $slug)->first();
+        $demtongsp = Product::All();
+
+           
+            return view('admin.product.sanpham', compact('product','demtongsp'));
+         
+       
+    }
+    
     public function getProductPrice($id)
     {
         $product = Product::find($id);
@@ -311,6 +326,17 @@ public function exportInvoice(Request $request)
 
     // Xuất hóa đơn PDF
     return $dompdf->stream('Hoa_don_ban_hang.pdf')->back();
+}
+public function doanhthu()
+{
+    $tongnhap=  NhapChitiet::All();
+    $tong = $tongnhap->sum('total_price');
+  
+    $tongxuat=  XuatChitiet::All();
+    $tongx = $tongxuat->sum('total_price');
+   
+
+    return view('admin.thongke.doanhthu',compact('tong','tongx'));
 }
 
 

@@ -83,7 +83,7 @@
         </a>
         
       </li>
-      <li>
+      {{-- <li>
         <a href="{{route('xuat.barcode')}}">
           <i class="fa fa-th"></i> <span>Quét mã vạch</span>
           <span class="pull-right-container">
@@ -91,12 +91,20 @@
           </span>
         </a>
         
-      </li>
-      <li>
-
+      </li> --}}
+      
       <li>
         <a href="{{route('category.index')}}">
           <i class="fa fa-th"></i> <span>Quản lý danh mục </span>
+          <span class="pull-right-container">
+         
+          </span>
+        </a>
+        
+      </li>
+      <li>
+        <a href="{{route('thongke.doanhthu')}}">
+          <i class="fa fa-th"></i> <span>Thống kê </span>
           <span class="pull-right-container">
          
           </span>

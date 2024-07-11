@@ -45,7 +45,7 @@
                     <img src="{{asset('images')}}/{{$item->image}}" alt="" width="150px" height="150px">
                 </td>
                 <td>{{$item->created_at}}</td>
-                
+                 
                 <td>
                     <a href="{{route('product.restore',$item->id)}}" class="btn btn-success">Khôi phục</a>
                     <a href="{{route('product.forceDelete',$item->id)}}" onclick="return confirm('Xóa vĩnh viễn !')"  class="btn btn-danger">Xóa vĩnh viễn</a>

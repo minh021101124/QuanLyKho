@@ -72,6 +72,7 @@
                 <thead>
                     <tr>
                         <th>STT</th>
+                        <th>Ảnh</th>
                         <th>Tên sản phẩm</th>
                         <th>Ảnh</th>
                         <th>Số lượng</th>
@@ -83,7 +84,11 @@
                     @foreach ($nhapchitiet as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        
+                        <td>
+                   
+                            <img src="{{asset('images')}}/{{$item->product->image}}" alt="" width=50px height="50px">
+        
+                        </td>
                         <td>{{ $item->product->name }}</td>
                         <td>
                         <img src="{{asset('images')}}/{{$item->image}}" alt="" width=50px height="50px"></td>
@@ -99,10 +104,12 @@
         <div class="box box2">
             
             <h3>Tồn kho</h3>
+            <span style="font-size: 20px;color:red"> Tổng hàng tồn:{{$demtongton}}</span>
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>STT</th>
+                        <th>Ảnh</th>
                         <th>Tên sản phẩm</th>
                         <th>Số lượng</th>
                     </tr>
@@ -111,6 +118,11 @@
                     @foreach ($demtongsp as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>
+                   
+                            <img src="{{asset('images')}}/{{$item->image}}" alt="" width=50px height="50px">
+        
+                        </td>
                         <td>{{ $item->name }}</td>
                         <td>
                             @if($item->quantity == 0)

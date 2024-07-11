@@ -148,6 +148,14 @@ public function taodon($id)
         $products = Product::all(); 
         return view('admin.nhap.add', compact('nhap','products'));
     }
+    public function them($id)
+    {
+        $nhap = Nhap::all();
+        $products = Product::all(); 
+        $id_from_url = $id;
+        return view('admin.nhap.them', compact('nhap','products','id_from_url'));     
+        
+    }
     
    
 }

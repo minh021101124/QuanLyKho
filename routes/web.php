@@ -17,13 +17,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeControllerr;
 
 
-
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
 use App\Http\Controllers\PostController;
-
 use App\Http\Controllers\ModalController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -81,7 +80,15 @@ Route::prefix('admin')->group(function () {
     Route::get('/xuathang',[XuatController::class,'xuathang'])->name('xuat.index');
     Route::get('/danh-sach-xuat',[XuatController::class,'dsxuat'])->name('xuat.list');
     Route::get('/admin/tao-don-xuat/{id}', [XuatController::class, 'taodon'])->name('xuat.donhang');
-    Route::get('/barcode',[XuatController::class,'barcode'])->name('xuat.barcode');
+
+    Route::get('/them/{id}', [NhapController::class, 'them'])->name('nhap.them');
+    // Route::get('/sanpham/{id}',[ProductController::class,'sanpham'])->name('product.sanpham');
+    // Route::get('detail/{slug}', [HomeController::class, 'detail'])->name('detail');
+    Route::get('sanpham/{slug}', [ProductController::class, 'ctsanpham'])->name('product.sanpham');
+
+    Route::get('doanhthu', [ProductController::class, 'doanhthu'])->name('thongke.doanhthu');
+
+
 });
 
 Route::get('/search', [ProductController::class,'search'])->name('search');
