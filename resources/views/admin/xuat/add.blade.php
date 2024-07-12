@@ -3,6 +3,180 @@
 @section('title','Tạo mới đơn xuất')
 
 <section class="content">
+    <form action="{{ route('xuathanghoa.store') }}" method="POST">
+        @csrf
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group @error('ma_xuat') has-error @enderror">
+                        <label for="ma_xuat">Mã đơn hàng</label>
+                        <input type="text" name="ma_xuat" id="ma_xuat" class="form-control">
+                        @error('ma_xuat')
+                            <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group @error('noi_dung_xuat') has-error @enderror">
+                        <label for="noi_dung_xuat">Nội dung xuất hàng</label>
+                        <input type="text" name="noi_dung_xuat" id="noi_dung_xuat" value="Hóa đơn xuất hàng"class="form-control">
+                        @error('noi_dung_xuat')
+                            <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group @error('ghi_chu') has-error @enderror">
+                        <label for="ghi_chu">Ghi chú</label>
+                        <textarea name="ghi_chu" id="ghi_chu" class="form-control" rows="2" placeholder="Nhập thông tin ghi chú cho đơn hàng cần xuất"></textarea>
+                        @error('ghi_chu')
+                            <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Tổng tiền</th>
+                    <th>Ngày sản xuất</th>
+                    <th>Ngày hết hạn</th>
+                    <th><a href="javascript:void(0)" class="btn btn-success addRow">+</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="product_id[]" class="form-control product-dropdown">
+                            <option value="">Chọn sản phẩm</option>
+                            @foreach($products as $prod)
+                                <option value="{{ $prod->id }}">{{ $prod->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td><input type="number" name="quantity[]" class="form-control quantity" min="1" max="100"></td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="sale_price">
+                            <label class="form-check-label" for="price_type_gia_nhap">Giá nhập</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="le_price">
+                            <label class="form-check-label" for="price_type_gia_le">Giá lẻ</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="price">
+                            <label class="form-check-label" for="price_type_gia_si">Giá sỉ</label>
+                        </div>
+                    </td>
+                    <td><input type="text" name="total_price[]" class="form-control total-price" readonly></td>
+                    <td><input type="date" name="ngaysx[]" class="form-control"></td>
+                    <td><input type="date" name="hansd[]" class="form-control"></td>
+                    <td><a href="javascript:void(0)" class="btn btn-danger removeRow">-</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-success" style="width:100px;margin-left:1%">Lưu</button>
+        <a href="{{ route('xuat.index') }}" class="btn btn-danger" style="margin-left:0; margin-top:0;width:100px;">Hủy</a>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // When selecting a product, fetch its price via AJAX
+            $(document).on('change', '.product-dropdown', function() {
+                var productId = $(this).val();
+                var $row = $(this).closest('tr');
+
+                if (productId) {
+                    $.ajax({
+                        url: '/product-price/' + productId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.price !== undefined) {
+                                $row.find('.price-radio').each(function() {
+                                    if ($(this).is(':checked')) {
+                                        var priceType = $(this).val();
+                                        if (priceType === 'sale_price') {
+                                            $row.find('.total-price').val(response.sale_price);
+                                        } else if (priceType === 'le_price') {
+                                            $row.find('.total-price').val(response.le_price);
+                                        } else if (priceType === 'price') {
+                                            $row.find('.total-price').val(response.price);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                } else {
+                    $row.find('.total-price').val('');
+                }
+            });
+
+            // When changing the price type, update the total price
+            $(document).on('change', '.price-radio', function() {
+                var $row = $(this).closest('tr');
+                var productId = $row.find('.product-dropdown').val();
+
+                if (productId) {
+                    $.ajax({
+                        url: '/product-price/' + productId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.price !== undefined) {
+                                var priceType = $row.find('.price-radio:checked').val();
+                                if (priceType === 'sale_price') {
+                                    $row.find('.total-price').val(response.sale_price);
+                                } else if (priceType === 'le_price') {
+                                    $row.find('.total-price').val(response.le_price);
+                                } else if (priceType === 'price') {
+                                    $row.find('.total-price').val(response.price);
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    $row.find('.total-price').val('');
+                }
+            });
+
+            // Calculate total price when quantity changes
+            $(document).on('input', '.quantity', function() {
+                var $row = $(this).closest('tr');
+                calculateTotal($row);
+            });
+
+            function calculateTotal($row) {
+                var price = parseFloat($row.find('.total-price').val()) || 0;
+                var quantity = parseInt($row.find('.quantity').val()) || 0;
+                var total = price * quantity;
+                $row.find('.total-price').val(total.toFixed(2));
+            }
+        });
+    </script>
+</section>
+
+@endsection
+
+
+
+
+{{-- @extends('admin.master')
+@section('main-content')
+@section('title','Tạo mới đơn xuất')
+
+<section class="content">
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,15 +249,15 @@
                     
                     <td>
                         <div class="form-check">
-                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="gia_nhap">
+                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="sale_price">
                             <label class="form-check-label" for="price_type_gia_nhap">Giá nhập</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="gia_le">
+                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="le_price">
                             <label class="form-check-label" for="price_type_gia_le">Giá lẻ</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="gia_si">
+                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="price">
                             <label class="form-check-label" for="price_type_gia_si">Giá sỉ</label>
                         </div>
                     </td>
@@ -286,4 +460,4 @@
 </script>
 @endif
 
-@endsection
+@endsection --}}
