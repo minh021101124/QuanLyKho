@@ -18,7 +18,6 @@
                 <a href="{{route('category.create')}}" class="btn btn-success" style="margin-left:2%; margin-top:5%">+ Thêm mới danh mục</a>
 
           <tbody>
-            
             <tr>
                 <th>STT</th>
                 <th>Tên danh mục</th>
@@ -43,7 +42,7 @@
             @endif
           </td>
          
-          <td>{{$item->created_at}}
+          <td>{{$item->created_at}}</td>
             
           <td>{!!$item->status ? '<span class="label label-success">Hiển thị</span> ':' <span class="label label-success">Ẩn hiển thị</span>'!!}</td>
           <td>
