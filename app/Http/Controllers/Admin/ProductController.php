@@ -102,6 +102,7 @@ public function store(StoreProductRequest $request)
         $slug = Str::slug($request->name);
         $post->name = $request->name;
         $post->price = $request->price;
+        $post->le_price = $request->le_price;
         $post->slug = $slug;
         $post->sale_price = $request->sale_price;
         $post->category_id = $request->category_id;
@@ -184,6 +185,7 @@ public function store(StoreProductRequest $request)
          $product->name = $request->name;
          $product->slug = $request->slug;
          $product->price = $request->price;
+         $product->le_price = $request->le_price;
          $product->sale_price = $request->sale_price;
          $product->category_id = $request->category_id;
          $product->description = $request->description;

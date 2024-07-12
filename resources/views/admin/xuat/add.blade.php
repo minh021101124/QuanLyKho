@@ -72,7 +72,22 @@
                     </td>
                     <td><input type="number" name="quantity[]" id="quantity" min="1" max="100"class="form-control"></td>
                     
-                    <td><input type="text" name="price[]" id="product-price" class="form-control"></td>
+                    
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="gia_nhap">
+                            <label class="form-check-label" for="price_type_gia_nhap">Giá nhập</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="gia_le">
+                            <label class="form-check-label" for="price_type_gia_le">Giá lẻ</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input price-radio" type="radio" name="price_type[]" value="gia_si">
+                            <label class="form-check-label" for="price_type_gia_si">Giá sỉ</label>
+                        </div>
+                    </td>
+                      
                     <td><input type="text" name="total_price[]" id="tong_tien"class="form-control"></td>
                     <td><input type="date" name="ngaysx[]" class="form-control"></td>
                     <td><input type="date" name="hansd[]" class="form-control"></td>

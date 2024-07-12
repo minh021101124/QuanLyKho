@@ -38,6 +38,21 @@
             </div>
             <!-- /.box -->
         </div>
+
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Lợi nhuận</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <p>Tổng lợi nhuận trong tuần: </p>
+                </div>
+                {{-- {{ number_format($tong )}}đ --}}
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
         <!-- /.col -->
     </div>
     <!-- /.row -->

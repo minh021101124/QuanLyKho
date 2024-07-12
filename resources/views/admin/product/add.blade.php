@@ -102,8 +102,17 @@
                                 
                     <div class="row">
                         <div class="col-md-6">
+                            <div class="form-group @error('sale_price') has-error @enderror">
+                                <label for="">Giá nhập</label>
+                                <input type="input" class="form-control" id="" placeholder="" name="sale_price" value="{{ old('sale_price') }}">
+                                @error('sale_price')
+                                <span class="help-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group @error('price') has-error @enderror">
-                                <label for="">Giá sản phẩm</label>
+                                <label for="">Giá sỉ</label>
                                 <input type="input" class="form-control" id="" placeholder="" name="price" value="{{ old('price') }}">
                                 @error('price')
                                 <span class="help-block">{{ $message }}</span>
@@ -111,14 +120,15 @@
                             </div>      
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group @error('sale_price') has-error @enderror">
-                                <label for="">Giá khuyến mãi</label>
-                                <input type="input" class="form-control" id="" placeholder="" name="sale_price" value="{{ old('sale_price') }}">
-                                @error('sale_price')
+                            <div class="form-group @error('le_price') has-error @enderror">
+                                <label for="">Giá bán lẻ</label>
+                                <input type="input" class="form-control" id="" placeholder="" name="le_price" value="{{ old('le_price') }}">
+                                @error('le_price')
                                 <span class="help-block">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div>      
                         </div>
+                        
                     </div>
                                 
                  
