@@ -24,6 +24,8 @@
                 <th>Giá KM</th>
                 <th>Danh mục</th>
                 <th>Ảnh</th>
+                <th></th>
+                <th></th>
                 {{-- <th>Ngày tạo</th> --}}
 
             </tr>
