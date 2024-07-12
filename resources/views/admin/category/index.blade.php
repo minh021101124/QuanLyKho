@@ -4,11 +4,10 @@
 @section('content-header')
 <h1>DANH MỤC SẢN PHẨM</h1>
 
-    <div class="box-body table-responsive no-padding">
+  <div class="box-body table-responsive no-padding">
       
       <table class="table table-hover" style="margin-left:2%; margin-top:5%">
             <!-- Default box -->
-
             @if ($message = Session::get('success'))
             <div class="alert alert-success alert-block">
               <button type="button" class="close" data-dismiss="alert">×</button>	
@@ -16,7 +15,8 @@
             </div>
             @endif
                   
-                    <a href="{{route('category.create')}}" class="btn btn-success" style="margin-left:2%; margin-top:5%">+ Thêm mới danh mục</a>   
+                <a href="{{route('category.create')}}" class="btn btn-success" style="margin-left:2%; margin-top:5%">+ Thêm mới danh mục</a>
+
           <tbody>
             
             <tr>
@@ -25,6 +25,7 @@
                 <th>Danh mục cha</th>
                 <th>Ngày tạo</th>
                 <th>Trạng thái</th>
+                <th></th>
                 <th></th>
             </tr>
 
@@ -40,15 +41,14 @@
             @else
            
             @endif
-        </td>
+          </td>
          
           <td>{{$item->created_at}}
             
           <td>{!!$item->status ? '<span class="label label-success">Hiển thị</span> ':' <span class="label label-success">Ẩn hiển thị</span>'!!}</td>
           <td>
             <a href="{{route('category.edit',$item)}}" class="btn btn-success">Sửa</a>
-            
-            </td>
+          </td>
             <td>
               <form action="{{route('category.destroy',$item)}}" method="POST">
                 @csrf
@@ -62,10 +62,7 @@
         </tbody>
     </table>
     <a href="{{route('category.trash')}}"style="margin-left:2%" class="btn btn-primary"><i class="fa fa-trash"> Thùng rác</i></a>
-      </div>
   </div>
-
-
 
 @endsection
 
