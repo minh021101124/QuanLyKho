@@ -20,6 +20,7 @@ class XuatChitiet extends Model
         return $this->belongsTo(Xuat::class);
     }
     
-    
+     
+
 }
 
