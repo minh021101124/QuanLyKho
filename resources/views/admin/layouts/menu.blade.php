@@ -123,6 +123,7 @@
          
         </a>
       </li>
+      
       <li>
         <a href="{{route('banner.index')}}">
           <i class="fa fa-th"></i> <span>Quản lí banner</span>
