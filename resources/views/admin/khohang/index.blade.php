@@ -1,37 +1,27 @@
 @extends('admin.master')
 @section('main-content')
 @section('title','Kho hàng')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
-    .ganhet {
-        font-weight: 500;
-        font-size: 12px;
-        color: green;
-    }
-    .ganhetroi {
-        font-weight: 500;
-        font-size: 12px;
-        color: rgb(250, 175, 0);
-    }
-    .maihet {
-        font-weight: 500;
-        font-size: 12px;
-        color: blue;
-    }
-    .dahet {
-        font-weight: 600;
-        font-style: italic;
-        font-size: 12px;
-        color: rgb(255, 0, 0);
-    }
-    .chua {
-        width: 150px;
-        margin-left: 10px;
-    }
-    .container {
+
+    .container1 {
+        max-width: 1050px;
+        margin: 0px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
         display: flex;
-        /* justify-content: space-between; */
-        margin-top: 1%;
+        
+       
     }
+    h1 {
+        font-size: 38px;
+        margin-bottom: 20px;
+        color: #333;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 'Arial Narrow Bold', sans-serif;
+    }
+    
     .box {
         padding: 10px;
         border: 2px solid rgb(147, 148, 150);
@@ -46,27 +36,17 @@
         width: 40%; 
         height: 100%; 
     }
-    .table-container .table {
-        border-collapse: collapse;
-    }
-    .table-container th, .table-container td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: left;
-    }
+   
 </style>
 
-<section class="content">
-    {{-- @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-block">
-      <button type="button" class="close" data-dismiss="alert">×</button>  
-        <strong>{{ $message }}</strong>
-    </div>
-    @endif  --}}
 
-    <h2>Kho hàng</h2>
-    <div class="container">
-        <div class="box box1">
+
+
+    <div class="container1">
+      
+       
+   
+        <div class="box1">
             <h3>Sản phẩm đã nhập</h3>
             <table class="table table-hover">
                 <thead>
@@ -101,8 +81,8 @@
             </table>
         </div>
         
-        <div class="box box2">
-            
+        
+        <div class="box2">
             <h3>Tồn kho</h3>
             <span style="font-size: 20px;color:red"> Tổng hàng tồn:{{$demtongton}}</span>
             <table class="table table-hover">
@@ -141,5 +121,11 @@
         
     </div>
     {{ $nhapchitiet->links() }}
-</section>
+    </div>
+  
+
+
 @endsection
+
+
+

@@ -1,6 +1,6 @@
 <?php
- 
- namespace App\Http\Controllers;
+
+namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,20 +12,20 @@ class AuthController extends Controller
 {
     public function register()
     {
-        return view('register');
+        return view('taikhoan.register');
     }
     public function login()
     {
-        return view('login');
+        return view('taikhoan.login');
     }
 
     public function change()
     {
-        return view('password-change');
+        return view('taikhoan.password-change');
     }
-   
 
-   
+
+
 
     public function loginPost(Request $request)
     {
@@ -50,20 +50,20 @@ class AuthController extends Controller
         return back()->with('success', 'Đăng ký thành công !');
     }
     public function changePassword(Request $request)
-{
-    $request->validate([
-        'current_password' => 'required',
-        'new_password' => 'required|min:4|confirmed',
-    ]);
-    $user = Auth::user();
-    if (!Hash::check($request->current_password, $user->password)) {
-        return redirect()->back()->with('error', 'Mật khẩu hiện tại không chính xác');
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:4|confirmed',
+        ]);
+        $user = Auth::user();
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->with('error', 'Mật khẩu hiện tại không chính xác');
+        }
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        Auth::logout();
+        return redirect('/login')->with('success', 'Mật khẩu đã được thay đổi thành công . Vui lòng đăng nhập lại bằng mật khẩu mới.');
     }
-    $user->password = Hash::make($request->new_password);
-    $user->save();
-    Auth::logout();
-    return redirect('/login')->with('success', 'Mật khẩu đã được thay đổi thành công . Vui lòng đăng nhập lại bằng mật khẩu mới.');
-}
     public function logout(Request $request)
     {
         $userId = Auth::id();

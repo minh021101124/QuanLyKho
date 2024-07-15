@@ -3,9 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// use App\Models\Infor;
-// use App\Models\Invoice;
-// use App\Models\Category;
+use App\Models\Category;
 use App\Models\Nhap;
 use App\Models\NhapChitiet;
 use App\Models\Product;
@@ -22,14 +20,8 @@ class NhapController extends Controller
     }
     public function dsnhap() {
         $nhap = Nhap::all();
-        
-        // Corrected pagination and ordering
         $nhapchitiet = NhapChitiet::orderBy('id', 'DESC')->paginate(7);
-        
-        // Fetching all products
         $products = Product::all();
-        
-        // Returning the view with compacted data
         return view('admin.nhap.list', compact('nhap', 'products', 'nhapchitiet'));
     }
     
@@ -96,21 +88,8 @@ class NhapController extends Controller
         return redirect()->route('nhap.index')->with('success', 'Nhập hàng thành công.');
         // return back()->with('message', 'Nhập hàng thành công.');
     }
-    
-    
-    
 
-
-//  
-// public function add($id){
-//     // $nhap = Nhap::all();
-//     $products = Product::all();
-//    $duliu = NhapChitiet::All();
-//     $mado = Nhap::All();
-//     return view('admin.nhap.themsp',compact('duliu','mado','products'));
-// }
-
-public function taodon($id)
+    public function taodon($id)
     {
        
         $nhap = Nhap::with('ctNhap')->find($id);
@@ -137,8 +116,6 @@ public function taodon($id)
         }
     }
     public function nhaphang(){
-        // $nhap = Nhap::all();
-        // $products = Product::all();
         $nhap = Nhap::orderBy('id', 'DESC')->paginate(5); 
         return view('admin.nhap.index', compact('nhap'));
     }

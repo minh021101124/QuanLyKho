@@ -12,7 +12,9 @@ use App\Http\Requests\Category\UpdateCategoryRequest;
 class CategoryController extends Controller
 {
     protected $data = [];
-    public function __construct(){}
+    public function __construct()
+    {
+    }
 
 
     /**
@@ -23,7 +25,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('admin.category.index',compact('categories'));
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -35,8 +37,8 @@ class CategoryController extends Controller
     {
         //  $categories = Category::all();
 
-       $categories = Category::orderBy('name','ASC')->get();
-        return view('admin.category.add',compact('categories'));
+        $categories = Category::orderBy('name', 'ASC')->get();
+        return view('admin.category.add', compact('categories'));
     }
 
     /**
@@ -47,12 +49,11 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        try{
+        try {
             Category::create($request->all());
-            return redirect() ->route('category.index')->with('success','Thêm mới thành công');
-        }
-        catch(\Throwable $th){
-            return redirect()->back()->with('error','Thêm mới thất bại');
+            return redirect()->route('category.index')->with('success', 'Thêm mới thành công');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Thêm mới thất bại');
         }
 
     }
@@ -77,12 +78,12 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         // $categories = Category::all();
-       
+
         $categories = Category::whereNull('parent_id')->get();
-        
+
         return view('admin.category.edit', compact('category', 'categories'));
     }
-    
+
 
 
     /**
@@ -92,16 +93,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request,Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        try{
+        try {
 
             $category->update($request->all());
 
-            return redirect() ->route('category.index')->with('success','Cập nhật thành công');
-        }
-        catch(\Throwable $th){
-            return redirect()->back()->with('error','Thêm mới thất bại');
+            return redirect()->route('category.index')->with('success', 'Cập nhật thành công');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Thêm mới thất bại');
         }
     }
 
@@ -113,29 +113,31 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        try{
+        try {
 
             $category->delete();
 
-            return redirect() ->route('category.index')->with('success','Xóa thành công');
-        }
-        catch(\Throwable $th){
-            return redirect()->back()->with('error','Thất bại');
+            return redirect()->route('category.index')->with('success', 'Xóa thành công');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Thất bại');
         }
     }
-    public function trash() {
+    public function trash()
+    {
         $categories = Category::onlyTrashed()->get();
-        return view('admin.category.trash',compact('categories'));
+        return view('admin.category.trash', compact('categories'));
     }
-    public function restore($id){
-        Category::withTrashed()->where('id',$id)->restore();
+    public function restore($id)
+    {
+        Category::withTrashed()->where('id', $id)->restore();
         //Category::withTrashed->where('id',$id)->restore();
-        return redirect() ->route('category.index')->with('success','Khôi phục thành công');
+        return redirect()->route('category.index')->with('success', 'Khôi phục thành công');
     }
-    public function forceDelete($id){
-        Category::withTrashed()->where('id',$id)->forceDelete();
-       
-        return redirect() ->route('category.trash')->with('success','Thành công');
+    public function forceDelete($id)
+    {
+        Category::withTrashed()->where('id', $id)->forceDelete();
+
+        return redirect()->route('category.trash')->with('success', 'Thành công');
     }
-    
+
 }
