@@ -22,3 +22,4 @@ class XuatChitiet extends Model
     
     
 }
+
