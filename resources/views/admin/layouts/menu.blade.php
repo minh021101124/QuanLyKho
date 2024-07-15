@@ -72,19 +72,6 @@
 
         </li>
 
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Quản lý sản phẩm </span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="{{ route('product.index') }}"><i class="fa fa-circle-o"></i> Danh sách sản phẩm </a></li>
-                <li><a href="{{ route('product.create') }}"><i class="fa fa-circle-o"></i> Thêm mới sản phẩm </a></li>
-            </ul>
-        </li>
-
       <li class="treeview">
         <a href="#">
           <i class="fa fa-th" style="font-size: 20px"></i> <span>Quản lý sản phẩm </span>
@@ -98,21 +85,21 @@
         </ul>
       </li>
       <!-- <li>
-        <a href="{{route('avatar.index')}}">
+       
           <i class="fa fa-th"></i> <span>Quản lí Ảnh trang chủ</span>
          
         </a>
       </li>
       
       <li>
-        <a href="{{route('banner.index')}}">
+        
           <i class="fa fa-th"></i> <span>Quản lí banner</span>
          
         </a>
       </li>
       
       <li>
-        <a href="{{route('admin.statistic')}}">
+        
           <i class="fa fa-th"></i> <span>Thống kê</span>
          
         </a>
