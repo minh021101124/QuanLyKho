@@ -7,460 +7,206 @@ use Illuminate\Http\Request;
 use App\Models\Xuat;
 use App\Models\XuatChitiet;
 use App\Models\Product;
+use App\Http\Requests\Xuat\StoreXuatRequest;
 use Carbon\Carbon;
 
 class XuatController extends Controller
 {
-    public function index() {
-       $xuat = Xuat::All();
-    //    $products = Product::orderBy('id', 'DESC')->get();
-    $products = Product::all();
-        return view('admin.xuat.index', compact('xuat','products'));
+    public function index()
+    {
+        $xuat = Xuat::All();
+        //    $products = Product::orderBy('id', 'DESC')->get();
+        $products = Product::all();
+        return view('admin.xuat.index', compact('xuat', 'products'));
     }
-    public function xuathang(){
+    public function xuathang()
+    {
         $xuat = Xuat::all();
         $products = Product::all();
-        return view('admin.xuat.index', compact('xuat','products'));
+        return view('admin.xuat.index', compact('xuat', 'products'));
     }
-    public function barcode(){
+    public function barcode()
+    {
         $xuat = Xuat::all();
         $products = Product::all();
-        return view('admin.xuat.barcode', compact('xuat','products'));
+        return view('admin.xuat.barcode', compact('xuat', 'products'));
     }
 
 
     public function create()
-{
-    $xuat = Xuat::all(); // Lấy tất cả các dữ liệu từ bảng Xuat
-    $products = Product::all(); // Lấy tất cả các sản phẩm từ bảng Product
+    {
+        $xuat = Xuat::all(); // Lấy tất cả các dữ liệu từ bảng Xuat
+        $products = Product::all(); // Lấy tất cả các sản phẩm từ bảng Product
 
-    // Lấy tất cả giá của từng sản phẩm
-    $prices = Product::pluck('price', 'id')->all();
-    $sale_prices = Product::pluck('sale_price', 'id')->all();
-    $le_prices = Product::pluck('le_price', 'id')->all();
-    return view('admin.xuat.add', compact('xuat', 'products', 'prices','sale_prices','le_prices'));
-}
+        // Lấy tất cả giá của từng sản phẩm
+        $prices = Product::pluck('price', 'id')->all();
+        $sale_prices = Product::pluck('sale_price', 'id')->all();
+        $le_prices = Product::pluck('le_price', 'id')->all();
+        return view('admin.xuat.add', compact('xuat', 'products', 'prices', 'sale_prices', 'le_prices'));
+    }
 
-    public function dsxuat() {
+    public function dsxuat()
+    {
         $nhap = Xuat::All();
-        
+
         $xuatchitiet = XuatChitiet::orderBy('id', 'DESC')->get();
-      // $products = Product::orderBy('id', 'DESC')->get();
-         $products = Product::all();
-         return view('admin.xuat.list', compact('nhap','products','xuatchitiet'));
-     }
-    // public function xuat(){
-    //     return view('admin.xuat.index');
-    // }
-    
-    // public function create()
+        // $products = Product::orderBy('id', 'DESC')->get();
+        $products = Product::all();
+        return view('admin.xuat.list', compact('nhap', 'products', 'xuatchitiet'));
+    }
+
+
+
+
+
+    // public function store(StoreXuatRequest $request)
     // {
-    //    $nhap = Nhap::orderBy('name','ASC')->get();
-    //     return view('admin.nhap.add',compact('xuat'));
-    // }
-    // public function store(Request $request) {
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'quantity' => 'required|integer',
-    //         'type' => 'required|in:xuat,xuat',
-    //         'hansudung' => 'nullable|date',
+    //     // Validate the form inputs
+    //     $request->validate([
+    //         'ma_xuat' => 'required|string|max:255',
+    //         'noi_dung_xuat' => 'nullable|string',
+    //         'ghi_chu' => 'nullable|string',
+    //         'product_id' => 'required|array',
+    //         'product_id.*' => 'required|exists:products,id',
+    //         'quantity' => 'required|array',
+    //         'quantity.*' => 'required|integer|min:1',
+    //         'price' => 'required|array',
+    //         'price.*' => 'required|in:sale_price,le_price,price',
+    //         'total_price' => 'required|array',
+    //         'total_price.*' => 'required|numeric',
+    //         'ngaysx' => 'required|array',
+    //         'ngaysx.*' => 'required|date',
+    //         'hansd' => 'required|array',
+    //         'hansd.*' => 'required|date',
     //     ]);
+    //     //Check if quantity requested is not more than available quantity
+    //     foreach ($request->product_id as $key => $productId) {
+    //         $product = Product::findOrFail($productId);
+    //         $requestedQuantity = $request->quantity[$key];
 
-    //     xuat::create($validatedData);
-    //     return redirect()->route('kho.index')->with('success', 'hoàn thành');
+    //         if ($requestedQuantity > $product->quantity) {
+    //             return redirect()->back()->withInput()->withErrors(['error' => 'Số lượng xuất của sản phẩm ' . $product->name . ' không được lớn hơn số lượng hiện có (' . $product->quantity . ')']);
+    //         }
+    //     }
+    //     try {
+    //         // Save the export record
+    //         $xuat = new Xuat();
+    //         $xuat->ma_xuat = $request->ma_xuat;
+    //         $xuat->noi_dung_xuat = $request->noi_dung_xuat ?? 'Hóa đơn xuất hàng';
+    //         $xuat->ghi_chu = $request->ghi_chu;
+    //         $xuat->save();
+
+    //         // Prepare data for the export details
+    //         $xuat_id = $xuat->id;
+    //         $products = $request->input('product_id');
+    //         $quantities = $request->input('quantity');
+    //         $price_types = $request->input('price');
+    //         $total_prices = $request->input('total_price');
+    //         $ngaysx = $request->input('ngaysx');
+    //         $hansd = $request->input('hansd');
+
+    //         $data = [];
+    //         foreach ($products as $key => $productId) {
+    //             $product = Product::find($productId);
+    //             $priceType = $price_types[$key];
+    //             $price = $product->$priceType; // Get the price based on the selected price type
+
+    //             $data[] = [
+    //                 'product_id' => $productId,
+    //                 'xuat_id' => $xuat_id,
+    //                 'price' => $price,
+    //                 'total_price' => $total_prices[$key],
+    //                 'quantity' => $quantities[$key],
+    //                 'ngaysx' => $ngaysx[$key],
+    //                 'hansd' => $hansd[$key],
+    //             ];
+    //         }
+
+    //         // Insert the export details into the database
+    //         XuatChitiet::insert($data);
+
+    //         // Deduct the exported quantities from product inventory
+    //         foreach ($products as $key => $productId) {
+    //             $product = Product::find($productId);
+    //             if ($product) {
+    //                 $product->quantity -= $quantities[$key];
+    //                 $product->save();
+    //             }
+    //         }
+
+    //         return back()->with('success', 'Xuất hàng thành công.');
+    //     } catch (\Exception $e) {
+    //         return back()->withInput()->withErrors(['error' => 'Lỗi Lưu: ' . $e->getMessage()]);
+    //     }
     // }
-    
+    public function store(StoreXuatRequest $request)
+    {
+        // The request has already been validated by StoreXuatRequest
 
-//     public function store(Request $request)
-// {
-//     $request->validate([
-//         'ma_xuat' => 'required|string|max:255',
-//         'nguoi_xuat' => 'nullable|string|max:255',
-//         'ghi_chu' => 'nullable|string',
-//         'noi_dung_xuat' => 'nullable|string',
-//         'product_id' => 'required|array',
-//         'product_id.*' => 'required|exists:products,id',
-//         'quantity' => 'required|array',
-//         'quantity.*' => 'required|integer|min:1|max:100',
-//         'price' => 'required|array',
-//         'price.*' => 'required|numeric',
-//         'total_price' => 'required|array',
-//         'total_price.*' => 'required|numeric',
-//         'ngaysx' => 'required',
-//         'hansd' => 'required',
-//     ]);
+        // Check if quantity requested is not more than available quantity
+        foreach ($request->product_id as $key => $productId) {
+            $product = Product::findOrFail($productId);
+            $requestedQuantity = $request->quantity[$key];
 
-//     // Check if quantity requested is not more than available quantity
-//     foreach ($request->product_id as $key => $productId) {
-//         $product = Product::findOrFail($productId);
-//         $requestedQuantity = $request->quantity[$key];
+            if ($requestedQuantity > $product->quantity) {
+                return redirect()->back()->withInput()->withErrors(['error' => 'Số lượng xuất của sản phẩm ' . $product->name . ' không được lớn hơn số lượng hiện có (' . $product->quantity . ')']);
+            }
+        }
 
-//         if ($requestedQuantity > $product->quantity) {
-//             return redirect()->back()->withInput()->withErrors(['error' => 'Số lượng xuất của sản phẩm ' . $product->name . ' không được lớn hơn số lượng hiện có (' . $product->quantity . ')']);
-//         }
-//     }
+        try {
+            // Save the export record
+            $xuat = new Xuat();
+            $xuat->ma_xuat = $request->ma_xuat;
+            $xuat->noi_dung_xuat = $request->noi_dung_xuat ?? 'Hóa đơn xuất hàng';
+            $xuat->ghi_chu = $request->ghi_chu;
+            $xuat->save();
 
-//     // Proceed to save the export record
-//     $nhap = new Xuat();
-//     $nhap->ma_xuat = $request->ma_xuat;
-//     $nhap->nguoi_xuat = $request->nguoi_xuat ?? 'admin';
-//     $nhap->ghi_chu = $request->ghi_chu;
-//     $nhap->noi_dung_xuat = $request->noi_dung_xuat;
-//     $nhap->save();
-
-//     $nhap_id = $nhap->id;
-//     $masp = $request->input('product_id');
-//     $quantities = $request->input('quantity');
-//     $prices = $request->input('price');
-//     $total_prices = $request->input('total_price');
-//     $ngaysanxuat = $request->input('ngaysx');
-//     $ngayhethan = $request->input('hansd');
-//     $data = [];
-//     foreach ($masp as $key => $productId) {
-//         $data[] = [
-//             'product_id' => $productId,
-//             'xuat_id' => $nhap_id,
-//             'price' => $prices[$key],
-//             'total_price' => $total_prices[$key],
-//             'quantity' => $quantities[$key],
-//             'ngaysx' => $ngaysanxuat[$key],
-//             'hansd' => $ngayhethan[$key],
-//         ];
-//     }
-
-//     try {
-//         XuatChitiet::insert($data);
-//     } catch (\Exception $e) {
-//         return redirect()->back()->withInput()->withErrors(['error' => 'Lỗi Lưu ' . $e->getMessage()]);
-//     }
-
-//     // Deduct the exported quantities from product inventory
-//     foreach ($masp as $key => $productId) {
-//         $product = Product::find($productId);
-//         if ($product) {
-//             $product->quantity -= $quantities[$key];
-//             $product->save();
-//         }
-//     }
-
-//     return back()->with('success', 'Xuất hàng thành công.');
-// }
-
-
-
-
-
-// public function store(Request $request)
-// {
-//     // Validate the form inputs
-//     $request->validate([
-//         'ma_xuat' => 'required|string|max:255',
-//         'noi_dung_xuat' => 'nullable|string',
-//         'ghi_chu' => 'nullable|string',
-//         'product_id' => 'required|array',
-//         'product_id.*' => 'required|exists:products,id',
-//         'quantity' => 'required|array',
-//         'quantity.*' => 'required|integer|min:1',
-//         'price' => 'required|array',
-//         'price.*' => 'required|in:sale_price,le_price,price',
-//         'total_price' => 'required|array',
-//         'total_price.*' => 'required|numeric',
-//         'ngaysx' => 'required|array',
-//         'ngaysx.*' => 'required|date',
-//         'hansd' => 'required|array',
-//         'hansd.*' => 'required|date',
-//     ]);
-
-//     try {
-//         // Save the export record
-//         $xuat = new Xuat();
-//         $xuat->ma_xuat = $request->ma_xuat;
-//         $xuat->noi_dung_xuat = $request->noi_dung_xuat ?? 'Hóa đơn xuất hàng';
-//         $xuat->ghi_chu = $request->ghi_chu;
-//         $xuat->save();
-
-//         // Prepare data for the export details
-//         $xuat_id = $xuat->id;
-//         $products = $request->input('product_id');
-//         $quantities = $request->input('quantity');
-//         $price_types = $request->input('price');
-//         $total_prices = $request->input('total_price');
-//         $ngaysx = $request->input('ngaysx');
-//         $hansd = $request->input('hansd');
-
-//         $data = [];
-//         foreach ($products as $key => $productId) {
-//             $product = Product::find($productId);
-//             $priceType = $price_types[$key];
-//             $price = $product->$priceType; // Get the price based on the price type
-
-//             $data[] = [
-//                 'product_id' => $productId,
-//                 'xuat_id' => $xuat_id,
-//                 'price' => $price, // Assign the selected price type value
-//                 'total_price' => $total_prices[$key],
-//                 'quantity' => $quantities[$key],
-//                 'ngaysx' => $ngaysx[$key],
-//                 'hansd' => $hansd[$key],
-//             ];
-//         }
-
-//         // Insert the export details into the database
-//         XuatChitiet::insert($data);
-
-//         // Deduct the exported quantities from product inventory
-//         foreach ($products as $key => $productId) {
-//             $product = Product::find($productId);
-//             if ($product) {
-//                 $product->quantity -= $quantities[$key];
-//                 $product->save();
-//             }
-//         }
-
-//         return back()->with('success', 'Xuất hàng thành công.');
-//     } catch (\Exception $e) {
-//         return back()->withInput()->withErrors(['error' => 'Lỗi Lưu: ' . $e->getMessage()]);
-//     }
-// }
-
-
-// public function store(Request $request)
-// {
-//     // Validate the form inputs
-//     $request->validate([
-//         'ma_xuat' => 'required|string|max:255',
-//         'noi_dung_xuat' => 'nullable|string',
-//         'ghi_chu' => 'nullable|string',
-//         'product_id' => 'required|array',
-//         'product_id.*' => 'required|exists:products,id',
-//         'quantity' => 'required|array',
-//         'quantity.*' => 'required|integer|min:1',
-//         'price' => 'required|array',
-//         'price.*' => 'required|in:sale_price,le_price,price',
-//         'total_price' => 'required|array',
-//         'total_price.*' => 'required|numeric',
-//         'ngaysx' => 'required|array',
-//         'ngaysx.*' => 'required|date',
-//         'hansd' => 'required|array',
-//         'hansd.*' => 'required|date',
-//     ]);
-
-//     try {
-//         // Save the export record
-//         $xuat = new Xuat();
-//         $xuat->ma_xuat = $request->ma_xuat;
-//         $xuat->noi_dung_xuat = $request->noi_dung_xuat ?? 'Hóa đơn xuất hàng';
-//         $xuat->ghi_chu = $request->ghi_chu;
-//         $xuat->save();
-
-//         // Prepare data for the export details
-//         $xuat_id = $xuat->id;
-//         $products = $request->input('product_id');
-//         $quantities = $request->input('quantity');
-//         $price_types = $request->input('price');
-//         $total_prices = $request->input('total_price');
-//         $ngaysx = $request->input('ngaysx');
-//         $hansd = $request->input('hansd');
-
-//         $data = [];
-//         foreach ($products as $key => $productId) {
-//             $product = Product::find($productId);
-//             $priceType = $price_types[$key];
-//             $price = $product->$priceType; // Get the price based on the selected price type
-
-//             $data[] = [
-//                 'product_id' => $productId,
-//                 'xuat_id' => $xuat_id,
-//                 'price' => $price,
-//                 'total_price' => $total_prices[$key],
-//                 'quantity' => $quantities[$key],
-//                 'ngaysx' => $ngaysx[$key],
-//                 'hansd' => $hansd[$key],
-//             ];
-//         }
-
-//         // Insert the export details into the database
-//         XuatChitiet::insert($data);
-
-//         // Deduct the exported quantities from product inventory
-//         foreach ($products as $key => $productId) {
-//             $product = Product::find($productId);
-//             if ($product) {
-//                 $product->quantity -= $quantities[$key];
-//                 $product->save();
-//             }
-//         }
-
-//         return back()->with('success', 'Xuất hàng thành công.');
-//     } catch (\Exception $e) {
-//         return back()->withInput()->withErrors(['error' => 'Lỗi Lưu: ' . $e->getMessage()]);
-//     }
-// }
-
-public function store(Request $request)
-{
-    // Validate the form inputs
-    $request->validate([
-        'ma_xuat' => 'required|string|max:255',
-        'noi_dung_xuat' => 'nullable|string',
-        'ghi_chu' => 'nullable|string',
-        'product_id' => 'required|array',
-        'product_id.*' => 'required|exists:products,id',
-        'quantity' => 'required|array',
-        'quantity.*' => 'required|integer|min:1',
-        'price' => 'required|array',
-        'price.*' => 'required|in:sale_price,le_price,price',
-        'total_price' => 'required|array',
-        'total_price.*' => 'required|numeric',
-        'ngaysx' => 'required|array',
-        'ngaysx.*' => 'required|date',
-        'hansd' => 'required|array',
-        'hansd.*' => 'required|date',
-    ]);
-        //Check if quantity requested is not more than available quantity
+            // Prepare data for the export details
+            $data = [];
             foreach ($request->product_id as $key => $productId) {
-                $product = Product::findOrFail($productId);
-                $requestedQuantity = $request->quantity[$key];
+                $product = Product::find($productId);
+                $priceType = $request->price[$key];
+                $price = $product->$priceType; // Get the price based on the selected price type
 
-                if ($requestedQuantity > $product->quantity) {
-                    return redirect()->back()->withInput()->withErrors(['error' => 'Số lượng xuất của sản phẩm ' . $product->name . ' không được lớn hơn số lượng hiện có (' . $product->quantity . ')']);
+                $data[] = [
+                    'product_id' => $productId,
+                    'xuat_id' => $xuat->id,
+                    'price' => $price,
+                    'total_price' => $request->total_price[$key],
+                    'quantity' => $request->quantity[$key],
+                    'ngaysx' => $request->ngaysx[$key],
+                    'hansd' => $request->hansd[$key],
+                ];
+            }
+
+            // Insert the export details into the database
+            XuatChitiet::insert($data);
+
+            // Deduct the exported quantities from product inventory
+            foreach ($request->product_id as $key => $productId) {
+                $product = Product::find($productId);
+                if ($product) {
+                    $product->quantity -= $request->quantity[$key];
+                    $product->save();
                 }
             }
-    try {
-        // Save the export record
-        $xuat = new Xuat();
-        $xuat->ma_xuat = $request->ma_xuat;
-        $xuat->noi_dung_xuat = $request->noi_dung_xuat ?? 'Hóa đơn xuất hàng';
-        $xuat->ghi_chu = $request->ghi_chu;
-        $xuat->save();
 
-        // Prepare data for the export details
-        $xuat_id = $xuat->id;
-        $products = $request->input('product_id');
-        $quantities = $request->input('quantity');
-        $price_types = $request->input('price');
-        $total_prices = $request->input('total_price');
-        $ngaysx = $request->input('ngaysx');
-        $hansd = $request->input('hansd');
-
-        $data = [];
-        foreach ($products as $key => $productId) {
-            $product = Product::find($productId);
-            $priceType = $price_types[$key];
-            $price = $product->$priceType; // Get the price based on the selected price type
-
-            $data[] = [
-                'product_id' => $productId,
-                'xuat_id' => $xuat_id,
-                'price' => $price,
-                'total_price' => $total_prices[$key],
-                'quantity' => $quantities[$key],
-                'ngaysx' => $ngaysx[$key],
-                'hansd' => $hansd[$key],
-            ];
+            return back()->with('success', 'Xuất hàng thành công.');
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors(['error' => 'Lỗi Lưu: ' . $e->getMessage()]);
         }
-
-        // Insert the export details into the database
-        XuatChitiet::insert($data);
-
-        // Deduct the exported quantities from product inventory
-        foreach ($products as $key => $productId) {
-            $product = Product::find($productId);
-            if ($product) {
-                $product->quantity -= $quantities[$key];
-                $product->save();
-            }
-        }
-
-        return back()->with('success', 'Xuất hàng thành công.');
-    } catch (\Exception $e) {
-        return back()->withInput()->withErrors(['error' => 'Lỗi Lưu: ' . $e->getMessage()]);
     }
-}
-
-// public function store(Request $request)
-// {
-//     $request->validate([
-//         'ma_xuat' => 'required|string|max:255',
-//         'noi_dung_xuat' => 'nullable|string',
-//         'ghi_chu' => 'nullable|string',
-//         'product_id' => 'required|array',
-//         'product_id.*' => 'required|exists:products,id',
-//         'quantity' => 'required|array',
-//         'quantity.*' => 'required|integer|min:1|max:100',
-//         'price_type' => 'required|array', // Ensure price_type is required and an array
-//         'price_type.*' => 'required|in:sale_price,le_price,price', // Validate each price_type value
-//         'total_price' => 'required|array',
-//         'total_price.*' => 'required|numeric',
-//         'ngaysx' => 'required|array',
-//         'ngaysx.*' => 'required|date',
-//         'hansd' => 'required|array',
-//         'hansd.*' => 'required|date',
-//     ]);
-
-//     try {
-//         // Proceed to save the export record
-//         $xuat = new Xuat();
-//         $xuat->ma_xuat = $request->ma_xuat;
-//         $xuat->noi_dung_xuat = $request->noi_dung_xuat ?? 'Hóa đơn xuất hàng';
-//         $xuat->ghi_chu = $request->ghi_chu;
-//         $xuat->save();
-
-//         $xuat_id = $xuat->id;
-//         $masp = $request->input('product_id');
-//         $quantities = $request->input('quantity');
-//         $total_prices = $request->input('total_price');
-//         $ngaysanxuat = $request->input('ngaysx');
-//         $ngayhethan = $request->input('hansd');
-//         $price_types = $request->input('price_type');
-
-//         $data = [];
-//         foreach ($masp as $key => $productId) {
-//             $product = Product::find($productId);
-//             $priceType = $price_types[$key];
-
-//             $data[] = [
-//                 'product_id' => $productId,
-//                 'xuat_id' => $xuat_id,
-//                 'price' => $product->$priceType, // Adjust according to selected price type
-//                 'total_price' => $total_prices[$key],
-//                 'quantity' => $quantities[$key],
-//                 'ngaysx' => $ngaysanxuat[$key],
-//                 'hansd' => $ngayhethan[$key],
-//                 'price_type' => $priceType, // Include price_type in the data array
-//             ];
-//         }
-
-//         XuatChitiet::insert($data);
-
-//         // Deduct the exported quantities from product inventory
-//         foreach ($masp as $key => $productId) {
-//             $product = Product::find($productId);
-//             if ($product) {
-//                 $product->quantity -= $quantities[$key];
-//                 $product->save();
-//             }
-//         }
-
-//         return back()->with('success', 'Xuất hàng thành công.');
-//     } catch (\Exception $e) {
-//         return back()->withInput()->withErrors(['error' => 'Lỗi Lưu: ' . $e->getMessage()]);
-//     }
-// }
-
-
-    
 
     public function taodon($id)
     {
-       
+
         $nhap = Xuat::with('ctNhap')->find($id);
 
         if ($nhap) {
-            
+
             return view('admin.xuat.donhang', ['nhap' => $nhap, 'ctNhaps' => $nhap->ctNhap]);
         } else {
-         
+
             return redirect()->back()->with('error', 'Nhập không tồn tại');
         }
     }
@@ -469,4 +215,3 @@ public function store(Request $request)
 }
 
 
- 
