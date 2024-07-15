@@ -201,7 +201,7 @@
     });
 </script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-{{-- <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function() {
         $('#product-dropdown').change(function() {
             var productId = $(this).val();
@@ -240,6 +240,7 @@
         // }
     });
 </script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var minNumber = 100;
@@ -255,21 +256,6 @@
     document.getElementById('ma_don').value = maDon;
     });
 </script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var minNumber = 100;
-    var maxNumber = 999;
-
-    // Sinh số ngẫu nhiên từ minNumber đến maxNumber
-    var randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-
-    // Format số ngẫu nhiên thành chuỗi 'HD02110xxx'
-    var maDon = 'HD02' + randomNumber.toString().padStart(4, '0');
-    
-    // Gán giá trị vào ô text có id là 'ma_don'
-    document.getElementById('ma_don').value = maDon;
-    });
-</script> --}}
 
 </section>
 @endsection
