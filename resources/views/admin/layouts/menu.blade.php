@@ -85,25 +85,25 @@
         </ul>
       </li>
       <!-- <li>
-        <a href="{{route('avatar.index')}}">
+       
           <i class="fa fa-th"></i> <span>Quản lí Ảnh trang chủ</span>
          
         </a>
       </li>
       
       <li>
-        <a href="{{route('banner.index')}}">
+        
           <i class="fa fa-th"></i> <span>Quản lí banner</span>
          
         </a>
       </li>
       
       <li>
-        <a href="{{route('admin.statistic')}}">
+        
           <i class="fa fa-th"></i> <span>Thống kê</span>
          
         </a>
       </li> -->
->>>>>>> b6e0f0bc708505a42c7915ec300c2d13f9a32de6
+
     </ul>
 </section>
