@@ -33,7 +33,6 @@
             text-align: left; /* Aligns text to the left */
         }
 
-        
         .pr{
             border: 1px solid black;text-align: left;
             padding: 5px;
