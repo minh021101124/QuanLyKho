@@ -1,109 +1,76 @@
-   <!-- sidebar: style can be found in sidebar.less -->
-   <section class="sidebar">
-    <!-- Sidebar user panel -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<section class="sidebar">
     <div class="user-panel">
-      <div class="pull-left image">
-        
-        <img src="{{asset('assets')}}/images/th.jfif" class="img-circle" alt="User Image">
-      </div>
-      <div class="pull-left info">
-        <p>--</p>
-        {{-- <form action="{{ route('logout') }}" method="POST" class="d-flex" role="search">
-          @csrf
-          @method('DELETE')
-          <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-              <img src="{{ asset('assets/images/logout.png') }}" width="20px" style="background: rgb(128, 126, 132)" alt="Logout">
-              <span style="font-size: 10px">Đăng xuất</span>
-          </button>
-      </form> --}}
-      
-        {{-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> --}}
-      </div>
+        <div class="pull-left image">
+            <img src="{{ asset('assets') }}/images/th.jfif" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+            <p>--</p>
+        </div>
     </div>
-    <!-- search form -->
-    {{-- <form action="#" method="get" class="sidebar-form">
-      <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Search...">
-        <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-      </div>
-    </form> --}}
-    <!-- /.search form -->
-    <!-- sidebar menu: : style can be found in sidebar.less -->
-
     <ul class="sidebar-menu" data-widget="tree">
-      <li>
-        <a href="{{route('admin.index')}}">
-          <i class="fa fa-home" style="font-size: 20px"></i> <span>Trang chủ</span>
-          <span class="pull-right-container">
-         
-          </span>
-        </a>
-        
-      </li>
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-download" style="font-size: 20px"></i> <span>Quản lý Nhập hàng </span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="{{route('nhap.index')}}"><i class="fa fa-cart-plus" style="font-size: 15px"></i> Nhập hàng </a></li>
-          <li><a href="{{route('nhap.list')}}"><i class="fa fa-gift" style="font-size: 15px"></i> Sản phẩm đã nhập </a></li>
-        </ul>
-      </li>
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-truck" style="font-size: 20px"></i> <span>Quản lý Xuất hàng </span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="{{route('xuat.index')}}"><i class="fa fa-send" style="font-size: 15px"></i> Xuất hàng </a></li>
-          <li><a href="{{route('xuat.list')}}"><i class="fa fa-gift" style="font-size: 15px"></i> Sản phẩm đã xuất </a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="{{route('khohang.index')}}">
-          <i class="fa fa-archive" style="font-size: 20px"></i> <span>Kho hàng</span>
-          <span class="pull-right-container">
-         
-          </span>
-        </a>
-        
-      </li>
-      {{-- <li>
+        <li>
+            <a href="{{ route('admin.index') }}">
+                <i class="fa fa-th"></i> <span>Trang chủ</span>
+                <span class="pull-right-container">
+                </span>
+            </a>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Quản lý Nhập hàng </span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{ route('nhap.index') }}"><i class="fa fa-circle-o"></i> Nhập hàng </a></li>
+                <li><a href="{{ route('nhap.list') }}"><i class="fa fa-circle-o"></i> Sản phẩm đã nhập </a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Quản lý Xuất hàng </span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{ route('xuat.index') }}"><i class="fa fa-circle-o"></i> Xuất hàng </a></li>
+                <li><a href="{{ route('xuat.list') }}"><i class="fa fa-circle-o"></i> Sản phẩm đã xuất </a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="{{ route('khohang.index') }}">
+                <i class="fa fa-th"></i> <span>Kho hàng</span>
+                <span class="pull-right-container">
+                </span>
+            </a>
+        </li>
+        {{-- <li>
         <a href="{{route('xuat.barcode')}}">
           <i class="fa fa-th"></i> <span>Quét mã vạch</span>
-          <span class="pull-right-container">
-         
+          <span class="pull-right-container">        
           </span>
-        </a>
-        
+        </a>       
       </li> --}}
-      
-      <li>
-        <a href="{{route('category.index')}}">
-          <i class="fa fa-navicon" style="font-size: 20px"></i> <span>Quản lý danh mục </span>
-          <span class="pull-right-container">
-         
-          </span>
-        </a>
-        
-      </li>
-      <li>
-        <a href="{{route('thongke.doanhthu')}}">
-          <i class="fa fa-pie-chart" style="font-size: 20px"></i> <span>Thống kê </span>
-          <span class="pull-right-container">
-         
-          </span>
-        </a>
-        
-      </li>
+        <li>
+            <a href="{{ route('category.index') }}">
+                <i class="fa fa-th"></i> <span>Quản lý danh mục </span>
+                <span class="pull-right-container">
+                </span>
+            </a>
+
+        </li>
+        <li>
+            <a href="{{ route('thongke.doanhthu') }}">
+                <i class="fa fa-th"></i> <span>Thống kê </span>
+                <span class="pull-right-container">
+
+                </span>
+            </a>
+
+        </li>
 
       <li class="treeview">
         <a href="#">
@@ -123,6 +90,7 @@
          
         </a>
       </li>
+      
       <li>
         <a href="{{route('banner.index')}}">
           <i class="fa fa-th"></i> <span>Quản lí banner</span>
@@ -136,6 +104,6 @@
          
         </a>
       </li> -->
+>>>>>>> b6e0f0bc708505a42c7915ec300c2d13f9a32de6
     </ul>
-  </section>
-  <!-- /.sidebar -->
+</section>
