@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
 <section class="sidebar">
     <div class="user-panel">
         <div class="pull-left image">
@@ -86,5 +85,40 @@
             </ul>
         </li>
 
+<<<<<<< HEAD
+=======
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-th" style="font-size: 20px"></i> <span>Quản lý sản phẩm </span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{route('product.create')}}"><i class="fa fa-plus-square" style="font-size: 15px"></i> Thêm mới sản phẩm </a></li>
+          <li><a href="{{route('product.index')}}"><i class="fa fa-cubes" style="font-size: 15px"></i> Danh sách sản phẩm </a></li>
+        </ul>
+      </li>
+      <!-- <li>
+        <a href="{{route('avatar.index')}}">
+          <i class="fa fa-th"></i> <span>Quản lí Ảnh trang chủ</span>
+         
+        </a>
+      </li>
+      
+      <li>
+        <a href="{{route('banner.index')}}">
+          <i class="fa fa-th"></i> <span>Quản lí banner</span>
+         
+        </a>
+      </li>
+      
+      <li>
+        <a href="{{route('admin.statistic')}}">
+          <i class="fa fa-th"></i> <span>Thống kê</span>
+         
+        </a>
+      </li> -->
+>>>>>>> b6e0f0bc708505a42c7915ec300c2d13f9a32de6
     </ul>
 </section>
