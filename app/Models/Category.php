@@ -10,8 +10,8 @@ class Category extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['id','name','parent_id','status'];
-    
+    protected $fillable = ['id', 'name', 'parent_id', 'status'];
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
@@ -20,7 +20,7 @@ class Category extends Model
     //quan he 1-n
     public function products()
     {
-        return $this->hasMany(Product::class,'category_id','id')->orderBy('created_at','DESC');
+        return $this->hasMany(Product::class, 'category_id', 'id')->orderBy('created_at', 'DESC');
     }
     public function children()
     {
@@ -28,28 +28,28 @@ class Category extends Model
     }
     // Category.php (Model) or CategoryService.php (Service Class)
 
-public static function getNestedCategories($parent_id = null)
-{
-    $categories = Category::where('parent_id', $parent_id)->get();
+    public static function getNestedCategories($parent_id = null)
+    {
+        $categories = Category::where('parent_id', $parent_id)->get();
 
-    $nestedCategories = [];
-    
-    foreach ($categories as $category) {
-        $category->children = self::getNestedCategories($category->id);
-        $nestedCategories[] = $category;
+        $nestedCategories = [];
+
+        foreach ($categories as $category) {
+            $category->children = self::getNestedCategories($category->id);
+            $nestedCategories[] = $category;
+        }
+
+        return $nestedCategories;
+    }
+    public function childrenCategories()
+    {
+        return $this->hasMany(Category::class, 'parent_id', 'id');
     }
 
-    return $nestedCategories;
-}
-public function childrenCategories()
-{
-    return $this->hasMany(Category::class, 'parent_id', 'id');
-}
+    public function allChildrenCategories()
+    {
+        return $this->childrenCategories()->with('allChildrenCategories');
+    }
 
-public function allChildrenCategories()
-{
-    return $this->childrenCategories()->with('allChildrenCategories');
-}
 
-  
 }
