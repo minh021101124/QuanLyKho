@@ -1,4 +1,5 @@
-   <!-- sidebar: style can be found in sidebar.less -->
+{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
    <section class="sidebar">
     <!-- Sidebar user panel -->
     <div class="user-panel">
@@ -50,8 +51,13 @@
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
-        <ul class="treeview-menu">
-          <li><a href="{{route('nhap.index')}}"><i class="fa fa-cart-plus" style="font-size: 15px"></i> Nhập hàng </a></li>
+        <ul class="treeview-menu">@php
+          $id = 1; // Ví dụ: gán giá trị cho biến $id
+      @endphp
+          <li><a href="{{ route('nhap.index') }}"><i class="fa fa-cart-plus" style="font-size: 15px"></i> Nhập hàng </a></li>
+          {{-- , ['id' => $id] --}}
+          
+          <li><a href="{{ route('nhaphanghoa.create') }}"><i class="fa fa-gift" style="font-size: 15px"></i> nhập </a></li>
           <li><a href="{{route('nhap.list')}}"><i class="fa fa-gift" style="font-size: 15px"></i> Sản phẩm đã nhập </a></li>
         </ul>
       </li>

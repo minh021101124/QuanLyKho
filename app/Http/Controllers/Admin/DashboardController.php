@@ -10,7 +10,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\NhapChitiet;
 use Carbon\Carbon;
-
+use App\Models\Nhap;
 class DashboardController extends Controller
 {
     public function index()
@@ -31,10 +31,29 @@ class DashboardController extends Controller
         $csvdata = file_get_contents($file);
         $rows = array_map("str_getcsv", explode("\n", $csvdata));
         $header = array_shift($rows);
+        $nhapList = NhapChitiet::where('ngaysx', '<>', null)->get();
 
+        $hsdList = $nhapList->map(function ($item) use (&$soLuongSapHetHan) {
+            $ngayHienTai = Carbon::now();
+            $ngaysx = Carbon::parse($item->ngaysx);
+            $hansd = $ngaysx->diffInDays($ngayHienTai);
+            
+            // Thêm 1 ngày để tính toán chính xác
+            $item->hansd = $hansd + 1;
 
+            // Cảnh báo nếu còn 7 ngày hoặc ít hơn
+            $item->canhbao = $hansd <= 7;
+
+            // Đếm sản phẩm sắp hết hạn
+            if ($item->canhbao) {
+                $soLuongSapHetHan++;
+            }
+
+            return $item;
+        });
+       
         $nhapchitiet = NhapChitiet::paginate(5);
-        return view('admin.index', compact('count', 'products', 'nhapchitiet', 'demtongsp', 'demsp_het', 'count_het', 'count_saphet', 'rows', 'header'));
+        return view('admin.index', compact('soLuongSapHetHan','hsdList','count', 'products', 'nhapchitiet', 'demtongsp', 'demsp_het', 'count_het', 'count_saphet', 'rows', 'header'));
     }
     // public function doc_excel() {
     //     $file = public_path('/files/Data1.csv'); 

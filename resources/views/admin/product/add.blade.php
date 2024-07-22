@@ -3,13 +3,47 @@
 @section('main-content')
 @section('content-header')
     <h1>THÊM MỚI SẢN PHẨM</h1>
-    <!-- Main content -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
+
+
     <!DOCTYPE html>
     <html lang="en">
 
     <head>
         <style>
+            .button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically (if the container height is set) */
+}
+
+          .table-container {
+    max-height: 470px; /* Adjust height as needed */
+    overflow-y: auto;  /* Vertical scrollbar will appear if content exceeds max-height */
+    border: 1px solid #ddd; /* Optional: add a border around the table */
+    padding: 0 10px; /* Optional: add some padding inside the container */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table th {
+    background-color: #f4f4f4;
+    text-align: left;
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0; /* Stick to the top of the container */
+    z-index: 2; /* Ensures header stays above the body content */
+}
+
+
             #photoPreviews div {
                 margin: 5px;
                 /* Khoảng cách giữa các hình ảnh */
@@ -84,17 +118,13 @@
         <!-- Content Header (Page header) -->
 
         <section class="content">
-            <div class="col-md-12">
-
-                <div class="box box-primary">
-
+            <div class="row"> <!-- Start row to contain columns -->
+                <div class="col-md-4" style="background: rgb(240, 240, 240); " > 
                     <form role="form" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
                         @csrf
-                        {{-- <input type="hidden" name="selected_category_id" value="{{ $selectedCategoryId }}"> --}}
                         <div class="box-body">
                             <div class="row">
-
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <div class="form-group @error('name') has-error @enderror">
                                         <label for="">Tên sản phẩm</label>
                                         <input type="input" class="form-control" id="productName" placeholder=""
@@ -104,20 +134,20 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group @error('slug') has-error @enderror">
                                         <label for="">Đường dẫn</label>
-                                        <input type="input" class="form-control" id="slug" placeholder=""
-                                            name="slug" value="{{ old('slug') }}">
+                                        <input type="input" class="form-control" id="slug" placeholder="" name="slug"
+                                            value="{{ old('slug') }}">
                                         @error('slug')
                                             <span class="help-block">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
-
+        
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group @error('sale_price') has-error @enderror">
                                         <label for="">Giá nhập</label>
                                         <input type="input" class="form-control" id="" placeholder=""
@@ -127,108 +157,130 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group @error('price') has-error @enderror">
                                         <label for="">Giá sỉ</label>
-                                        <input type="input" class="form-control" id="" placeholder=""
-                                            name="price" value="{{ old('price') }}">
+                                        <input type="input" class="form-control" id="" placeholder="" name="price"
+                                            value="{{ old('price') }}">
                                         @error('price')
                                             <span class="help-block">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group @error('le_price') has-error @enderror">
                                         <label for="">Giá bán lẻ</label>
-                                        <input type="input" class="form-control" id="" placeholder=""
-                                            name="le_price" value="{{ old('le_price') }}">
+                                        <input type="input" class="form-control" id="" placeholder="" name="le_price"
+                                            value="{{ old('le_price') }}">
                                         @error('le_price')
                                             <span class="help-block">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-
                             </div>
-
-
-
-                            <div class="form-group @error('category_id') has-error @enderror">
-                                <label for="category_id">Chọn danh mục</label>
-                                <select name="category_id" id="category_id" class="form-control">
-                                    <option value="">Chọn danh mục</option>
-                                    <?php showCategories($categories, old('category_id')); ?>
-                                </select>
-                                @error('category_id')
-                                    <span class="help-block">{{ $message }}</span>
-                                @enderror
+        
+                          
+        
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group @error('photo') has-error @enderror">
+                                        <label for="photo">Ảnh sản phẩm</label>
+                                        <input type="file" class="form-control" id="photoInput" placeholder="" name="photo"
+                                            onchange="displayImage(event)">
+                                        <img id="photoPreview" src="{{ asset('assets') }}/images/user2-160x160.jpg" alt="Ảnh sản phẩm"
+                                            style="display:none;max-width: 95px; max-height: 95px; margin:5px">
+                                            {{-- position: absolute; top:-70px; left:333px; border: solid 1px rgb(217, 217, 217) --}}
+                                        @error('photo')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group @error('category_id') has-error @enderror">
+                                        <label for="category_id">Chọn danh mục</label>
+                                        <select name="category_id" id="category_id" class="form-control">
+                                            <option value="">Chọn danh mục</option>
+                                            <?php showCategories($categories, old('category_id')); ?>
+                                        </select>
+                                        @error('category_id')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
-
-
-
-
-
-
-
-
-                            <div class="form-group @error('photo') has-error @enderror">
-                                <label for="photo">Ảnh sản phẩm</label>
-                                <input type="file" class="form-control" id="photoInput" placeholder="" name="photo"
-                                    onchange="displayImage(event)">
-                                <img id="photoPreview" src="#" alt="Ảnh sản phẩm"
-                                    style="display: none; max-width: 200px; max-height: 200px;">
-                                @error('photo')
-                                    <span class="help-block">{{ $message }}</span>
-                                @enderror
+        
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group @error('short_description') has-error @enderror">
+                                        <label for="">Mô tả ngắn về sản phẩm</label>
+                                        <textarea name="short_description" class="form-control" rows="2">{{ old('short_description') }}</textarea>
+                                    </div>
+                                </div>
                             </div>
-
-
-
-
-
-                            <div class="form-group @error('photos') has-error @enderror">
-                                <label for="photos">Ảnh mô tả</label>
-                                <input type="file" class="form-control" id="photos" name="photos[]" multiple
-                                    onchange="displayImages(event)">
-                                <div id="photoPreviews" class="photo-previews"></div>
-                                @error('photos')
-                                    <span class="help-block">{{ $message }}</span>
-                                @enderror
+                            <div class="row">
+                                <div class="button-container">
+                                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                </div>
                             </div>
-
-
-
-
-
-
-                            <div class="form-group @error('short_description') has-error @enderror">
-                                <label for="">Mô tả ngắn về sản phẩm</label>
-                                <textarea name="short_description" class="form-control" rows="3">{{ old('short_description') }}</textarea>
-                                {{-- <textarea name="ghi_chu" id="ghi_chu" class="form-control" rows="3"></textarea> --}}
-                            </div>
-                            <div class="form-group @error('description') has-error @enderror">
-                                <label for="">Mô tả chi tiết sản phẩm</label>
-                                <textarea name="description" id="editor1" rows="10" cols="80">{{ old('description') }}</textarea>
-                            </div>
-
-
-
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Thêm mới</button>
-                            </div>
+                            
                         </div>
                     </form>
-
                 </div>
-
-
+        
+                <!-- New div on the right -->
+                <div class="col-md-8"> <!-- Set width to 4/12 of the container -->
+                    <div class="box-body">
+                        <div class="table-container">
+                            <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Ảnh</th>
+                                    <th>Tên</th>
+                                    <th>Giá</th>
+                                    <th>Giá KM</th>
+                                    <th>Danh mục</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($posts as $post)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            <img src="{{ asset('images') }}/{{ $post->image }}" alt="" width="40" height="40">
+                                        </td>
+                                        <td>{{ $post->name }}</td>
+                                        <td>{{ number_format($post->price) }}đ</td>
+                                        <td>{{ number_format($post->sale_price) }}đ</td>
+                                        <td>
+                                            @if ($post->category)
+                                                {{ $post->category->name }}
+                                            @else
+                                                Danh mục không tồn tại
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('product.edit', $post) }}"><button class="btnsua">Sửa</button></a>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('product.destroy', $post) }}" method="post">
+                                                <button class="btnxoa" onclick="return confirm('Bạn đã chắc chắn?');" type="submit">Xóa</button>
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="box-footer">
-
-            </div>
-
-            </div>
-
         </section>
+        
     </body>
 
     </html>

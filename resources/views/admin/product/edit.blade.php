@@ -2,11 +2,80 @@
 @section('title', 'Cập nhật sản phẩm')
 @section('main-content')
 @section('content-header')
+<noidung>
     <h1>CẬP NHÂT THÔNG TIN SẢN PHẨM</h1>
     <!-- Main content -->
     <!DOCTYPE html>
     <html lang="en">
-
+        <style>
+            #photoPreviews div {
+                margin: 5px;
+                /* Khoảng cách giữa các hình ảnh */
+                float: left;
+                /* Hiển thị các phần tử trên cùng một hàng */
+            }
+        
+            #photoPreviews img {
+                display: block;
+                /* Hiển thị hình ảnh là block để tránh các lỗ hổng */
+                width: auto;
+                /* Đảm bảo chiều rộng của hình ảnh tự động thích ứng */
+                height: 150px;
+                /* Đảm bảo chiều cao của hình ảnh không vượt quá 200px */
+                max-width: 100%;
+                /* Đảm bảo hình ảnh không vượt quá chiều rộng của div cha */
+                max-height: 100%;
+                /* Đảm bảo hình ảnh không vượt quá chiều cao của div cha */
+            }
+        
+            #photoPreviews button {
+                display: block;
+                /* Hiển thị nút Xóa là block để nằm ngay dưới hình ảnh */
+            }
+        
+            .photo-previews {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                /* Adjust gap as needed */
+                margin-bottom: 20px;
+                /* Add space below images */
+            }
+        
+            .image-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+        
+            .image-container img {
+                max-width: 120px;
+                max-height: 120px;
+                margin-bottom: 5px;
+            }
+        
+            .delete-button {
+                background-color: red;
+                color: white;
+                border: none;
+                padding: 5px;
+                cursor: pointer;
+                border-radius: 3px;
+            }
+        
+            .delete-button:hover {
+                background-color: darkred;
+            }
+        
+            .form-group {
+                clear: both;
+                /* Ensure each form group is properly positioned */
+                margin-bottom: 20px;
+                /* Space between form groups */
+            }
+            
+        </style>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -398,3 +467,4 @@ function showCategories($categories, $selectedCategoryId, $parent_id = 0, $char 
     }
 }
 ?>
+</noidung>

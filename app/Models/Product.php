@@ -51,5 +51,13 @@ class Product extends Model
     {
         return $this->hasMany(NhapChitiet::class, 'product_id');
     }
-   
+    public function chitietxuat()
+    {
+        return $this->hasMany(XuatChitiet::class, 'product_id');
+    }
+    
+    public function xuatChitiets()
+    {
+        return $this->hasMany(XuatChitiet::class, 'product_id');
+    }
 }

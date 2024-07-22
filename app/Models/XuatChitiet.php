@@ -19,8 +19,14 @@ class XuatChitiet extends Model
     {
         return $this->belongsTo(Xuat::class);
     }
-    
-     
+    public function xuats()
+    {
+        return $this->belongsTo(Xuat::class, 'xuat_id');
+    }
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 
 }
 

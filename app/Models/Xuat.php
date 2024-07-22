@@ -30,4 +30,8 @@ class Xuat extends Model
     {
         return $this->hasMany(XuatChitiet::class);
     }
+    public function xuatChitiets()
+    {
+        return $this->hasMany(XuatChitiet::class, 'xuat_id');
+    }
 }

@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="css/style.css" />
     <script src="{{ asset('assets') }}/js/angular.min.js"></script>
     <script src="{{ asset('assets') }}/js/app.js"></script>
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
+    
     <link rel="icon" href="{{ asset('assets') }}/images/page_img.png" type="image/x-icon">
 </head>
 
@@ -113,6 +115,11 @@
         <div class="content-wrapper">
             <section class="content-header">
                 @yield('content-header')
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                
+            </body>
             </section>
             @yield('main-content')
         </div>

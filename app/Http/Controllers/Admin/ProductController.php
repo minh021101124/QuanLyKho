@@ -17,7 +17,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Models\NhapChitiet;
 use App\Models\XuatChitiet;
-
+use App\Models\Xuat;
 class ProductController extends Controller
 {
     /**
@@ -28,7 +28,10 @@ class ProductController extends Controller
     public function index()
     {
         $posts = Product::orderBy('id', 'DESC')->get();
-        return view('admin.product.index', compact('posts'));
+        $selectedCategoryId = session('selected_category_id') ?? request()->input('selected_category_id');
+        $categories = Category::orderBy('name', 'ASC')->get();
+        
+        return view('admin.product.index', compact('posts','categories', 'selectedCategoryId'));
     }
     public function ctsanpham($slug)
     {
@@ -53,7 +56,8 @@ class ProductController extends Controller
     {
         $selectedCategoryId = session('selected_category_id') ?? request()->input('selected_category_id');
         $categories = Category::orderBy('name', 'ASC')->get();
-        return view('admin.product.add', compact('categories', 'selectedCategoryId'));
+        $posts = Product::orderBy('id', 'DESC')->get();
+        return view('admin.product.add', compact('categories', 'selectedCategoryId','posts'));
     }
     /**
      * Store a newly created resource in storage.
@@ -97,7 +101,8 @@ class ProductController extends Controller
                 ]);
             }
         }
-        return redirect()->route('product.index')->with('success', 'Thêm mới thành công');
+        return back()->with('success', 'Thêm mới thành công');
+        // return redirect()->route('product.index')->with('success', 'Thêm mới thành công');
     }
     /**
      * Display the specified resource.
@@ -177,7 +182,7 @@ class ProductController extends Controller
     {
         try {
             $product->delete();
-            return redirect()->route('product.index')->with('success', 'Xóa thành công');
+            return back()->with('success', 'Xóa thành công');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Thất bại');
         }
@@ -273,6 +278,35 @@ class ProductController extends Controller
         $tong = $tongnhap->sum('total_price');
         $tongxuat = XuatChitiet::All();
         $tongx = $tongxuat->sum('total_price');
+        
         return view('admin.thongke.doanhthu', compact('tong', 'tongx'));
+    }
+    public function filter(Request $request)
+    {
+
+        $tongnhap = NhapChitiet::All();
+        $tong = $tongnhap->sum('total_price');
+        $tongxuat = XuatChitiet::All();
+        $tongx = $tongxuat->sum('total_price');
+
+        // Lấy dữ liệu từ form lọc
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $filterType = $request->input('filter_type');
+
+        
+        // Truy vấn bảng Xuat để lấy các record trong khoảng thời gian đã chọn
+        $xuatIds = Xuat::whereBetween('created_at', [$startDate, $endDate])->pluck('id');
+
+        // Truy vấn bảng XuatChitiet dựa trên các xuat_id đã lấy được
+        $orders = XuatChitiet::whereIn('xuat_id', $xuatIds)->get();
+
+        // Tính toán tổng doanh thu
+        $totalRevenue = $orders->sum('total_price'); // Giả sử cột tổng giá trong bảng xuat_chitiets là total_price
+        
+       
+        $xuatProduct=XuatChitiet::whereIn('xuat_id', $xuatIds)->get();
+        // Trả về kết quả cho view
+        return view('admin.thongke.doanhthu', compact('tong', 'tongx','orders', 'totalRevenue','startDate','endDate','xuatProduct'));
     }
 }

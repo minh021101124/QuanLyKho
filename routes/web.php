@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\KhoController;
 use App\Http\Controllers\Admin\NhapController;
 use App\Http\Controllers\Admin\XuatController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeControllerr;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -41,6 +41,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/nhaphang', [NhapController::class, 'nhaphang'])->name('nhap.index');
     Route::get('/danh-sach-nhap', [NhapController::class, 'dsnhap'])->name('nhap.list');
     Route::get('/admin/tao-don-nhap/{id}', [NhapController::class, 'taodon'])->name('nhap.donhang');
+    // Route::get('/nhap-hang/{$id}', [NhapController::class, 'taodonct'])->name('nhap.index');
+//    Route::get('nhapp/{id}', [NhapController::class, 'show'])->name('nhap.show');
+
     //Xuất hàng
     Route::resource('xuathanghoa', XuatController::class);
     Route::get('/xuathang', [XuatController::class, 'xuathang'])->name('xuat.index');
@@ -54,6 +57,13 @@ Route::prefix('admin')->group(function () {
 
     Route::get('doanhthu', [ProductController::class, 'doanhthu'])->name('thongke.doanhthu');
 
+    Route::get('/u', [NhapController::class, 'index']);
+ 
+Route::get('users/{id}', [NhapController::class, 'show'])->name('users.show');
+
+// Route::get('/doanhthu', [ProductController::class, 'doanhthu'])->name('thongke.doanhthu');
+Route::get('/doanhthu', [ProductController::class, 'filter'])->name('thongke.doanhthu');
+Route::post('/doanhthu/loc', [ProductController::class, 'filter'])->name('thongke.filter');
 
 });
 

@@ -31,6 +31,32 @@
         width: 150px;
         margin-left: 10px;
     }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        border: 1px solid #ddd;
+        padding: 4px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #115f19;
+        color: #ffffff;
+        text-align: left;
+        position: -webkit-sticky;
+        /* For Safari */
+        position: sticky;
+        top: 0;
+        /* Stick to the top of the container */
+        z-index: 2;
+        /* Ensures header stays above the body content */
+    }
 </style>
 <section class="content">
     @if ($message = Session::get('success'))
@@ -52,8 +78,6 @@
                     <th>Đơn giá</th>
                     <th>Thành tiền</th>
                     <th>Ngày xuất hàng</th>
-
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -74,8 +98,7 @@
                         <td>{{ $item->xuat->created_at ? $item->xuat->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y') : '' }}
                         </td>
 
-                        <td></td>
-                        </td>
+
                         {{-- <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s') }}</td> --}}
                         {{-- <td>{{ $item->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y') }}</td> --}}
 

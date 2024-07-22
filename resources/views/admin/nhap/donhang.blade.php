@@ -31,8 +31,39 @@
         width: 150px;
         margin-left: 10px;
     }
+    .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #ddd;
+            padding: 4px;
+            text-align: left; vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #115f19;color: #ffffff;
+            text-align: left;
+            position: -webkit-sticky;
+            /* For Safari */
+            position: sticky;
+            top: 0;
+            /* Stick to the top of the container */
+            z-index: 2;
+            /* Ensures header stays above the body content */
+        }
+        .hoadon{
+        margin: auto;
+        width: 600px;
+        height: 700px;
+        padding: 5%;
+        background: #ffffff;
+    }
 </style>
-<section class="content">
+<section class="content" style="background: #969696">
+    <div class="hoadon">
 
     {{-- @foreach ($madon as $item)
     Đơn hàng số : {{$item -> ma_don}}
@@ -103,6 +134,7 @@
         {{-- @else
             <span>Chưa có dữ liệu</span>
         @endif --}}
+    </div>
     </div>
 </section>
 @endsection

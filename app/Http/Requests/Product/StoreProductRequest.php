@@ -27,7 +27,9 @@ class StoreProductRequest extends FormRequest
         return [
         'name' => 'required|string|max:255|unique:products',
         'price' => 'required|numeric|min:0',
-        'sale_price' => 'nullable|numeric|lt:price',
+        'le_price' => 'required|numeric|min:0',
+        
+        'sale_price' => 'required|numeric|lt:price',
         'category_id' => 'required|integer|exists:categories,id',
         'photo' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
         'photos.*' => 'image|mimes:jpeg,png,jpg,gif,webp'
@@ -37,12 +39,14 @@ class StoreProductRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Tên sản phẩm là bắt buộc.',
+            'name.required' => 'Nhập Tên sản phẩm.',
             'name.unique'=>"$this->name đã tồn tại",
-            'price.required' => 'Giá sản phẩm là bắt buộc.',
-            'sale_price.lt' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.',
-            'category_id.required' => 'Danh mục là bắt buộc.',
-            'photo.required' => 'Ảnh sản phẩm là bắt buộc.',
+            'price.required' => 'Điền giá sỉ.',
+            'sale_price.required' => 'Điền giá nhập.',
+            'sale_price.lt' => 'Giá nhập phải nhỏ hơn giá sỉ.',
+            'le_price.required' => 'Điền giá bán lẻ.',
+            'category_id.required' => 'Chọn Danh mục.',
+            'photo.required' => 'Chọn 1 Ảnh.',
             'photo.image' => 'Ảnh sản phẩm phải là định dạng hình ảnh.',
             'photos.*.image' => 'Ảnh phụ phải là định dạng hình ảnh.'        
         ];

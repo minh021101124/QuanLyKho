@@ -1,0 +1,123 @@
+ <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group @error('name') has-error @enderror">
+                                        <label for="">Tên sản phẩm</label>
+                                        <input type="input" class="form-control" id="productName" placeholder=""
+                                            name="name" value="{{ old('name') }}" onkeyup="ChangeToSlug()">
+                                        @error('name')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group @error('sale_price') has-error @enderror">
+                                        <label for="">Giá nhập</label>
+                                        <input type="input" class="form-control" id="" placeholder=""
+                                            name="sale_price" value="{{ old('sale_price') }}">
+                                        @error('sale_price')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group @error('price') has-error @enderror">
+                                        <label for="">Giá sỉ</label>
+                                        <input type="input" class="form-control" id="" placeholder=""
+                                            name="price" value="{{ old('price') }}">
+                                        @error('price')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group @error('le_price') has-error @enderror">
+                                        <label for="">Giá bán lẻ</label>
+                                        <input type="input" class="form-control" id="" placeholder=""
+                                            name="le_price" value="{{ old('le_price') }}">
+                                        @error('le_price')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-group @error('category_id') has-error @enderror">
+                                <label for="category_id">Chọn danh mục</label>
+                                <select name="category_id" id="category_id" class="form-control">
+                                    <option value="">Chọn danh mục</option>
+                                    <?php showCategories($categories, old('category_id')); ?>
+                                </select>
+                                @error('category_id')
+                                    <span class="help-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+
+
+
+
+
+
+                            <div class="form-group @error('photo') has-error @enderror">
+                                <label for="photo">Ảnh sản phẩm</label>
+                                <input type="file" class="form-control" id="photoInput" placeholder="" name="photo"
+                                    onchange="displayImage(event)">
+                                <img id="photoPreview" src="#" alt="Ảnh sản phẩm"
+                                    style="display: none; max-width: 200px; max-height: 200px;">
+                                @error('photo')
+                                    <span class="help-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+
+
+
+                            <div class="form-group @error('photos') has-error @enderror">
+                                <label for="photos">Ảnh mô tả</label>
+                                <input type="file" class="form-control" id="photos" name="photos[]" multiple
+                                    onchange="displayImages(event)">
+                                <div id="photoPreviews" class="photo-previews"></div>
+                                @error('photos')
+                                    <span class="help-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+
+
+
+
+                            <div class="form-group @error('short_description') has-error @enderror">
+                                <label for="">Mô tả ngắn về sản phẩm</label>
+                                <textarea name="short_description" class="form-control" rows="3">{{ old('short_description') }}</textarea>
+                                {{-- <textarea name="ghi_chu" id="ghi_chu" class="form-control" rows="3"></textarea> --}}
+                            </div>
+                            {{-- <div class="form-group @error('description') has-error @enderror">
+                                <label for="">Mô tả chi tiết sản phẩm</label>
+                                <textarea name="description" id="editor1" rows="10" cols="80">{{ old('description') }}</textarea>
+                            </div> --}}
+                            <div class="col-md-6">
+                                <div class="form-group @error('slug') has-error @enderror">
+                                    <label for="">Đường dẫn</label>
+                                    <input type="input" class="form-control" id="slug" placeholder=""
+                                        name="slug" value="{{ old('slug') }}">
+                                    @error('slug')
+                                        <span class="help-block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="position: absolute; top: -40px; right: 20px;">Thêm mới</button>
+
+                            
+                        </div>
