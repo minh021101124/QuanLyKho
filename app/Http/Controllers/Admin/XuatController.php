@@ -6,10 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Xuat;
 use App\Models\XuatChitiet;
+use App\Models\NhapChitiet;
 use App\Models\Product;
 use App\Http\Requests\Xuat\StoreXuatRequest;
 use Carbon\Carbon;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Mpdf\Mpdf;
 class XuatController extends Controller
 {
     public function index()
@@ -46,6 +51,19 @@ class XuatController extends Controller
         $le_prices = Product::pluck('le_price', 'id')->all();
         return view('admin.xuat.add', compact('xuat', 'products', 'prices', 'sale_prices', 'le_prices'));
     }
+    public function taodon($id)
+    {
+
+        $nhap = Xuat::with('ctNhap')->find($id);
+
+        if ($nhap) {
+
+            return view('admin.xuat.donhang', ['nhap' => $nhap, 'ctNhaps' => $nhap->ctNhap]);
+        } else {
+
+            return redirect()->back()->with('error', 'Nhập không tồn tại');
+        }
+    }
 
     public function dsxuat()
     {
@@ -56,7 +74,20 @@ class XuatController extends Controller
         $products = Product::all();
         return view('admin.xuat.list', compact('nhap', 'products', 'xuatchitiet'));
     }
+    public function dsxuatin($id)
+    {
+        $nhap = Xuat::with('ctNhap')->find($id); 
+        
 
+        if ($nhap) {
+
+            return view('admin.xuat.in', ['nhap' => $nhap, 'ctNhaps' => $nhap->ctNhap]);
+        } else {
+
+            return redirect()->back()->with('error', 'Nhập không tồn tại');
+        }
+       
+    }
 
 
 
@@ -133,7 +164,7 @@ class XuatController extends Controller
                 }
             }
             // dd($data);
-            return back()->with('success', 'Xuất hàng thành công.');
+            return back()->with('success', 'Xuất thành công.');
         } catch (\Exception $e) {
             return back()->withInput()->withErrors(['error' => 'Lỗi Lưu: ' . $e->getMessage()]);
         }
@@ -196,20 +227,100 @@ class XuatController extends Controller
     //     }
     // }
 
-    public function taodon($id)
+
+
+    public function exportInvoice(Request $request)
     {
-
-        $nhap = Xuat::with('ctNhap')->find($id);
-
-        if ($nhap) {
-
-            return view('admin.xuat.donhang', ['nhap' => $nhap, 'ctNhaps' => $nhap->ctNhap]);
-        } else {
-
-            return redirect()->back()->with('error', 'Nhập không tồn tại');
-        }
+      
+        $ctNhaps = XuatChitiet::with('product')->get(); 
+        $total = $ctNhaps->sum('total_price'); 
+    
+        $data = [
+            'ctNhaps' => $ctNhaps,
+            'total' => $total,
+            'invoice_number' => 'HD' . mt_rand(1000, 9999),
+          
+          
+        ];
+    
+        
+        $dompdf = new Dompdf();
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $dompdf->setOptions($options);
+    
+        
+        $html = view('admin.xuat.in', $data)->render();
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+    
+        
+        return $dompdf->stream('Hoa_don_ban_hang.pdf');
     }
 
+    public function export(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $quantityToExport = $request->input('quantity');
+        
+        // Validate inputs
+        if ($quantityToExport <= 0) {
+            return response()->json(['error' => 'Invalid quantity'], 400);
+        }
+
+        DB::transaction(function() use ($productId, $quantityToExport) {
+            $items = Nhapchitiet::where('product_id', $productId)
+                ->where('quantity', '>', 0)
+                ->orderBy('hansd', 'ASC') // FIFO based on expiration date
+                ->orderBy('ngaysx', 'ASC') // FIFO based on production date if expiration dates are the same
+                ->get();
+
+            $remainingQuantity = $quantityToExport;
+
+            foreach ($items as $item) {
+                if ($remainingQuantity <= 0) break;
+
+                if ($item->quantity <= $remainingQuantity) {
+                    // Record transaction
+                    $this->createTransaction($productId, $item->quantity);
+
+                    // Update inventory
+                    $item->quantity = 0;
+                    $item->save();
+
+                    $remainingQuantity -= $item->quantity;
+                } else {
+                    // Partial quantity
+                    $this->createTransaction($productId, $remainingQuantity);
+
+                    // Update inventory
+                    $item->quantity -= $remainingQuantity;
+                    $item->save();
+
+                    $remainingQuantity = 0;
+                }
+            }
+
+            if ($remainingQuantity > 0) {
+                throw new \Exception('Not enough inventory to fulfill the request');
+            }
+        });
+
+        return response()->json(['success' => 'Export successful']);
+    }
+
+    private function createTransaction($productId, $quantity)
+    {
+        DB::table('transactions')->insert([
+            'product_id' => $productId,
+            'quantity' => $quantity,
+            'transaction_type' => 'out',
+            'transaction_date' => now()->toDateString(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
 
 }
 

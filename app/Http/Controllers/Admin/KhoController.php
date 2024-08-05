@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 // use App\Models\Category;
 use App\Models\Kho;
 use App\Models\NhapChitiet;
+use App\Models\XuatChitiet;
 use App\Models\Product;
 use Carbon\Carbon;
 
@@ -20,7 +21,7 @@ class KhoController extends Controller
 
         $now = Carbon::now();
         $nhapchitiet = NhapChitiet::paginate(5);
-
+        $xuatchitiet = XuatChitiet::paginate(5);
         $products = Product::all();
         $count = $products->count();
 
@@ -28,14 +29,14 @@ class KhoController extends Controller
 
 
         $demtongton = Product::sum('quantity');
+        $demtongspnhap = NhapChitiet::sum('quantity');
+        $demtongspxuat = XuatChitiet::sum('quantity');
 
-
-
-
-        $demtongsp = Product::All();
+        $demtongsp1 = $demtongspnhap-$demtongspxuat ;
+         $demtongsp = Product::All();
 
         $hethan = Kho::whereBetween('hansudung', [$now, $now->copy()->addDays(7)])->get();
-        return view('admin.khohang.index', compact('kho', 'hethan', 'nhapchitiet', 'demtongsp', 'demtongton'));
+        return view('admin.khohang.index', compact('kho', 'hethan', 'nhapchitiet','xuatchitiet', 'demtongsp', 'demtongton','demtongspnhap','demtongspxuat'));
     }
 
 

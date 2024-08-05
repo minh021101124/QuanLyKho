@@ -3,58 +3,123 @@
 @section('title', 'Trang chủ')
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
-<section class="content">
-    <style>
-        .product-image {
-            width: 140px;
-            height: 130px;
 
-            display: block;
-            margin: 10px 10px 10px 10px;
-            box-sizing: border-box;
-        }
-
+<style>
+    .notification {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 20px;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        z-index: 1000;
+        display: none;
+    }
+</style>
+<style>
+    .container2 {
+        display: flex;
+        /* max-width: 1030px; */
+        width: 100%;
+        /* margin: 13px 28px;
        
+        padding: 15px; */
+        /* border: solid 3px rgb(217, 217, 217); */
+       
+    }
+    .container4 {
+    max-width: 1200px;
+    margin: 10px 10px;
+    height: auto;
+    background-color: #ffffff;
+    padding: 10px 15px ;
+    border:solid 3px rgb(217, 217, 217);
+       
+    }
+    .container6 {
+    max-width: 1200px;
+    margin: 10px 10px;
+    height: auto;
+    background-color: #ffffff;
+    padding: 10px 15px ;
+    border:solid 3px rgb(217, 217, 217);
+       
+    }
 
-        
-        .titlen a:hover {
-            text-decoration: none;
-            color: #c62929;
-        }
+    .box1 {
+        width: 40%;
+        border: 3px solid rgb(220, 220, 220);
+        height: 100px;
+        padding: 10px;
+        margin:0 10px;
+    }
 
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            /* background: #fcf3e8; */
-            justify-content: flex-start;
-            padding: 20px;
-            align-items: center;
-        }
+    .box2 {
+        border: 3px solid rgb(220, 220, 220);
+        margin-left: 0px;
+        width: 40%;
+        height: 100px;
+        padding: 10px;
+        margin:0 10px;
+    }
+    .container3 {
+    display: flex;
+    width: 100%;
+    height: 320px;
+    /* margin-bottom: 20px; */
+}
 
-        /* body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        } */
-        .container1 {
-            max-width: 1200px;
-            margin: 15px auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+.box3, .box4 {
+    width: 50%;
+    height: 300px;
+}
 
-        h1 {
-            font-size: 38px;
-            margin-bottom: 20px;
-            color: #333;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            'Arial Narrow Bold',
-            sans-serif;
-        }
 
-        /* ul {
+    
+</style>
+<style>
+    .product-image {
+        width: 60px;
+        height: 60px;
+
+        display: block;
+        margin:  5px;
+        box-sizing: border-box;
+    }
+
+
+
+
+    .titlen a:hover {
+        text-decoration: none;
+        color: #c62929;
+    }
+
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        /* background: #fcf3e8; */
+        justify-content: flex-start;
+        padding: 20px;
+        align-items: center;
+    }
+
+   
+    .container1 {
+        max-width: 1000px;
+        margin: 13px 28px;
+        background-color: #ffffff;
+        padding: 15px;
+        border: solid 3px rgb(217, 217, 217);
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    }
+
+    
+
+    /* ul {
             list-style-type: none;
             padding: 0;
         }
@@ -62,232 +127,317 @@
             padding: 10px 0;
             border-bottom: 1px solid #eee;
         } */
-        .total {
-            font-size: 24px;
-            color: #007bff;
-        }
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    .total {
+        font-size: 15px;
+        color: #007bff;
+    }
 
-        .table th,
-        .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
-        .table th {
-            background-color: #1285f1;
-            text-align: left; color: #ffffff;
-            position: -webkit-sticky;
-            /* For Safari */
-            position: sticky;
-            top: 0;
-            /* Stick to the top of the container */
-            z-index: 2;
-            /* Ensures header stays above the body content */
-        }
-        .warning {
-            color: red;
-            font-weight: bold;
-        }
-        .ok{
-            color: rgb(5, 235, 63);
-            font-weight: bold;
-        }
-    </style>
+    .table th,
+    .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .table th {
+        background-color: #ffffff;
+        text-align: left;
+        color: #ffffff;
+        position: -webkit-sticky;
+        /* For Safari */
+        position: sticky;
+        top: 0;
+        /* Stick to the top of the container */
+        z-index: 2;
+        /* Ensures header stays above the body content */
+    }
+
+    .warning {
+        color: red;
+        font-weight: bold;
+    }
+
+    .ok {
+        color: rgb(5, 235, 63);
+        font-weight: bold;
+    }
+</style>
 <style>
     .warning-row {
         background-color: #ffdddd;
     }
+
     .warning-icon {
         color: red;
         font-weight: bold;
     }
-    
 </style>
-<div class="row"> <!-- Start row to contain columns -->
-    <div class="col-md-9" style="background: rgb(240, 240, 240); " > 
-<div class="container1">
-       
-
-        
-    <div class="summary">
-        <p class="total">Sản phẩm sắp hết hàng : {{ $count_saphet }}</p>
+@if (session()->has('message'))
+    <div class="notification" id="notification">
+        {{ session('message') }}
     </div>
-    <div class="product-container">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th style="width:40px">STT</th>
-                    <th style="width:50px">Ảnh</th>
+@endif
 
-                    <th style="width:200px">Tên sản phẩm</th>
-                    <th >Số lượng</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($demtongsp as $item)
-                    <tr>
-                        <td  style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                        <td>
-                            <a href="{{ route('product.sanpham', $item->slug) }}">
-                                <img src="{{ asset('images') }}/{{ $item->image }}" alt="" width=50px
-                                    height="50px">
-                            </a>
-                        </td>
-                        <td style="vertical-align: middle;">{{ $item->name }}</td>
-                        <td  style="vertical-align: middle;">
-
-                            Sắp hết hàng ( còn {{ $item->quantity }} sản phẩm)
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var notification = document.getElementById('notification');
+        if (notification) {
+            notification.style.display = 'block';
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 5000); // Ẩn thông báo sau 5 giây
+        }
+    });
+</script>
+<section class="content">
 
 
-                        </td>
-
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="container1">
-
-    <div class="summary">
-        <p class="total">Sản phẩm hết hàng : {{ $count_het }}</p>
-    </div>
-    <div class="product-container">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Ảnh</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Số lượng</th>
-                    {{-- <th></th> --}}
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($demsp_het as $item)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>
-                            {{-- <a href="{{route('product.sanpham','id')}}"> --}}
-
-
-                            <a href="{{ route('product.sanpham', $item->slug) }}">
-                                <img src="{{ asset('images') }}/{{ $item->image }}" alt="" width=50px
-                                    height="50px">
-                            </a>
-                        </td>
-                        <td>
-                            {{ $item->name }}
-                        </td>
-                        <td>
-                            <a href="">
-                                Đã hết hàng</a>
-
-                        </td>
-                        {{-- <td>
-                            <a href="{{ route('nhap.them', ['id' => $item]) }}" class="btn btn-success">Tạo mới
-                            </a>
-
-                        </td> --}}
-
-                        <script>
-                            function fillProductId() {
-                                // Lấy mã ID sản phẩm từ trường cần điền
-                                var productId = document.getElementById('product_id').value;
-
-                                // Điền mã ID sản phẩm vào trường trong form đơn nhập hàng
-                                document.getElementById('input_product_id').value = productId;
-                            }
-                        </script>
-
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="container1">
-
-    <div class="summary">
-        <p class="total">Sản phẩm sắp hết hạn {{ $count_het }}</p>
-    </div>
-    <div class="product-container">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>STT</th>
+.
+    {{-- <div class="row"> --}}
+        <div class="container2">
+           
+            <div class="box1" style="background: #ffffff">
+                <h5 style="font-weight:600 ;" >Tổng số đơn nhập</h5>
+                <p>
+                {{$count_don_nhap}}
+                </p>
+            </div>
+            <div class="box2" style="background: #ffffff">
+                <h5 style="font-weight:600 ;">Tổng số đơn xuất</h5>
+                <p>
+                    {{$count_don_xuat}}
+                </p>
+            </div>
+            <div class="box1" style="background: #ffffff">
+                <h5 style="font-weight:600 ;">Tổng số sản phẩm</h5>
+                <p>
+                    {{ $count }}
+                </p>
+            </div>
+            
+            <i class="fas fa-bell notification-icon">
+                {{-- <span class="badge">3</span> <!-- Số lượng thông báo --> --}}
+            </i>
+            <style>
+                .notification-icon {
+                    font-size: 24px; /* Kích thước biểu tượng */
+                    color: red; /* Màu sắc biểu tượng */
+                    position: relative;
+                }
+                /* .notification-icon .badge {
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    background-color: red;
+                    color: white;
+                    border-radius: 50%;
+                    padding: 5px 10px;
+                } */
+            </style>
+            
+           
+            
+        </div>
+        <div class="container5">
+            <div class="box5">
+            @if ($soLuongSapHetHan > 0)
+            
+            @else
+                <span></span>
+            @endif
+            <div class="product-container">
+                @if ($hsdList1->count() > 0)
+                    <span class="warning-icon">⚠️ Sắp hết hạn!</span>
+                    @foreach ($hsdList1 as $item)
+                        <table>
+                            <tr>
+                                <td>
+                                    <img src="{{ asset('images/' . $item->product->image) }}"
+                                        alt="{{ $item->name }}" class="product-image" style="width:50px;height:50px">
+                                </td>
+                                <td style="width:200px">{{ $item->product->name }}</td>
+                                <td style="width:90px">{{ $item->hansd }} ngày</td>
+                            </tr>
+                        </table>
+                    @endforeach
+                @else
+                    <span></span>
+                @endif
+            </div>
+            </div>
+        </div>
+        <div class="container5">
+           
+                
+            <div class="box5">
+                {{-- Sản phẩm --}}
+                <div class="container6">
+                    @if ($products->count() > 0)
+                    <h5 style="font-weight:600 ;" >Sản phẩm</h5>
                    
-                    <th>Tên sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>HSD</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($hsdList as $item)
-            <tr class="{{ $item->canhbao ? 'warning-row' : '' }}">
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $item->product->name }}</td>
-                <td>
-                    @if($item->quantity > 0)
-                        {{ $item->quantity }}
+                        <div class="product-container">
+                            @foreach ($products as $item)
+                                <div class="product-item">
+                                    <div class="img-product">
+
+                                        <a href="{{ route('product.sanpham', $item->slug) }}">
+                                            <img src="{{ asset('images/' . $item->image) }}" alt="{{ $item->name }}"
+                                                class="product-image" height="30px" width="30px">
+
+                                        </a>
+                                    </div>
+                                    <div class="product-details">
+                                        {{-- <div class="titlen">
+                                    <a href="">
+                                        <h4 class="product-title">{{ $item->name }}</h4>
+                                    </a>
+                                </div> --}}
+
+
+
+
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     @else
-                        <a href="#">Đã hết hàng</a>
+                        <span>Không có sản phẩm</span>
                     @endif
-                </td>
-                <td>{{ $item->hansd }} ngày</td>
-                <td>
-                    @if($item->canhbao)
-                        <span class="warning-icon">⚠️ Sắp hết hạn!</span>
-                    @else
-                        <span class="ok">Ổn định</span>
-                    @endif
-                </td>
-            </tr>
-        @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="container1">
-
-    <div class="summary">
-        <p class="total">Tổng số mặt hàng : {{ $count }}</p>
-    </div>
-    <div class="product-container">
-        @foreach ($products as $item)
-            <div class="product-item">
-                <div class="img-product">
-
-                    <a href="{{ route('product.sanpham', $item->slug) }}">
-                        <img src="{{ asset('images/' . $item->image) }}" alt="{{ $item->name }}"
-                            class="product-image" height="200px">
-
-                    </a>
-                </div>
-                <div class="product-details">
-                    {{-- <div class="titlen">
-                        <a href="">
-                            <h4 class="product-title">{{ $item->name }}</h4>
-                        </a>
-                    </div> --}}
-
-
-
-
                 </div>
             </div>
-        @endforeach
-    </div>
-</div>
-</div>
-<div class="col-md-3" style="background: rgb(235, 232, 232);height:800px" > 
-   <h4> Có {{$soLuongSapHetHan}} sản phẩm săp hết hạn cần xuất kho !!! </h4>
-</div>
-</div>
+            
+        </div>
+        <div class="container3">
+            <div class="box3">
+                
+            @if ($demtongsp->count() > 0)
+                <div class="container4">
+
+                    <h5 style="font-weight:600 ;">Sản phẩm sắp hết hàng</h5>
+                    <p>
+                        {{ $count_saphet }}
+                    </p>
+                    <div class="product-container">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px">STT</th>
+                                    <th style="width:50px">Ảnh</th>
+
+                                    <th style="width:200px">Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($demtongsp as $item)
+                                    <tr>
+                                        <td style="vertical-align: middle;">{{ $loop->iteration }}</td>
+                                        <td>
+                                            <a href="{{ route('product.sanpham', $item->slug) }}">
+                                                <img src="{{ asset('images') }}/{{ $item->image }}" alt=""
+                                                width=25px height="20px">
+                                            </a>
+                                        </td>
+                                        <td style="vertical-align: middle;">{{ $item->name }}</td>
+                                        <td style="vertical-align: middle;">
+
+                                             còn {{ $item->quantity }} sản phẩm
+
+
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            @else
+                {{-- <span>Không có sản phẩm sắp hết</span> --}}
+            @endif
+            </div>
+            <div class="box4">
+            @if ($demsp_het->count() > 0)
+                <div class="container4">
+                    <h5 style="font-weight:600 ;">Sản phẩm hết hàng</h5>
+                <p>
+                    {{ $count_het }}
+                </p>
+                   
+                    <div class="product-container">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    {{-- <th>Số lượng</th> --}}
+                                    {{-- <th></th> --}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($demsp_het as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            {{-- <a href="{{route('product.sanpham','id')}}"> --}}
+
+
+                                            <a href="{{ route('product.sanpham', $item->slug) }}">
+                                                <img src="{{ asset('images') }}/{{ $item->image }}" alt=""
+                                                    width=25px height="20px">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{ $item->name }}
+                                        </td>
+                                        {{-- <td>
+                                            <a href="">
+                                                Đã hết hàng</a>
+
+                                        </td> --}}
+                                        {{-- <td>
+                                        <a href="{{ route('nhap.them', ['id' => $item]) }}" class="btn btn-success">Tạo mới
+                                        </a>
+
+                                    </td> --}}
+
+                                        <script>
+                                            function fillProductId() {
+                                                // Lấy mã ID sản phẩm từ trường cần điền
+                                                var productId = document.getElementById('product_id').value;
+
+                                                // Điền mã ID sản phẩm vào trường trong form đơn nhập hàng
+                                                document.getElementById('input_product_id').value = productId;
+                                            }
+                                        </script>
+
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            @else
+                {{-- <span>Không có sản phẩm hết</span> --}}
+            @endif
+            
+            </div>
+        </div>
+
+            {{-- Hết hạn --}}
+       
+{{-- </div> --}}
+
+        {{-- menu phải --}}
+       
+    {{-- </div> --}}
 </section>
 @endsection

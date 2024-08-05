@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/_all-skins.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/giaodien.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="{{ asset('script/thongbao_alert.js') }}"></script>
     <script src="{{ asset('assets') }}/js/angular.min.js"></script>
     <script src="{{ asset('assets') }}/js/app.js"></script>
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
@@ -25,15 +30,50 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="{{ route('admin.index') }}" class="logo">
+            {{-- <div class="logo"> </div> --}}
+            {{-- <a href="{{ route('admin.index') }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>LT</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">Kho hàng</span>
+                {{-- <span class="logo-lg">Kho hàng</span> --}}
+            {{-- </a> --}}
+           
+            <a href="{{ route('admin.index') }}" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">
+                    <i class="fa fa-home" style="font-size: 14px"></i>
+                    <b>A</b>LT
+                </span>
+                <span class="logo-lg">
+                    <i class="fa fa-home" style="font-size: 20px"></i>
+                    Trang chủ
+                </span>
             </a>
+            
+
+            {{-- <a href="{{route('admin.index')}}" class="logo">
+                <i class="fa fa-home" style="font-size: 20px"></i>
+                <span class="logo-lg">Trang chủ</span>
+               
+               
+                
+              </a> --}}
+
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
                 <div class="navbar-custom-menu">
+
+                    {{-- <button class="btnthem" data-toggle="modal" data-target="#upload-img" style="position: absolute; top: 0px; right: 60px;">+ Thêm mới</button> --}}
+
+
+                    <!-- Create Product Modal -->
+
+
+
+
+
+
+
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="dropdown messages-menu">
@@ -115,13 +155,26 @@
         <div class="content-wrapper">
             <section class="content-header">
                 @yield('content-header')
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
                 
-            </body>
+            
             </section>
             @yield('main-content')
+        </div>
+    </div>
+    <div class="modal fade" id="upload-img" tabindex="-1" role="dialog" aria-labelledby="createProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createProductModalLabel">Tải ảnh sản phẩm lên</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+               
+            </div>
         </div>
     </div>
     <!-- jQuery 3 -->

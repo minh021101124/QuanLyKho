@@ -76,14 +76,19 @@
             /* Ensures header stays above the body content */
         }
 </style>
+<style>
+    .form-control{
+       height:28px;font-size:13px
+   }
+</style>
 <section class="content">
-
-    <h2>Danh sách đơn đã nhập</h2>
+<body>
+    <p style="font-size: 30px;font-weight:400">Danh sách đơn nhập</p>
 
     {{-- <a href="{{ route('nhaphanghoa.create') }}" class="btn btn-success" style="margin-left:80%; margin-top:0">Tạo mới đơn
         nhập</a> --}}
     <button class="btn btn-success" data-toggle="modal" data-target="#createProductModal"
-        style="position: absolute; top: 100px; right: 60px;">+ Thêm mới</button>
+        style="position: absolute; top: 60px; right: 700px;">+ Thêm mới</button>
     <div class="box-body table-responsive no-padding" style="height:440px">
         @if ($nhap->count() > 0)
             <table class="table table-hover" style="margin-left:0; margin-top:1%">
@@ -342,11 +347,20 @@
             </div>
         </div>
     </div>
+</body>
 </section>
+@if (session('success'))
+<div class="alert hide">
+    <span class="fas fa-exclamation-circle"></span>
+    <span class="msg">{{ session('success') }}</span>
+    <div class="close-btn">
+        <span class="fas fa-times"></span>
+    </div>
+</div>
+@endif
 
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
     integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @if (Session::has('success'))
@@ -360,7 +374,7 @@
             dangerMode: false,
         });
     </script>
-@endif
+@endif --}}
 
 
 <script>

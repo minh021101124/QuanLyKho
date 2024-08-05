@@ -1,34 +1,17 @@
 @extends('admin.master')
 @section('title', 'Danh mục')
-{{-- @section('TenTrang', 'THÊM MỚI DANH MỤC') --}}
+
 @section('main-content')
-    <!-- Main content -->
-    <!DOCTYPE html>
-    <html lang="en">
+<style>
+    .form-control{
+       height:28px;font-size:13px
+   }
+</style>
+    <section class="content">
+        <span style="font-size:28px;font-weight:500;margin-left:450px">SỬA DANH MỤC</span>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Add New Menu</title>
+        <div class="col-md-8">
 
-    <body>
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1> Cập nhật danh mục </h1>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-
-            <!-- Default box -->
-            <div class="col-md-8">
-                <!-- general form elements -->
-                <div class="box box-primary">
-                    {{-- <div class="box-header with-border">
-                <h3 class="box-title">Thêm mới menu</h3>
-              </div> --}}
-                    <!-- /.box-header -->
-                    <!-- form start -->
                     <form role="form" method="POST" action="{{ route('category.update', $category->id) }}">
                         @method('PUT')
                         @csrf
@@ -94,20 +77,6 @@
                         </div>
                     </form>
                 </div>
-
-                <!-- /.box -->
-
             </div>
-            <!-- /.box -->
-
-        </section>
-    </body>
-
-    </html>
-
-
-    </div>
-
-
-
+    </section>
 @endsection

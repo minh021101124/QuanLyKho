@@ -17,38 +17,30 @@
 
     <body style="background: #ffffff">
         <div class="all">
-            <div class="deprod">
+            <div class="row">
+                <div class="col-md-4">
+                    
 
-                <span> {{ session('success') }}</span>
-
-
-                <div class="left">
-
-                    <div class="imaged">
-
-
-                        <img src="{{ asset('images') }}/{{ $product->image }}">
-
-                    </div>
-
-
-                    <div class="imgdet">
-                        @foreach ($product->images as $item)
-                            <div class="product-thumbnail"
-                                onclick="openModal('{{ asset('images_many') }}/{{ $item->image }}')">
-                                <img src="{{ asset('images_many') }}/{{ $item->image }}" alt="">
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <!-- The Modal -->
-                    <div id="myModal" class="modal">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                        <img class="modal-content" id="modalImg">
-                    </div>
-
+                        <div class="imaged">
+    
+    
+                            <img src="{{ asset('images') }}/{{ $product->image }}">
+    
+                        </div>
+    
+    
+                        <div class="imgdet">
+                            @foreach ($product->images as $item)
+                                <div class="product-thumbnail"
+                                    onclick="openModal('{{ asset('images_many') }}/{{ $item->image }}')">
+                                    <img src="{{ asset('images_many') }}/{{ $item->image }}" alt="">
+                                </div>
+                            @endforeach
+                        </div>
+                    
                 </div>
-                <div class="right">
+                <div class="col-md-8">
+                <div class="right" >
 
                     <h3 class="product-title">{{ $product->name }}</h3>
                     <div class="det">
@@ -124,15 +116,18 @@
                     </td>
                     </form>
                 </div>
-
-
-
-
-
-
-
-
             </div>
+            </div>
+                
+
+
+
+
+
+
+
+
+   
 
         </div>
 

@@ -18,6 +18,10 @@ use Dompdf\Options;
 use App\Models\NhapChitiet;
 use App\Models\XuatChitiet;
 use App\Models\Xuat;
+use Carbon;
+use App\Imports\CustomerImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ProductsImport;
 class ProductController extends Controller
 {
     /**
@@ -25,9 +29,28 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+     public function importForm()
+    {
+        return view('import');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv,txt',
+        ]);
+
+        Excel::import(new ProductsImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Nhập thành công!');
+    }
     public function index()
     {
-        $posts = Product::orderBy('id', 'DESC')->get();
+        //$posts = Product::orderBy('id', 'DESC')->get();
+        $posts = Product::orderBy('id', 'DESC')->paginate(7);
+
         $selectedCategoryId = session('selected_category_id') ?? request()->input('selected_category_id');
         $categories = Category::orderBy('name', 'ASC')->get();
         
@@ -101,7 +124,7 @@ class ProductController extends Controller
                 ]);
             }
         }
-        return back()->with('success', 'Thêm mới thành công');
+        return redirect()->route('product.index')->with('success', 'Thêm mới thành công');
         // return redirect()->route('product.index')->with('success', 'Thêm mới thành công');
     }
     /**
@@ -278,6 +301,8 @@ class ProductController extends Controller
         $tong = $tongnhap->sum('total_price');
         $tongxuat = XuatChitiet::All();
         $tongx = $tongxuat->sum('total_price');
+      
+       
         
         return view('admin.thongke.doanhthu', compact('tong', 'tongx'));
     }

@@ -66,11 +66,8 @@
             /* Ensures header stays above the body content */
         }
     </style>
-
-    {{-- <div class="container1" style="margin-bottom:1%; ">
-        <h1 style="font-weight:700">THỐNG KÊ</h1>
-    </div> --}}
-
+<section class="content">
+    <span style="font-size:28px;font-weight:500;margin-left:400px">THỐNG KÊ</span>
     <div class="container1">
 
         <div class="box1" style="background: #107715;color:#ffffff">
@@ -91,13 +88,12 @@
             <h4>Tổng lợi nhuận</h4>
             </p>
         </div>
-
+       
     </div>
     <div class="container1">
         <div class="container">
-            <div class="row"> <!-- Start row to contain columns -->
+             <!-- Start row to contain columns -->
                 <div class="col-md-12" style="background: rgb(255, 255, 255); ">
-
                     <form action="{{ route('thongke.filter') }}" method="POST">
                         @csrf
                         <table class="table" style="border: none;">
@@ -121,57 +117,51 @@
                                 </td>
                             </tr>
                         </table>
-                        {{-- @php
-                        use Carbon\Carbon;
-                        $formattedStartDate = Carbon::parse($startDate)->format('d/m/Y');
-                        $formattedEndDate = Carbon::parse($endDate)->format('d/m/Y');
-                    @endphp --}}
+                       
                         @if (isset($totalRevenue))
                        
                     
-                    <h4>Doanh thu {{ number_format($totalRevenue, 0, ',', '.') }} VND</h4>
+                        <h4>Doanh thu {{ number_format($totalRevenue, 0, ',', '.') }} VND</h4>
                        
                         @endif
                        
                        
                     </form>
-
                 </div>
-            </div>
-
         </div>
 
-                <div class="col-md-12" style="background: rgb(255, 255, 255); ">
-                    @if (isset($totalRevenue))
-                        {{-- Doanh Thu Tổng: {{ number_format($totalRevenue, 0, ',', '.') }} VND
-                        <h5>Từ ngày : {{ $startDate }} đến ngày : {{ $endDate }}</h5> --}}
-                        <div class="table-container">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Ngày xuất</th>
-                                        <th>Giá tiền (đồng)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($orders as $order)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($order->xuat->created_at)->format('d/m/Y') }}</td>
-                                            <td>{{ number_format($order->total_price, 0, ',', '.') }} </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
-            </div>
-        </div>
+        @if (isset($totalRevenue) && $orders->count() > 0)
+            {{-- <div class="col-md-12" style="background: rgb(255, 255, 255);"> --}}
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ngày xuất</th>
+                                <th>Giá tiền (đồng)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($orders as $order)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($order->xuat->created_at)->format('d/m/Y') }}</td>
+                                    <td>{{ number_format($order->total_price, 0, ',', '.') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            {{-- </div> --}}
+        @else Không có thông tin ! @endif
+
+        
+        
     </div>
 
     </div>
-
+</section>
 
 
 

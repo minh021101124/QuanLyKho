@@ -68,20 +68,21 @@
     {{-- @foreach ($madon as $item)
     Đơn hàng số : {{$item -> ma_don}}
     @endforeach --}}
-    <h1 style="margin-bottom:5%">Chi tiết Đơn Nhập Hàng</h1>
+    <h1 style="margin-bottom:5%; text-align:center; font-weight:600">Chi tiết Đơn Nhập Hàng</h1>
     {{-- <p>ID: {{ $nhap->id }}</p> --}}
-    <table style="border:none; width: 35%;font-size:18px;">
+    <table style="border:none; width: 75%; font-size:18px;">
         <tr>
-            <td style="font-weight: 600; color: red; padding-left: 10%;">Mã đơn hàng:</td>
-            <td style="padding-left: 10%;">{{ $nhap->ma_don }}</td>
-
+            <td style="font-weight: 600; color: red; padding-left: 10px;">Mã đơn hàng:</td>
+            <td style="padding-left: 20px;">{{ $nhap->ma_don }}</td>
         </tr>
         <tr>
-            <td style="font-weight: 600; color: red; padding-left: 10%;">Ngày Nhập:</td>
-            <td style="padding-left: 10%;">
-                {{ $nhap->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('H:i - d/m/Y') }}</td>
+            <td style="font-weight: 600; color: red; padding-left: 10px;">Ngày Nhập:</td>
+            <td style="padding-left: 20px;">
+                {{ $nhap->created_at->setTimezone('Asia/Ho_Chi_Minh')->format('H:i - d/m/Y') }}
+            </td>
         </tr>
     </table>
+    
 
 
     <div class="box-body table-responsive no-padding">
@@ -109,7 +110,7 @@
                         $total += $ctNhap->total_price; // Cộng dồn vào biến tổng
                     @endphp
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td >{{ $loop->iteration }}</td>
                         <td>{{ $ctNhap->product->name }}</td>
                         <td>{{ number_format($ctNhap->price) }}đ</td>
                         <td>{{ $ctNhap->quantity }}</td>
@@ -130,7 +131,11 @@
             </tbody>
 
 
+
         </table>
+        <div class="col-md-4">
+            
+        </div>
         {{-- @else
             <span>Chưa có dữ liệu</span>
         @endif --}}

@@ -118,5 +118,10 @@
                         </div>
                     </div>
         </div>
+        <form action="{{ route('xuat.in') }}" method="POST">
+            @csrf
+           
+            <button type="submit">Print</button>
+        </form>
 </section>
 @endsection

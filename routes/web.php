@@ -8,7 +8,10 @@ use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\KhoController;
 use App\Http\Controllers\Admin\NhapController;
 use App\Http\Controllers\Admin\XuatController;
+use App\Http\Controllers\Admin\NccController;
+use App\Http\Controllers\Admin\AvatarController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Dompdf\Dompdf;
@@ -37,10 +40,14 @@ Route::prefix('admin')->group(function () {
     Route::resource('kho', KhoController::class);
     Route::get('/khohang', [KhoController::class, 'index'])->name('khohang.index');
     //Nhập hàng
+    //Nhập hàng
     Route::resource('nhaphanghoa', NhapController::class);
     Route::get('/nhaphang', [NhapController::class, 'nhaphang'])->name('nhap.index');
     Route::get('/danh-sach-nhap', [NhapController::class, 'dsnhap'])->name('nhap.list');
+    Route::get('/danh-sach-nhap-in', [NhapController::class, 'dsnhapin'])->name('nhap.in');
+  
     Route::get('/admin/tao-don-nhap/{id}', [NhapController::class, 'taodon'])->name('nhap.donhang');
+  
     // Route::get('/nhap-hang/{$id}', [NhapController::class, 'taodonct'])->name('nhap.index');
 //    Route::get('nhapp/{id}', [NhapController::class, 'show'])->name('nhap.show');
 
@@ -48,8 +55,11 @@ Route::prefix('admin')->group(function () {
     Route::resource('xuathanghoa', XuatController::class);
     Route::get('/xuathang', [XuatController::class, 'xuathang'])->name('xuat.index');
     Route::get('/danh-sach-xuat', [XuatController::class, 'dsxuat'])->name('xuat.list');
-    Route::get('/admin/tao-don-xuat/{id}', [XuatController::class, 'taodon'])->name('xuat.donhang');
+    
+    Route::get('/danh-sach-xuat-in', [XuatController::class, 'dsxuatin'])->name('xuat.in');
 
+    Route::get('/admin/tao-don-xuat/{id}', [XuatController::class, 'taodon'])->name('xuat.donhang');
+    // Route::get('/admin/tao-don-xuat-pdf/{id}', [XuatController::class, 'taodonxuat'])->name('xuat.donhang');
     Route::get('/them/{id}', [NhapController::class, 'them'])->name('nhap.them');
     // Route::get('/sanpham/{id}',[ProductController::class,'sanpham'])->name('product.sanpham');
     // Route::get('detail/{slug}', [HomeController::class, 'detail'])->name('detail');
@@ -85,6 +95,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
 });
-Route::get('/export-invoice', [ProductController::class, 'exportInvoice'])->name('export.invoice');
+Route::post('/export-hdxuat', [XuatController::class, 'exportInvoice'])->name('xuat.in');
 
 Route::get('/product-price/{id}', [ProductController::class, 'getProductPrice']);
+
+Route::get('customer/import', [App\Http\Controllers\CustomerController::class, 'index']);
+Route::post('customer/import', [App\Http\Controllers\CustomerController::class, 'importExcelData']);
+
+Route::get('import', [ProductController::class, 'importForm']);
+Route::post('import', [ProductController::class, 'import'])->name('products.import');
+
+Route::resource('photo', PhotoController::class);
+//Route::get('/anhsanpham', [PhotoController::class, 'index'])->name('admin.photo');
+
+// routes/web.php
+Route::get('/admin/photo', [PhotoController::class, 'index'])->name('admin.photo');
+Route::post('/admin/photo', [PhotoController::class, 'store'])->name('admin.photo.store');
+Route::resource('avatar', AvatarController::class);
+    Route::delete('/deleteimageavt/{id}', [AvatarController::class, 'deleteimageavt'])->name('deleteimageavt');
+    Route::post('/export-hdnhap', [NhapController::class, 'exportInvoice'])->name('nhap.in');
+    //Nhà cung cấp
+    Route::resource('nhacungcap', NccController::class);
+   // Route::get('/nhaphang', [NccController::class, 'nhaphang'])->name('nhap.index');
+    //Route::get('/danh-sach-nhap', [NhapController::class, 'dsnhap'])->name('nhap.list');
+    

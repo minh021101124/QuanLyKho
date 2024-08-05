@@ -1,93 +1,63 @@
 @extends('admin.master')
 @section('title', 'Thêm mới danh mục')
-
 @section('main-content')
-    <!-- Main content -->
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <body>
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-
-            <!-- Default box -->
-            <h1> THÊM MỚI DANH MỤC</h1>
-            <div class="col-md-8">
-                <!-- general form elements -->
-                <div class="box box-primary">
-                    {{-- <div class="box-header with-border">
-                <h3 class="box-title">Thêm mới menu</h3>
-              </div> --}}
-                    <!-- /.box-header -->
-                    <!-- form start -->
-
-                    <form role="form" method="POST" action="{{ route('category.store') }}">
-                        @csrf
-                        <div class="box-body">
-                            <div class="form-group @error('name') has-error @enderror">
-                                <label for="">Tên danh mục</label>
-                                <input type="input" class="form-control" id="" placeholder="" name="name">
-                                @error('name')
-                                    {{-- <div class="alert alert-danger" >{{$message}}</div> --}}
-                                    <span class="help-block">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="" name="">Danh mục cha </label>
-                                <select name="parent_id" id="input" class="form-control">
-                                    <option value="">Chọn danh mục cha</option>
-
-
-                                    <?php showCategories($categories); ?>
-
-
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Chọn trạng thái</label>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="status" id="input" value="1"
-                                            checked="checked">
-                                        Hiện
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" id="input" value="0">
-                                        Ẩn
-                                    </label>
-                                </div>
-                            </div>
-
+<style>
+    .form-control{
+       height:28px;font-size:13px
+   }
+</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <section class="content">
+        <div class="col-md-8">
+            <form role="form" method="POST" action="{{ route('category.store') }}">
+                @csrf
+                <div class="box-body">
+                    <div class="form-group @error('name') has-error @enderror">
+                        <label for="">Tên danh mục</label>
+                        <input type="input" class="form-control" id="" placeholder="" name="name">
+                        @error('name')
+                            <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="" name="">Danh mục cha </label>
+                        <select name="parent_id" id="input" class="form-control">
+                            <option value="">Chọn danh mục cha</option>
+                            <?php showCategories($categories); ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Chọn trạng thái</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="status" id="input" value="1" checked="checked">
+                                Hiện
+                            </label>
+                            <label>
+                                <input type="radio" name="status" id="input" value="0">
+                                Ẩn
+                            </label>
                         </div>
-                        <!-- /.box-body -->
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    </div>
+            </form>
+        </div>
+    </section>
 
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- /.box -->
-
+    @if (session('success'))
+        <div class="alert hide">
+            <span class="fas fa-exclamation-circle"></span>
+            <span class="msg">{{ session('success') }}</span>
+            <div class="close-btn">
+                <span class="fas fa-times"></span>
             </div>
-            <!-- /.box -->
+        </div>
+    @endif
 
-        </section>
-    </body>
-
-    </html>
-
-
-    </div>
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="{{ asset('script/thongbao_alert.js') }}"></script> --}}
 
 
 

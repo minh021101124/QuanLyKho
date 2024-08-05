@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('quantity');
+            $table->date('hansudung')->nullable();
             $table->enum('type', ['nhap', 'xuat']); // Định nghĩa kiểu nhập hoặc xuất
             $table->timestamps();
         });

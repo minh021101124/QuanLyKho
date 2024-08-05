@@ -20,7 +20,8 @@ return new class extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->unsignedBigInteger('nhap_id');
             $table->foreign('nhap_id')->references('id')->on('nhaps')->onDelete('cascade');
-           
+            $table->unsignedBigInteger('ncc_id');
+            $table->foreign('ncc_id')->references('id')->on('ncc');
            
             $table->float('price')->nullable();
             $table->integer('quantity');

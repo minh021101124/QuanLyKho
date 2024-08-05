@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Nhap;
 use App\Models\NhapChitiet;
+use App\Models\Ncc;
 use App\Models\Product;
 use Carbon\Carbon;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use App\Models\XuatChitiet;
 
 class NhapController extends Controller
 {
@@ -60,8 +63,7 @@ class NhapController extends Controller
             'price.*' => 'required|numeric',
             'total_price' => 'required|array',
             'total_price.*' => 'required|numeric',
-            'ngaysx' => 'required',
-            'hansd' => 'required',
+            
         ]);
     
       
@@ -79,6 +81,8 @@ class NhapController extends Controller
         $total_prices = $request->input('total_price'); 
         $ngaysanxuat = $request->input('ngaysx');
         $ngayhethan = $request->input('hansd');
+        $nhacung = $request->input('ncc_id');
+        
         $data = [];
         foreach ($masp as $key => $productId) {
             $data[] = [
@@ -89,6 +93,7 @@ class NhapController extends Controller
                 'quantity' => $quantities[$key],
                 'ngaysx' => $ngaysanxuat[$key],
                 'hansd' => $ngayhethan[$key],
+                'ncc_id' => $nhacung[$key],
             ];
         }
     
@@ -105,7 +110,7 @@ class NhapController extends Controller
             }
         }
         // dd($data);
-        return redirect()->route('nhap.index')->with('success', 'Nhập hàng thành công.');
+        return redirect()->route('nhap.index')->with('success', 'Nhập thành công!');
         // return back()->with('message', 'Nhập hàng thành công.');
     }
 
@@ -135,8 +140,9 @@ class NhapController extends Controller
     public function create()
     {
         $nhap = Nhap::all();
+        $nhacungcap= Ncc::all();
         $products = Product::all(); 
-        return view('admin.nhap.add', compact('nhap','products'));
+        return view('admin.nhap.add', compact('nhap','products','nhacungcap'));
     }
     public function index()
     {        
@@ -152,6 +158,71 @@ class NhapController extends Controller
         return response()->json($user);
     }
     
+//     public function exportInvoice(Request $request)
+// {
+//     $ctNhaps = NhapChitiet::with('product')->get(); // Fetch all invoice details
+//     $total = 0;
+
+//     foreach ($ctNhaps as $ctNhap) {
+//         $total += $ctNhap->total_price; // Accumulate total
+//     }
+
+//     // Prepare data for the invoice
+//     $data = [
+//         'invoice_number' => 'HD' . mt_rand(1000, 9999),
+//         'created_at' => now(),
+//         'ctNhaps' => $ctNhaps,
+//         'total' => $total,
+//     ];
+
+//     // Load the PDF library (Dompdf)
+//     $dompdf = new Dompdf();
+//     $options = new Options();
+//     $options->set('isHtml5ParserEnabled', true);
+//     $options->set('isPhpEnabled', true);
+//     $dompdf->setOptions($options);
+
+//     // Render the HTML for the invoice
+//     $html = view('admin.nhap.in', $data)->render();
+//     $dompdf->loadHtml($html);
+//     $dompdf->render();
+
+//     // Output the generated PDF (stream or download)
+//     return $dompdf->stream('Hoa_don_nhap_kho.pdf');
+// }
+
+public function exportInvoice(Request $request)
+{
+    $ctNhaps = NhapChitiet::with('product')->get(); // Fetch all invoice details
+    $total = 0;
+
+    foreach ($ctNhaps as $ctNhap) {
+        $total += $ctNhap->total_price; // Accumulate total
+    }
+
+    // Prepare data for the invoice
+    $data = [
+        'invoice_number' => 'HD' . mt_rand(1000, 9999),
+        'created_at' => now(),
+        'ctNhaps' => $ctNhaps,
+        'total' => $total,
+    ];
+
+    // Load the PDF library (Dompdf)
+    $dompdf = new Dompdf();
+    $options = new Options();
+    $options->set('isHtml5ParserEnabled', true);
+    $options->set('isPhpEnabled', true);
+    $dompdf->setOptions($options);
+
+    // Render the HTML for the invoice
+    $html = view('admin.nhap.in', $data)->render();
+    $dompdf->loadHtml($html);
+    $dompdf->render();
+
+    // Output the generated PDF (stream or download)
+    return $dompdf->stream('Hoa_don_xuat_kho.pdf');
+}
 }
 
 

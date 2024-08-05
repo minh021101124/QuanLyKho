@@ -65,7 +65,8 @@
             <strong>{{ $message }}</strong>
         </div>
     @endif
-    <h3>Danh sách sản phẩm đã xuất</h3>
+    <p style="font-size: 30px;font-weight:400">Sản phẩm đã xuất</p>
+    @if ($nhap->count() > 0)
     <div class="box-body table-responsive no-padding">
         {{-- @if ($xuat->count() > 0) --}}
         <table class="table table-hover" style="margin-left:0; margin-top:1%">
@@ -106,9 +107,16 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- @else
-            <span>Chưa có dữ liệu</span>
-        @endif --}}
+
+
+        <form action="{{ route('xuat.in') }}" method="POST" style="">
+            @csrf
+        
+            <button type="submit" style="width: 100px">In</button>
+        </form>
+        @else
+        <span>Chưa có dữ liệu</span>
+    @endif
     </div>
 </section>
 

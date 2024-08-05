@@ -19,6 +19,10 @@ class NhapChitiet extends Model
     {
         return $this->belongsTo(Nhap::class);
     }
+    public function ncc()
+    {
+        return $this->belongsTo(Ncc::class, 'ncc_id');
+    }
 
 
 }

@@ -61,13 +61,8 @@
         }
 </style>
 <section class="content">
-    {{-- @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-block">
-      <button type="button" class="close" data-dismiss="alert">×</button>	
-        <strong>{{ $message }}</strong>
-    </div>
-  @endif  --}}
-    <h3>Danh sách sản phẩm đã nhập</h3>
+    <p style="font-size: 30px;font-weight:400">Sản phẩm đã nhập</p>
+    {{-- <h3>Danh sách sản phẩm đã nhập</h3> --}}
     <div class="box-body table-responsive no-padding" style="height:390px">
         @if ($nhap->count() > 0)
             <table class="table table-hover" style="margin-left:0; margin-top:1%">
@@ -76,6 +71,8 @@
                         <th>STT</th>
                         <th>Ảnh</th>
                         <th>Tên mặt hàng</th>
+                        <th>Nhà cung cấp</th>
+                        
                         <th>Số lượng</th>
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
@@ -96,6 +93,7 @@
 
                             </td>
                             <td>{{ $item->product->name }}</td>
+                            <td>{{ $item->ncc->ten }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>{{ number_format($item->price) }}đ</td>
                             <td>{{ number_format($item->total_price) }}đ</td>
@@ -111,14 +109,22 @@
                     @endforeach
                 </tbody>
             </table>
+          
             {{-- {{ $nhapchitiet->links() }} --}}
         @else
             <span>Chưa có dữ liệu</span>
         @endif
     </div>
+    <form action="{{ route('nhap.in') }}" method="POST" style="">
+        @csrf
+    
+        <button type="submit" style="width: 100px">In</button>
+    </form>
     <div class="pagination-container">
         {{ $nhapchitiet->links() }}
     </div>
+
+
 </section>
 
 

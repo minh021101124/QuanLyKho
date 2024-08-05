@@ -27,19 +27,21 @@
         }
         
 </style>
-    <h1>DANH MỤC SẢN PHẨM</h1>
+@if (session('success'))
+        <div class="alert hide">
+            <span class="fas fa-exclamation-circle"></span>
+            <span class="msg">{{ session('success') }}</span>
+            <div class="close-btn">
+                <span class="fas fa-times"></span>
+            </div>
+        </div>
+    @endif
+<section class="content">
+    <span style="font-size:28px;font-weight:500;margin-left:450px">DANH MỤC</span>
 
     <div class="box-body table-responsive no-padding">
 
-        <table class="table table-hover" style="margin-left:0%; margin-top:5%">
-            <!-- Default box -->
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>{{ $message }}</strong>
-                </div>
-            @endif
-
+        <table class="table table-hover" style="margin-left:0%; margin-top:2%">
             <a href="{{ route('category.create') }}" class="btn btn-success" style="margin-left:2%; margin-top:5%">+ Thêm mới
                 danh mục</a>
 
@@ -47,11 +49,12 @@
                 <tr>
                     <th>STT</th>
                     <th>Tên danh mục</th>
-                    {{-- <th>Danh mục cha</th> --}}
+                    
+                    <th>ID</th>
                     <th>Ngày tạo</th>
-                  
-                    <th></th>
-                    <th></th>
+                   
+                    <th style="width:40px"></th>
+                <th style="width:40px"s></th>
                 </tr>
 
                 @forelse ($categories as $item)
@@ -59,7 +62,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->name }}</td>
                         {{-- <td>{{$item->parent_id}}</td> --}}
-                       
+                        <td>{{ $item->id }}</td>
 
                         <td>{{ $item->created_at }}</td>
 
@@ -67,13 +70,13 @@
                             ? '<span class="label label-success">Hiển thị</span> '
                             : ' <span class="label label-success">Ẩn hiển thị</span>' !!}</td>--}}
                         <td> 
-                            <a href="{{ route('category.edit', $item) }}" class="btn btn-success">Sửa</a>
+                            <a href="{{ route('category.edit', $item) }}" ><i class="fa fa-edit" style="font-size: 15px;"></i></a>
                         </td>
                         <td>
                             <form action="{{ route('category.destroy', $item) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                <button type="submit" style="background: none; border: none; color: red; cursor: pointer;" onclick="return confirm('Bạn đã chắc chắn?');"><i class="fa fa-trash" style="font-size: 15px;"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -82,10 +85,10 @@
                 @endforelse
             </tbody>
         </table>
-        <a href="{{ route('category.trash') }}" style="position: absolute; top: 100px; right: 60px;" class="btn btn-primary"><i class="fa fa-trash"> Thùng
+        <a href="{{ route('category.trash') }}" style="position: absolute; top: 550px; left: 30px;" class="btn btn-primary"><i class="fa fa-trash"> Thùng
                 rác</i></a>
     </div>
-
+</section>
 @endsection
 
 

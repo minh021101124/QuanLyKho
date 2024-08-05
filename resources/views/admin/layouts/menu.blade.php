@@ -5,7 +5,7 @@
     <div class="user-panel">
       <div class="pull-left image">
         
-        <img src="{{asset('assets')}}/images/th.jfif" class="img-circle" alt="User Image">
+        {{-- <img src="{{asset('assets')}}/images/th.jfif" class="img-circle" alt="User Image"> --}}
       </div>
       <div class="pull-left info">
         <p>--</p>
@@ -35,7 +35,7 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
 
     <ul class="sidebar-menu" data-widget="tree">
-      <li>
+      {{-- <li>
         <a href="{{route('admin.index')}}">
           <i class="fa fa-home" style="font-size: 20px"></i> <span>Trang chủ</span>
           <span class="pull-right-container">
@@ -43,7 +43,7 @@
           </span>
         </a>
         
-      </li>
+      </li> --}}
       <li class="treeview">
         <a href="#">
           <i class="fa fa-download" style="font-size: 20px"></i> <span>Quản lý Nhập hàng </span>
@@ -54,10 +54,10 @@
         <ul class="treeview-menu">@php
           $id = 1; // Ví dụ: gán giá trị cho biến $id
       @endphp
-          <li><a href="{{ route('nhap.index') }}"><i class="fa fa-cart-plus" style="font-size: 15px"></i> Nhập hàng </a></li>
+          <li><a href="{{ route('nhap.index') }}"><i class="fa fa-cart-plus" style="font-size: 15px"></i>Xem đơn nhập</a></li>
           {{-- , ['id' => $id] --}}
           
-          <li><a href="{{ route('nhaphanghoa.create') }}"><i class="fa fa-gift" style="font-size: 15px"></i> nhập </a></li>
+          <li><a href="{{ route('nhaphanghoa.create') }}"><i class="fa fa-gift" style="font-size: 15px"></i>Tạo đơn nhập</a></li>
           <li><a href="{{route('nhap.list')}}"><i class="fa fa-gift" style="font-size: 15px"></i> Sản phẩm đã nhập </a></li>
         </ul>
       </li>
@@ -69,13 +69,23 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="{{route('xuat.index')}}"><i class="fa fa-send" style="font-size: 15px"></i> Xuất hàng </a></li>
+          <li><a href="{{route('xuat.index')}}"><i class="fa fa-send" style="font-size: 15px"></i>Xem đơn xuất</a></li>
+          <li><a href="{{ route('xuathanghoa.create') }}"><i class="fa fa-gift" style="font-size: 15px"></i>Tạo đơn xuất</a></li>
           <li><a href="{{route('xuat.list')}}"><i class="fa fa-gift" style="font-size: 15px"></i> Sản phẩm đã xuất </a></li>
         </ul>
       </li>
       <li>
         <a href="{{route('khohang.index')}}">
           <i class="fa fa-archive" style="font-size: 20px"></i> <span>Kho hàng</span>
+          <span class="pull-right-container">
+         
+          </span>
+        </a>
+        
+      </li>
+      <li>
+        <a href="{{route('nhacungcap.index')}}">
+          <i class="fa fa-archive" style="font-size: 20px"></i> <span> Nhà cung cấp</span>
           <span class="pull-right-container">
          
           </span>
